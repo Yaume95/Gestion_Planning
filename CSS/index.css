@@ -1,0 +1,208 @@
+body
+{
+	background-color: #F8F8F8;
+}
+
+.Maladie
+{
+	background-color: #E30C2A;
+}
+.Repos
+{
+	background-color: #9C5A0C;
+}
+.DemiRepos
+{
+	background-color: #DD7F0F;
+}
+.CA
+{
+	background-color: #B50C8F;
+}
+.DemiCA
+{
+	background-color: #E7A4D8;
+}
+.CAavantAvril
+{
+	background-color: #0000A1;
+}
+.DemiCAavantAvril
+{
+	background-color: #02C1C3;
+}
+.Stages
+{
+	background-color: #158000;
+}
+.affiche
+{
+	text-align: center!important;
+}
+#Nom
+{
+	text-align: center;
+	font-size: 18px;
+}
+button
+{
+	font-size:16px!important;
+}
+#btn-repos
+{
+	color:white!important;
+	background-color: #9C5A0C!important;
+}
+#btn-repos:hover
+{
+	color:white!important;
+	background-color: #884700!important;
+}
+#btn-demirepos
+{
+	color:white!important;
+	background-color: #DD7F0F!important;
+}
+#btn-demirepos:hover
+{
+	color:white!important;
+	background-color: #D0700C!important;
+}
+#btn-ca
+{
+	color:white!important;
+	background-color: #B50C8F!important;
+}
+#btn-ca:hover
+{
+	color:white!important;
+	background-color: #A60080!important;
+}
+
+#btn-demica
+{
+	color:white!important;
+	background-color: #E7A4D8!important;
+}
+#btn-demica:hover
+{
+	color:white!important;
+	background-color: #DD90C4!important;
+}
+
+#btn-caavA
+{
+	color:white!important;
+	background-color: #0C0CB5!important;
+}
+#btn-caavA:hover
+{
+	color:white!important;
+	background-color: #0000A1!important;
+}
+#btn-demicaavA
+{
+	color:white!important;
+	background-color: #16D5D7!important;
+}
+#btn-demicaavA:hover
+{
+	color:white!important;
+	background-color: #02C1C3!important;
+}
+td br
+{
+	display: none;
+}
+.MoisSelec
+{
+	text-align: center;
+	font-weight: bold;
+	font-size:26px;
+}
+nav li a
+{
+	font-size:19px;
+	font-weight: bold;
+	color: #939292!important
+}
+nav li a:hover
+{
+	color: white!important;
+}
+.Active
+{
+	color: white!important;
+}
+ul.nav 
+{
+    width:100%;
+    text-align:center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.nav li 
+{ 
+    display:inline-block;
+    width:33%;
+}
+
+.nav a {
+    text-align:center;
+    display:block;
+}
+.nav a:hover 
+{ 
+    color:white!important;
+}
+.divider-droite
+{
+	border-right: 2px solid lightgrey;
+}
+
+a span
+{
+	margin-right:10px;
+}
+
+.Lieu
+{
+	height: 50px;
+}
+td,.date,.Entete
+{
+	text-align: center;
+	vertical-align: middle!important;
+	font-size:15px;
+}
+.test2
+{
+	
+	height:100%;
+}
+.choix
+{
+	width: 49%!important;
+	font-size:18px;
+}
+
+#infos
+{
+	width: 98.5%!important;
+}
+
+.espace-droit
+{
+	margin-right:40px;
+}
+
+#actions
+{
+	display:flex;
+	justify-content: space-around;
+}
+
+.glyphicon-calendar
+{
+	margin-right:20px;
+}

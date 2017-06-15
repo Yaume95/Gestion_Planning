@@ -1,0 +1,146 @@
+<div id="body" ng-init="initFirst()">
+    <div class="container-fluid">
+        <div>
+            <ul>
+                <li ng-hide="true" ng-repeat="chargement in Horaires" ng-if="SelectionPersonne==chargement.IDP && SelectionMois.mois==chargement.Mois && chargement.Etat!='Travail'" id="{{chargement.Date_jour+chargement.IDL+chargement.IDP}}">
+                    {{chargement.Etat}}
+                </li>
+                <li ng-hide="true" ng-repeat="chargement in Horaires" ng-if="SelectionPersonne==chargement.IDP && SelectionMois.mois==chargement.Mois && chargement.NbHeures>0" id="{{chargement.Date_jour+chargement.IDL+chargement.IDP}}">
+                    {{chargement.NbHeures}}
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-bordered" ng-keydown="unableTab($event)">
+                    <tr>
+                        <th class="MoisSelec" colspan="33"><span class="glyphicon glyphicon-calendar"></span> {{SelectionMois.mois}}</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            
+                            <select class="form-control input-md" ng-model="SelectionPersonne" ng-change="reset()" ng-init="count=0">
+                                <option ng-repeat="(count,x) in Employes" id="{{count}}" value="{{x.IDP}}">{{Employes[count].Personne}}</option>
+                            </select>
+                            <select class="form-control" ng-model="SelectionMois" ng-options="x.mois for x in Mois" ng-init="SelectionMois=Mois[0]"></select>
+                        </th>
+                        <th ng-repeat="x in Calendrier" ng-if="x.Mois==SelectionMois.mois" class='date'>
+                            {{x.Jour}}
+                            <br>
+                            {{x.Date_jour[8] + x.Date_jour[9]}}
+                        </th>
+                        <th class= "date"> Total </th>
+                    </tr>
+                    <tr ng-repeat="a in Lieux">
+                        <th class ='lieu'> {{a.Lieu}} </th>
+                        <td ng-repeat="b in Calendrier" ng-if="b.Mois==SelectionMois.mois" ng-bind="cellule(b.Date_jour,a.IDL,SelectionPersonne)" 
+                        data-idp="{{SelectionPersonne}}" 
+                        data-date="{{b.Date_jour}}" 
+                        data-idl="{{a.IDL}}" 
+                        ng-keypress="valide_entrer($event)"
+                        ng-click="focusin($event)" 
+                        ng-blur="focusout($event)" 
+                        ng-mousedown="clickdroit($event)" 
+                        class="heure" contenteditable="true"></td>
+                        <td class="Total" ng-bind="total(a.IDL)"></td>
+                    </tr>
+
+                    <tr>
+                      <th>Bilan Mensuel</th>
+                      <th rowspan="2" colspan="2"> Heures :</th> <td colspan="3" ng-bind="total_mensuel()">  </td>
+                      <th rowspan="2" colspan="2"> RTT :</th> <td colspan="3" ng-bind="rtt_mensuel()">  </td>
+                      <th rowspan="2" colspan="3">Nb Maladie :</th> <td colspan="3" ng-bind="maladie_mensuel()"></td>
+                      <th rowspan="2" colspan="3">CA avant Avril:</th> <td colspan="3" ng-bind="caav_mensuel()"></td>
+                      <th rowspan="2" colspan="2">CA :</th> <td colspan="3" ng-bind="ca_mensuel()"></td>
+            </table>
+        </div>
+    
+    </div>
+    <div class="container-fluid">
+        <div class="col-xs-5">
+            <table class="table table-bordered">
+                  <tr>
+                      <th colspan="2" id="Nom"> {{Employes[place].Personne }} : (Bilan Annuel)</th>
+                      
+                  </tr>
+                  <tr>
+                      <th class="col-xs-2"> Total des heures : </th>
+                      <td class="col-xs-3 affiche">{{Employes[place].Total }}</td>
+                  </tr>
+                  <tr>
+                      <th class="col-xs-2"> RTT Pris : </th>
+                      <td class="col-xs-3 affiche" id="RTT">{{Employes[place].RTT}}</td>
+                  </tr>
+                  <tr>
+                      <th class="col-xs-2"> CA avant Avril : </th>
+                      <td class="col-xs-3 affiche">{{Employes[place].CAav }}</td>
+                  </tr>
+                  <tr>
+                      <th class="col-xs-2"> CA : </th>
+                      <td class="col-xs-3 affiche">{{Employes[place].CA }}</td>
+                  </tr>
+                  <tr>
+                      <th class="col-xs-2"> Jours de Maladie :</th>
+                      <td class="col-xs-3 affiche">{{Employes[place].Maladie }}</td>
+                  </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ======================================= Modal ======================================= -->
+
+<div class="modal  fade" id="AjoutEtat" role="dialog" ng-controller="modalCtrl">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content etat">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><b> État</b></h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <button class="btn btn-danger col-xs-10" ng-click="affect($event,0)" id="btn-maladie" >Maladie</button>
+                    <div class="col-xs-1"></div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class="col-xs-1"></div>
+                    <button class="btn col-xs-10" ng-click="affect($event,1)" id ="btn-repos">Repos</button>
+                    <div class="col-xs-1"></div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class="col-xs-1"></div>
+                    <button class="btn col-xs-10" ng-click="affect($event,2)" id ="btn-demirepos">1/2 Repos</button>
+                    <div class="col-xs-1"></div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class="col-xs-1"></div>
+                    <button class="btn col-xs-10" ng-click="affect($event,3)" id="btn-ca">CA</button>
+                    <div class="col-xs-1"></div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class="col-xs-1"></div>
+                    <button class="btn col-xs-10" ng-click="affect($event,4)" id="btn-demica">1/2 CA</button>
+                    <div class="col-xs-1"></div>
+                </div>
+                <br>  
+                <div class="row ">
+                    <div class="col-xs-1"></div>
+                    <button class="btn col-xs-10" ng-click="affect($event,5)" id="btn-caavA">CA avant Avril</button>
+                    <div class="col-xs-1"></div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class="col-xs-1"></div>
+                    <button class="btn col-xs-10" ng-click="affect($event,6)" id="btn-demicaavA">1/2 CA avant Avril</button>
+                    <div class="col-xs-1"></div>
+                </div>
+                <br>  
+            </div>
+        </div>
+    </div>
+</div>
