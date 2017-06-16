@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="col-xs-2">
-                <button class="btn btn-success date" style="width:100%"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
+                <button class="btn btn-success date" id="btn-ajouter" ng-click=ajouter()><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
             </div>
             <div class="col-xs-2"></div>
         </div>
@@ -21,8 +21,8 @@
 
         <!-- ==================================== Affichage du Personnel ==================================== --> 
         <div class="col-xs-12">
-            <div class="col-xs-2"></div>
-            <div class="col-xs-8">
+
+            <div class="col-xs-12">
                 <table class="table table-bordered">
                     <tr>
                         <th class ="Entete"> Nom </th>
@@ -30,38 +30,43 @@
                         <th class ="Entete"> CA </th>
                         <th class ="Entete"> CA (avt Avr.) </th>
                         <th class ="Entete"> Nb Maladies </th>
+                        <th class ="Entete"> RTT </th>
                         <th class ="Entete MoisSelec" colspan="5">Actions</th>
 
                     </tr>
                     <tr ng-repeat="x in Employes | filter:Recherche" id={{x.IDP}}>
-                        <td class="col-xs-3" contenteditable="false">{{x.Personne}}</td>
+                        <td class="col-xs-2" contenteditable="false">{{x.Personne}}</td>
                         <td class="col-xs-2" contenteditable="false">{{x.Total}}</td>
                         <td class="col-xs-1" contenteditable="false">{{x.CA}}</td>
                         <td class="col-xs-2" contenteditable="false">{{x.CAav}}</td>
                         <td class="col-xs-1" contenteditable="false">{{x.Maladie}}</td>
+                        <td class="col-xs-1" contenteditable="false">{{x.RTT}}</td>
                         <th class="col-xs-3">
                             <div id="actions">
-                            <button type="button" class="btn btn-danger" ng-click="validSuppression(x.IDP)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
-                            <button type="button" class="btn btn-primary" ng-click="modification(x)"><span class="glyphicon glyphicon-list"></span> Modifier </button></div>
+                                <button type="button" class="btn btn-danger" ng-click="validSuppression(x.IDP)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
+                                <button type="button" class="btn btn-primary" ng-click="modification(x)"><span class="glyphicon glyphicon-th-list"></span> Modifier </button>
+                                <button type="button" class="btn btn-warning" ng-click=""><span class="glyphicon glyphicon-calendar"></span> Planning </button>
+                            </div>
                         </th>
                     </tr>
                 </table>
             </div>
-            <div class="col-xs-2"></div>
         </div>
     </div>
 </div>
 
-<div id="dialog" title="Confirmation" style="display:none;">
+<div id="dialog" class="Boxsupp" title="Confirmation">
     <p>Êtes-vous sur de vouloir supprimer cette personne de la base de données ?</p>
 </div>
 
+
+<!-- =============================== Modal Modification d'une Personne =============================== -->
 
 <div class="modal fade" id="Modification" role="dialog" ng-controller="modifCtrl">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <div class="modal-header text-center">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-dismiss="modal">X</button>
             <h3 class="modal-title TitreForm"><b> {{PersonneModif.Personne}}</b></h3>
         </div>
 
@@ -69,36 +74,144 @@
                 <div class="row">
                     <div class="col-xs-1"></div>
                     <label class="col-xs-3 control-label" > Nom :</label>
-                    <div class="col-xs-5"><input type="text" type="text" class="form-control" value="{{PersonneModif.Personne}}" id="NomSubmit"></div>
+                    <div class="col-xs-5"><input type="text" type="text" class="form-control" placeholder="{{PersonneModif.Personne}}" id="NomSubmit1"></div>
                     <div class="col-xs-3"></div>
                 </div>
                 <br>
                 <div class="row">
                         <div class="col-xs-1"></div>
                         <label class="col-xs-3 control-label"> Heures à faire :</label>
-                        <div class="col-xs-5"><input type="text" type="number" class="form-control" value="{{PersonneModif.Total}}" id="HSubmit"></div>
+                        <div class="col-xs-5"><input type="text" type="number" class="form-control" placeholder="{{PersonneModif.Total}}" id="HSubmit1"></div>
                         <div class="col-xs-3"></div>
                 </div>
                 <br>
                 <div class="row">
                         <div class="col-xs-1"></div>
                         <label class="col-xs-3 control-label"> Congés Annuel max  :</label>
-                        <div class="col-xs-5"><input type="text" type="number" class="form-control" value="{{PersonneModif.CA}}" id="CASubmit"></div>
+                        <div class="col-xs-5"><input type="text" type="number" class="form-control" placeholder="{{PersonneModif.CA}}" id="CASubmit1"></div>
                         <div class="col-xs-3"></div>
                 </div>
                 <br>
                 <div class="row">
                         <div class="col-xs-1"></div>
                         <label class="col-xs-3 control-label"> CA avant Avril max :</label>
-                        <div class="col-xs-5"><input type="text" type="number" class="form-control" value="{{PersonneModif.CAav}}" id="CAavSubmit"></div>
+                        <div class="col-xs-5"><input type="text" type="number" class="form-control" placeholder="{{PersonneModif.CAav}}" id="CAavSubmit1"></div>
                         <div class="col-xs-3"></div>
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-xs-5"></div>
+                    <div class="col-xs-4"></div>
                     <div class="col-xs-2"><button class="btn btn-primary" ng-click="envoyer_modifs()">Confirmer</button></div>
                     <div class="col-xs-5"></div>
                 </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =============================== Modal Ajout d'une Personne =============================== -->
+
+<div class="modal fade" id="Ajout" role="dialog" ng-controller="ajoutCtrl">
+    <div class="modal-dialog modal-lg rain">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal">X</button>
+                <p class="modal-title TitreForm"> Ajouter une personne</p>
+            </div>
+
+            <div class="modal-body">
+            <br>
+                <form name="myform">
+                <div class="row form-group">
+                    <div class="col-xs-1"></div>
+                    <label class="col-xs-3 " > Nom :</label>
+                    <div class="col-xs-5"><input type="text" type="text" name="AjoutNom" class="form-control" ng-model="AjoutNom" placeholder="Entrez le nom" id="NomSubmit2" required my-text-only></div>
+                    <div class="col-xs-3">
+                            <div class="Erreur" ng-hide="!myform.AjoutNom.$error.required || myform.AjoutNom.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span> 
+                                <label class="texte">Champ nécessaire</label>
+                            </div>
+                            <div class="Erreur" ng-hide="!myform.AjoutNom.$error.textOnly || myform.AjoutNom.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span>
+                                <label class="texte">Ni chiffres ni charactères spéciaux</label>
+                            </div>
+                            <div class="OK" ng-hide="myform.AjoutNom.$error.textOnly || myform.AjoutNom.$error.required || myform.AjoutNom.$pristine">
+                                <span class="glyphicon glyphicon-ok "></span>
+                            </div>        
+                    </div>
+                </div>
+                <br><br>
+                <div class="row form-group">
+                        <div class="col-xs-1"></div>
+                        <label class="col-xs-3 control-label"> Heures à faire :</label>
+                        <div class="col-xs-5 Erreur">
+                            <input type="text" type="number" name="AjoutH" ng-model="AjoutH" class="form-control" placeholder="Entrez le nombre d'heures à faire" id="HSubmit2" required my-is-number>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="Erreur" ng-hide="!myform.AjoutH.$error.required || myform.AjoutH.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span> 
+                                <label class="texte">Champ nécessaire</label>
+                            </div>
+                            <div class="Erreur" ng-hide="!myform.AjoutH.$error.number || myform.AjoutH.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span>
+                                <label class="texte">Entrez un nombre</label>
+                            </div>
+                            <div class="OK" ng-hide="myform.AjoutH.$error.number || myform.AjoutH.$error.required || myform.AjoutH.$pristine">
+                                <span class="glyphicon glyphicon-ok "></span>
+                            </div>
+                            
+                        </div>
+                </div>
+                <br><br>
+                <div class="row form-group">
+                        <div class="col-xs-1"></div>
+                        <label class="col-xs-3 control-label"> Congés Annuel :</label>
+                        <div class="col-xs-5"><input type="text" type="number" name="AjoutCA" ng-model="AjoutCA" class="form-control" placeholder="Entrez le nombre de CA" id="CASubmit2" required my-is-number></div>
+                        <div class="col-xs-3">
+                            <div class="Erreur" ng-hide="!myform.AjoutCA.$error.required || myform.AjoutCA.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span> 
+                                <label class="texte">Champ nécessaire</label>
+                            </div>
+                            <div class="Erreur" ng-hide="!myform.AjoutCA.$error.number || myform.AjoutCA.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span>
+                                <label class="texte">Entrez un nombre</label>
+                            </div>
+                            <div class="OK" ng-hide="myform.AjoutCA.$error.number || myform.AjoutCA.$error.required || myform.AjoutCA.$pristine">
+                                <span class="glyphicon glyphicon-ok "></span>
+                            </div>
+                            
+                        </div>
+                </div>
+                <br><br>
+                <div class="row form-group">
+                        <div class="col-xs-1"></div>
+                        <label class="col-xs-3 control-label"> CA avant Avril :</label>
+                        <div class="col-xs-5"><input type="text" type="number" name="AjoutCAav" ng-model="AjoutCAav" class="form-control" placeholder="Entrez le nombre de CA a prendre avant Avril" id="CAavSubmit2" required my-is-number></div>
+                        <div class="col-xs-3">
+                            <div class="Erreur" ng-hide="!myform.AjoutCAav.$error.required || myform.AjoutCAav.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span> 
+                                <label class="texte">Champ nécessaire</label>
+                            </div>
+                            <div class="Erreur" ng-hide="!myform.AjoutCAav.$error.number || myform.AjoutCAav.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span>
+                                <label class="texte">Entrez un nombre</label>
+                            </div>
+                            <div class="OK" ng-hide="myform.AjoutCAav.$error.number || myform.AjoutCAav.$error.required || myform.AjoutCAav.$pristine">
+                                <span class="glyphicon glyphicon-ok "></span>
+                            </div>
+                            
+                        </div>
+                </div>
+                <br><br>
+
+                <div class="row form-group">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-3"><button class="btn btn-primary" ng-click="ajouter_personne()">Confirmer</button></div>
+                    <div class="col-xs-5"></div>
+                </div>
+            </form>
 
             </div>
         </div>

@@ -1,6 +1,8 @@
 app.controller('gestion_controller', ['$scope','$http',function($scope, $http)
 {
 
+    $scope.PersonneModif=[];
+
 	$scope.initGestion=function()
 	{
 
@@ -48,14 +50,24 @@ app.controller('gestion_controller', ['$scope','$http',function($scope, $http)
 
         $('#Modification').modal('show')
 
-        $scope.PersonneModif = [];
+        console.log($scope.PersonneModif);
+
+
+        $scope.PersonneModif['IDP']=object.IDP;
         $scope.PersonneModif['Personne']=object.Personne;
         $scope.PersonneModif['Total']=substr(object.Total,"/");
         $scope.PersonneModif['CA']=substr(object.CA,"/");
         $scope.PersonneModif['CAav']=substr(object.CAav,"/");
 
 
+        console.log($scope.PersonneModif);
+        $scope.refresh();
 
+    }
+
+    $scope.ajouter=function()
+    {
+        $('#Ajout').modal('show');
     }
 
 

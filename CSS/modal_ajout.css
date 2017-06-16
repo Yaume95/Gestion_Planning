@@ -1,0 +1,58 @@
+/* Pour tous les modals */
+
+
+.modal-content ,.modal-body
+{
+	border:round!important;
+	border-bottom-left-radius: 20px!important;
+	border-bottom-right-radius: 20px!important;
+}
+
+.modal-content , .modal-header
+{
+	border:round!important;
+	border-top-left-radius: 20px!important;
+	border-top-right-radius: 20px!important;
+}
+
+.modal-header
+{
+	background-color: white;
+	font-size:28px;
+}
+#Ajout .modal-body, #Modification .modal-body
+{
+	background-color: #E3E1E1;
+}
+
+
+#Ajout div.row >label
+{
+	font-size: 16px;
+}
+
+#Ajout
+{
+	top:5%;
+}
+
+@-webkit-keyframes colors {
+    0% {background-color: #226EBB;}
+    25% {background-color: #C038A0;}
+    50% {background-color: #29A63F;}
+    75% {background-color: #E5060C;}
+    100% {background-color: #226EBB;}
+}
+.rain{
+    -webkit-animation-direction: normal;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: colors;
+    -webkit-animation-timing-function: ease;
+
+    padding: 3px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 20px!important;
+}
+

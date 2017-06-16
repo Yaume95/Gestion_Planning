@@ -202,7 +202,18 @@ td,.date,.Entete
 	justify-content: space-around;
 }
 
-.glyphicon-calendar
+.calendar
 {
 	margin-right:20px;
 }
+
+#btn-ajouter
+{
+	width:100%;
+}
+
+.Boxsupp
+{
+	display: none;
+}
+
