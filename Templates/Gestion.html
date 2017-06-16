@@ -33,7 +33,7 @@
                         <th class ="Entete MoisSelec" colspan="5">Actions</th>
 
                     </tr>
-                    <tr ng-repeat="x in Employes | orderBy:'Personne'" ng-if="includes(x.Personne,Recherche)" id={{x.IDP}}>
+                    <tr ng-repeat="x in Employes | filter:Recherche" id={{x.IDP}}>
                         <td class="col-xs-3" contenteditable="false">{{x.Personne}}</td>
                         <td class="col-xs-2" contenteditable="false">{{x.Total}}</td>
                         <td class="col-xs-1" contenteditable="false">{{x.CA}}</td>
@@ -76,21 +76,21 @@
                 <div class="row">
                         <div class="col-xs-1"></div>
                         <label class="col-xs-3 control-label"> Heures à faire :</label>
-                        <div class="col-xs-5"><input type="text" type="number" class="form-control" value="{{PersonneModif.Total}}"></div>
+                        <div class="col-xs-5"><input type="text" type="number" class="form-control" value="{{PersonneModif.Total}}" id="HSubmit"></div>
                         <div class="col-xs-3"></div>
                 </div>
                 <br>
                 <div class="row">
                         <div class="col-xs-1"></div>
                         <label class="col-xs-3 control-label"> Congés Annuel max  :</label>
-                        <div class="col-xs-5"><input type="text" type="number" class="form-control" value="{{PersonneModif.CA}}"></div>
+                        <div class="col-xs-5"><input type="text" type="number" class="form-control" value="{{PersonneModif.CA}}" id="CASubmit"></div>
                         <div class="col-xs-3"></div>
                 </div>
                 <br>
                 <div class="row">
                         <div class="col-xs-1"></div>
                         <label class="col-xs-3 control-label"> CA avant Avril max :</label>
-                        <div class="col-xs-5"><input type="text" type="number" class="form-control" value="{{PersonneModif.CAav}}"></div>
+                        <div class="col-xs-5"><input type="text" type="number" class="form-control" value="{{PersonneModif.CAav}}" id="CAavSubmit"></div>
                         <div class="col-xs-3"></div>
                 </div>
                 <br>

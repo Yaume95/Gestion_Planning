@@ -26,44 +26,6 @@ app.controller('gestion_controller', ['$scope','$http',function($scope, $http)
       }); 
    }
 
-    $scope.AucunChoix=function(selected)
-    {
-        if(selected==null || selected==undefined)
-        {
-            return true;
-        }
-        return false
-    }
-
-    $scope.Liste=function(string)
-    {
-        var sortie = [];
-        var x = $scope.Employes;
-        recherche= string.toLowerCase();
-
-        Liste = angular.forEach(x,function(object,key)
-        {
-            temp = object.Personne.toLowerCase();
-            if(   temp.includes(recherche) )
-            {
-                console.log(temp,recherche,temp.includes(recherche) );
-                sortie+=x[key];
-            }
-            console.log(sortie);
-            return sortie;  
-        });
-    }
-
-
-    $scope.includes=function(string1,string2)
-    {
-        if(string2==undefined || string2==null)
-        {
-            string2='';
-        }
-        return string1.toLowerCase().includes(string2.toLowerCase());
-    }
-
     $scope.validSuppression=function(idp)
     {
         if(confirm("Êtes-vous sur de vouloir supprimer cette personne de la base de données ?"))
@@ -84,27 +46,23 @@ app.controller('gestion_controller', ['$scope','$http',function($scope, $http)
     $scope.modification=function(object)
     {
 
-        $('#Modification').modal('show');
-        $scope.PersonneModif= object;
-/*
-        str = object.Total;
-        str= str.substring(str.indexOf("/") + 1); 
-        $scope.PersonneModif.Total =str ;
+        $('#Modification').modal('show')
 
-        str = object.CA;
-        str= str.substring(str.indexOf("/") + 1); 
-        $scope.PersonneModif.CA =str ;
+        $scope.PersonneModif = [];
+        $scope.PersonneModif['Personne']=object.Personne;
+        $scope.PersonneModif['Total']=substr(object.Total,"/");
+        $scope.PersonneModif['CA']=substr(object.CA,"/");
+        $scope.PersonneModif['CAav']=substr(object.CAav,"/");
 
-        str = object.CAav;
-        str= str.substring(str.indexOf("/") + 1); 
-        $scope.PersonneModif.CAav =str ;*/
 
 
     }
 
-    $scope.cut=function(s)
-    {
-        var x =  s.substring(s.indexOf("/") + 1);
-    }
+
 	
 }]);
+
+function substr(s,separator)
+{
+    return s.substring(s.indexOf(separator) + 1);
+}
