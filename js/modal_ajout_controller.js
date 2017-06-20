@@ -2,11 +2,12 @@ app.controller('ajoutCtrl', ['$scope', '$http', function($scope,$http)
 {
   $scope.ajouter_personne=function()
     {
+
         nom=$('#NomSubmit2').val();
         nom= nom.charAt(0).toUpperCase() +nom.substring(1);
         totalH=$('#HSubmit2').val();      
         maxCA=$('#CASubmit2').val();    
-        maxCAav=$('#CAavSubmit2').val();        
+        maxCAav=$('#CAavSubmit2').val();    
         $http({ 
         method : 'POST',
         url : './BDD/ajout_personne.php',
@@ -22,17 +23,20 @@ app.controller('ajoutCtrl', ['$scope', '$http', function($scope,$http)
         })
         .then(function successCallback(response)
         {
+
+
             $('#Ajout').modal('hide');
-            $('#NomSubmit2').val("");      
-            $('#HSubmit2').val("");      
-            $('#CASubmit2').val("");    
-            $('#CAavSubmit2').val(""); 
+            $('#NomSubmit2').val(null);      
+            $('#HSubmit2').val(null);      
+            $('#CASubmit2').val(null);    
+            $('#CAavSubmit2').val(null);
             $scope.refresh();
-            $scope.data.myform.AjoutHsetPristine();
 
         });
+        $scope.myform.$setPristine();
+
     }
-  
+
 }]);
 
 
@@ -41,9 +45,11 @@ app.directive('myIsNumber', function() {
         require: 'ngModel',
         link: function(scope, element, attr, mCtrl) {
             function myValidation(value) {
-                if (!isNaN(value)) {
+                if (!isNaN(Number(value) && value.length>0)) {
                     mCtrl.$setValidity('number', true);
-                } else {
+                } 
+                else
+                {
                     mCtrl.$setValidity('number', false);
                 }
                 return value;
@@ -58,10 +64,43 @@ app.directive('myTextOnly', function() {
         require: 'ngModel',
         link: function(scope, element, attr, mCtrl) {
             function myValidation(value) {
-                if (/^[a-zA-Z- ]*$/.test(value) == true) {
+                if (/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸ]*([ '-][a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸ]+)*$/.test(value) == true && value.length>=3) 
+                {
                     mCtrl.$setValidity('textOnly', true);
-                } else {
+                    mCtrl.$setValidity('textTooShort', false);
+
+                } 
+                else if (/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸ]*([ '-][a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸ]+)*$/.test(value) == true &&  value.length<3)
+                {
+                    mCtrl.$setValidity('textOnly', true);
+                    mCtrl.$setValidity('textTooShort', true);
+                }
+                else if (/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸ]*([ '-][a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸ]+)*$/.test(value) == false && value.length>=3)
+                {
                     mCtrl.$setValidity('textOnly', false);
+                    mCtrl.$setValidity('textTooShort', false);
+                }
+                else if (/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸ]*([ '-][a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸ]+)*$/.test(value) == false && value.length<3)
+                {
+                    mCtrl.$setValidity('textOnly', false);
+                    mCtrl.$setValidity('textTooShort', true);
+                }
+                return value;
+            }
+            mCtrl.$parsers.push(myValidation);
+        }
+    };
+});
+
+app.directive('isEmpty', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attr, mCtrl) {
+            function myValidation(value) {
+                if (value == "") {
+                    mCtrl.$setValidity('isEmpty', true);
+                } else {
+                    mCtrl.$setValidity('isEmpty', false);
                 }
                 return value;
             }

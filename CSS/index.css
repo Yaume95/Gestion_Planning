@@ -110,6 +110,7 @@ button
 	color:white!important;
 	background-color: #02C1C3!important;
 }
+
 td br
 {
 	display: none;
@@ -129,6 +130,15 @@ nav li a
 nav li a:hover
 {
 	color: white!important;
+}
+.Dropdown
+{
+	background-color: #0C0C0C!important;
+	width: 100%!important;
+}
+.Dropdown:hover
+{
+	color:black!important;
 }
 .Active
 {

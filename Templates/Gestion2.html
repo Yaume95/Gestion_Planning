@@ -1,0 +1,90 @@
+<div ng-init="initGestion2()" class="container-fluid" >
+    <div class="container-fluid">
+    
+<!-- ==================================== Affichage des Lieux ==================================== --> 
+        <div class="col-xs-12">
+
+            <div class="col-xs-12">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-8"><table class="table table-bordered" >
+                    <tr>
+                        <th class ="Entete"> Nom du site </th>
+                        <th class ="Entete MoisSelec" colspan="5">Actions</th>
+
+                    </tr>
+                    <tr ng-repeat="x in Lieux |orderBy:'Lieu'">
+                        <td class="col-xs-3" id="IDL{{x.IDL}}" contenteditable="false">{{x.Lieu}}</td>
+                        <th class="col-xs-2">
+                            <div id="actions">
+                                <button type="button" class="btn btn-danger col-xs-4" ng-click="validSuppression(x.IDL)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
+                                <button type="button" class="btn btn-primary col-xs-4" ng-click="modificationLieu(x)"><span class="glyphicon glyphicon-th-list"></span> Modifier </button>
+                            </div>
+                        </th>
+                    </tr>
+                </table></div>
+                <div class="col-xs-2"></div>             
+            </div>
+            <div class="col-xs-12">
+                <div ng-if="AjoutDemande" class="row"> 
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10">
+                        <div class="col-xs-1"><label id="AjoutNomLieu">Nom : </label></div>
+                        <div class="col-xs-6"><input type="text" placeholder="Entrez le nom du nouveau site" ng-model="AjoutNomLieu" class ="form-control"></div>
+                        <div class="col-xs-1"><input type="submit" ng-click="annulerDemande()" value="Annuler" class ="btn btn-danger"></div>
+                        <div class="col-xs-1"><input type="submit" ng-click="confirmerDemande(AjoutNomLieu)" value="Confirmer" class ="btn btn-success"></div>
+                    </div>
+                    <div class="col-xs-2"></div>    
+                    <br><br><br>
+                </div>
+                <div ng-if="AjoutDemande==false">
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-4"><button id="AjoutLieu" class="btn btn-success"  ng-click="demandeAjout()"><span class="glyphicon glyphicon-plus"></span> Ajouter un lieu</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =============================== Modal Modification d'une Personne =============================== -->
+
+<div class="modal fade" id="ModificationLieu" role="dialog" ng-controller="modifLieuCtrl">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal">X</button>
+            <h3 class="modal-title TitreForm"><b>{{LieuModif.Lieu}} </b></h3>
+        </div>
+
+            <div class="modal-body">
+                <form name="formLieu">
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <label class="col-xs-3 control-label" > Nom du site:</label>
+                    <div class="col-xs-5"><input type="text" type="text" name="ModifNomLieu" ng-model="ModifNomLieu" class="form-control" placeholder="{{LieuModif.Lieu}}" id="NomSubmitLieu" my-text-only is-empty></div>
+                    <div class="col-xs-3">
+                            <div class="Erreur" ng-hide="!formLieu.ModifNomLieu.$error.textOnly || formLieu.ModifNomLieu.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span>
+                                <label class="texte">Ni chiffres ni charactères spéciaux</label>
+                            </div>
+                            <div class="OK" ng-hide="formLieu.ModifNomLieu.$error.textOnly || formLieu.ModifNomLieu.$pristine || !formLieu.ModifNomLieu.$error.textTooShort || !formLieu.ModifNomLieu.$error.isEmpty">
+                                <span class="glyphicon glyphicon-ok "></span>
+                            </div>        
+                    </div>
+                </div>
+                <br>
+                
+                <br>
+                <div class="row">
+                    <div class="col-xs-5"></div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-primary" ng-click="envoyer_modifs_lieu()" 
+                                ng-disabled="(formLieu.ModifNomLieu.$error.textOnly || !formLieu.ModifNomLieu.$error.textTooShort &&  formLieu.ModifNomLieu.$error.isEmpty)">Confirmer
+                        </button>
+                    </div>
+                    <div class="col-xs-5"></div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>

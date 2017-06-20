@@ -1,4 +1,4 @@
-app.controller('planning1_controller', ['$scope','$http', '$route','$window','$location' ,function($scope, $http,$route,$window,$location) {
+app.controller('planning1_controller', ['$scope','$http', '$route','$window','$location','$rootScope' ,function($scope, $http,$route,$window,$location,$rootScope) {
 
     $scope.initFirst=function()
     {
@@ -6,9 +6,16 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
       .then(function (response) 
       {
           $scope.Employes = response.data.employes;
-          $scope.SelectionPersonne = $scope.Employes[0].IDP;
-          $scope.place=0;
-
+          if($rootScope.redirect==true)
+          {
+            $rootScope.redirect==false;
+            $scope.SelectionPersonne = $rootScope.planningRedirect;
+          }
+          else
+          {
+            $scope.SelectionPersonne = $scope.Employes[0].IDP;
+          }
+          $scope.place=$('[value='+$rootScope.planningRedirect+']').attr('id');
       });
 
       $http.get("./BDD/horaires.php")
@@ -110,7 +117,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
             if(!isNaN(content) )
             {
               
-              if(contentCell!="" && content=="" )
+              if(contentCell!="" && content==""  || (contentCell=="" && content=="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantAvril,.DemiCAavantAvril,.DemiRepos,.DemiCA')))
               {
                   contentCell="";
                   $event.target.blur();
@@ -127,24 +134,27 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                                 } 
                   }).then(function successCallback(response) {
                       $event.target.blur();
-                      x= $('[data-idp='+idp+'] + [data-idl='+idl+'] + [data-date='+date+']');
-                      console.log(x);
-                      x.removeClass().addClass('heure');
+                      x= $('[data-idp='+idp+'][data-idl='+idl+'][data-date='+date+']');
+                      y=$('#'+date+idl+idp);
+                      x.removeClass().addClass('heure ng-scope ng-binding');
+                      console.log("supression");
+                      $scope.refresh();
                   }, function errorCallback(response)
                   {
                       
                   });
                   $scope.refresh();
-                  $("[data-idl="+idl+"] + [data-idp="+idp+"] + [data-date='"+date+"']").css({"backgroundColor":"white"});
+                  $("[data-idl="+idl+"][data-date='"+date+"']").css({"backgroundColor":"white"});
+                  $scope.refresh();
                   //alert('suppression heures');
               }
-              else if (contentCell=="" && content!="" && Number(content)>0)
+              else if (contentCell=="" && content!="" && Number(content)>0 && !$('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantAvril,.DemiCAavantAvril,.DemiRepos,.DemiCA'))
               {
 
                  
                   $event.target.blur();
                   
-
+                  console.log("ajout");
                   $http({ 
                         method : 'POST',
                         url : './BDD/ajout_horaires.php',
@@ -155,14 +165,36 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                                     Date_jour:date,
                                     NbHeures:nbheures
                                 } 
-                  });
-                  $scope.refresh();
+                  }).then(function successCallback(response) {
+                      $event.target.blur();
+                      x= $('[data-idl='+idl+'][data-date='+date+']').removeClass().addClass('heure');
+                      $scope.refresh()
+                    });
                   
 
               }
-              else if (contentCell!="" && content!="" && !isNaN(content))
+              else if (contentCell!="" && content!="" && !isNaN(content) || (contentCell=="" && content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantAvril,.DemiCAavantAvril,.DemiRepos,.DemiCA')))
               {
+                  console.log("modif");
 
+                  if(isNaN($('#'+date+idl+idp).text()))
+                  {
+                      $('[data-idl='+idl+'][data-date='+date+']').removeClass('heure ng-binding ng-scope');
+                      Oldetat = $scope.compress($('#'+date+idl+idp).text());
+                      $('[data-idl='+idl+'][data-date='+date+']').addClass('heure ng-binding ng-scope').removeClass(Oldetat);
+                      $('[data-idl='+idl+'][data-date='+date+']').css('backgroundColor','white');
+                  }
+                  
+
+
+                  if(content!="")
+                  {
+                      etat='Travail';
+                      $('[data-idl='+idl+'][data-date='+date+']').re
+                  }
+
+
+          
                   $event.target.blur();
                   $http({ 
                         method : 'POST',
@@ -172,9 +204,14 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                                     IDP: idp,
                                     IDL: idl,
                                     Date_jour:date,
-                                    NbHeures:nbheures
+                                    NbHeures:nbheures,
+                                    Etat:etat
                                 } 
-                  });
+                  })
+                  .then(function successCallback(response) {
+                      $event.target.blur();
+                      $scope.refresh()
+                    });
                   $scope.refresh();
               }
               else if( content!="" && Number(content)<=0)
@@ -228,14 +265,11 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
             
             angular.forEach(response.data.employes, function(object, key)
             {
-
                 if(int==Number(object.IDP) )
                 {
                     $scope.place=key;
                 }
             });
-
-
           });
 
           return $scope.place
@@ -286,15 +320,15 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     $scope.rtt_mensuel= function()
     { 
         var z =0.0;
-        var valeurs = document.querySelectorAll('.heure');
+        var valeurs = $('.heure');
 
-        angular.forEach(valeurs,function(value,key)
+        valeurs.each(valeurs,function(key,value)
         {
-            if(value.innerText=="Repos")
+            if(value.hasClass("Repos"))
             { 
               z+=1;
             }
-            else if(value.innerText=="Demi Repos")
+            else if(value.innerText=="DemiRepos")
             {
               z+=0.5
             }
@@ -365,8 +399,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         var x=$scope.compress($('#'+Date+Lieu+Nom).text().valueOf())  ;
         if(isNaN(x))
         {
-            $("[data-idl="+Lieu+"] + [data-date='"+Date+"']").addClass(x);
-            return x;
+            $("[data-idl="+Lieu+"][data-date='"+Date+"']").addClass(x);
         }
         else
         {

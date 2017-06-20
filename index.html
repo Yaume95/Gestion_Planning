@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="CSS/modal_ajout.css">
     <link rel="stylesheet" href="CSS/gestion.css">
 
+
+
 </head>
 
 <body ng-app="Planning">
@@ -36,9 +38,14 @@
                 </a>
             </li>
             <li>
-                <a href="#!Gestion" id ="Gestion">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="" id ="Gestion">
                     <span class="glyphicon glyphicon-cog" ng-click="selectActive()"></span> Gestion
+                    <span class="caret"></span>
                 </a>
+                <ul class="dropdown-menu Dropdown">
+                  <li class="Dropdown"><a href="#!Gestion_Personnel" class="Dropdown">Personnel</a></li><br>
+                  <li class="Dropdown"><a href="#!Gestion_Lieux" class="Dropdown">Lieux</a></li>
+                </ul>
             </li>
         </ul>
     </div>
@@ -51,9 +58,11 @@
 <script src="./js/planning1_controller.js"></script>
 <script src="./js/modal_controller.js"></script>
 <script src="./js/modal_modif_controller.js"></script>
+<script src="./js/modal_modiflieu_controller.js"></script>
 <script src="./js/modal_ajout_controller.js"></script>
 <script src="./js/planning2_controller.js"></script>
 <script src="./js/gestion_controller.js"></script>
+<script src="./js/gestion_controller2.js"></script>
 
 
 

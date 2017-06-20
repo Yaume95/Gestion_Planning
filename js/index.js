@@ -4,7 +4,7 @@ var app = angular.module('Planning', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
-        templateUrl : "Planning1.html",
+        templateUrl : "Templates/Planning1.html",
         controller : "planning1_controller"
     })
     .when("/Planning_Personnel", {
@@ -15,9 +15,13 @@ app.config(function($routeProvider) {
         templateUrl : "Templates/Planning2.html",
         controller : "planning2_controller"
     })
-    .when("/Gestion", {
-        templateUrl : "Templates/Gestion.html",
+    .when("/Gestion_Personnel", {
+        templateUrl : "Templates/Gestion1.html",
         controller : "gestion_controller"
+    })
+    .when("/Gestion_Lieux", {
+        templateUrl : "Templates/Gestion2.html",
+        controller : "gestion_controller2"
     });
 });
 

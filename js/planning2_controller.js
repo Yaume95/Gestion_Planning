@@ -54,4 +54,5 @@ app.controller('planning2_controller', ['$scope','$http','$window','$location' ,
             $event.preventDefault();
 		}
 	}
+
 }]);

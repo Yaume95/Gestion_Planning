@@ -10,12 +10,13 @@
 	//var_dump($params);
 	$dbh->beginTransaction();
 
-	$requete = $dbh->prepare("UPDATE horaires set NbHeures=:NbHeures , Etat='Travail' where IDP=:IDP and IDL=:IDL and Date_jour=:Date_jour");
+	$requete = $dbh->prepare("UPDATE horaires set NbHeures=:NbHeures , Etat=:Etat where IDP=:IDP and IDL=:IDL and Date_jour=:Date_jour");
 
 	$requete->bindParam(':IDP', $IDP);
 	$requete->bindParam(':IDL', $IDL);
 	$requete->bindParam(':NbHeures', $NbHeures);
 	$requete->bindParam(':Date_jour', $Date_jour);
+	$requete->bindParam(':Etat', $Etat);
 	
 
 
@@ -23,6 +24,7 @@
 	$IDL=$params['IDL'];
 	$NbHeures=$params['NbHeures'];
 	$Date_jour=$params['Date_jour'];
+	$Etat=$params['Etat'];
 
 	$requete->execute();
 	$dbh->commit();

@@ -20,8 +20,10 @@
 	background-color: white;
 	font-size:28px;
 }
-#Ajout .modal-body, #Modification .modal-body
-{
+
+
+#Ajout .modal-body, #Modification .modal-body, #ModificationLieu
+.modal-body{
 	background-color: #E3E1E1;
 }
 
@@ -43,9 +45,10 @@
     75% {background-color: #E5060C;}
     100% {background-color: #226EBB;}
 }
-.rain{
+.rain
+{
     -webkit-animation-direction: normal;
-    -webkit-animation-duration: 20s;
+    -webkit-animation-duration: 5s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-name: colors;
     -webkit-animation-timing-function: ease;

@@ -1,4 +1,4 @@
-app.controller('gestion_controller', ['$scope','$http',function($scope, $http)
+app.controller('gestion_controller', ['$scope','$http','$window','$location','$rootScope', function($scope, $http,$location,$window,$rootScope)
 {
 
     $scope.PersonneModif=[];
@@ -17,6 +17,8 @@ app.controller('gestion_controller', ['$scope','$http',function($scope, $http)
         {
             $scope.Lieux =response.data.lieux
         });
+
+        $scope.Recherche="";
 	}
 
     $scope.refresh=function()
@@ -45,13 +47,24 @@ app.controller('gestion_controller', ['$scope','$http',function($scope, $http)
         $scope.refresh();
     }
 
+    $scope.include=function(string,Liste)
+    {
+        x=false;
+        angular.forEach(Liste, function(value,key)
+        {
+            if(value.Personne.toLowerCase().includes(string.toLowerCase()) )
+            {
+                x = true;
+            }
+        });
+
+        return x;
+    }
+
     $scope.modification=function(object)
     {
 
-        $('#Modification').modal('show')
-
-        console.log($scope.PersonneModif);
-
+        $('#Modification').modal('show');
 
         $scope.PersonneModif['IDP']=object.IDP;
         $scope.PersonneModif['Personne']=object.Personne;
@@ -59,8 +72,6 @@ app.controller('gestion_controller', ['$scope','$http',function($scope, $http)
         $scope.PersonneModif['CA']=substr(object.CA,"/");
         $scope.PersonneModif['CAav']=substr(object.CAav,"/");
 
-
-        console.log($scope.PersonneModif);
         $scope.refresh();
 
     }
@@ -70,7 +81,12 @@ app.controller('gestion_controller', ['$scope','$http',function($scope, $http)
         $('#Ajout').modal('show');
     }
 
-
+    $scope.redirectPlanning=function(object)
+    {
+        $rootScope.redirect=true;
+        $rootScope.planningRedirect=object.IDP;
+        location.hash="#!/Planning_Personnel";
+    }
 	
 }]);
 

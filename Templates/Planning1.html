@@ -18,7 +18,7 @@
                     <tr>
                         <th>
                             
-                            <select class="form-control input-md" ng-model="SelectionPersonne" ng-change="reset()" ng-init="count=0">
+                            <select class="form-control input-md" id="SelectedPerson" ng-model="SelectionPersonne" ng-change="reset()" ng-init="count=0">
                                 <option ng-repeat="(count,x) in Employes" id="{{count}}" value="{{x.IDP}}">{{Employes[count].Personne}}</option>
                             </select>
                             <select class="form-control" ng-model="SelectionMois" ng-options="x.mois for x in Mois" ng-init="SelectionMois=Mois[0]"></select>
@@ -55,7 +55,7 @@
         </div>
     
     </div>
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
         <div class="col-xs-5">
             <table class="table table-bordered">
                   <tr>
@@ -84,7 +84,7 @@
                   </tr>
             </table>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- ======================================= Modal ======================================= -->

@@ -67,6 +67,7 @@ app.controller('modifCtrl', ['$scope', '$http', function($scope,$http)
 	    	$('#HSubmit1').val("");
 	    	$('#CASubmit1').val("");
 	    	$('#CAavSubmit1').val("");
+            $scope.myform1.$setPristine();
         	$scope.refresh();
 
 
