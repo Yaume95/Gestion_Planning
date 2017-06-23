@@ -35,6 +35,10 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
             data :  {
                         Nom: nom                           
                     } 
+        })
+        .then(function successCallback(response) {
+            console.log(nom);
+            $scope.refresh();
         });
         $scope.AjoutDemande=false;
     
@@ -61,6 +65,10 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
                 data :  {
                             IDL: idl                            
                         } 
+            })
+            .then(function successCallback(response) 
+            {
+                $scope.refresh();
             });
             $scope.refresh();
         }

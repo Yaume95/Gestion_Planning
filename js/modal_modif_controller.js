@@ -8,6 +8,7 @@ app.controller('modifCtrl', ['$scope', '$http', function($scope,$http)
     	if ($('#NomSubmit1').val() != "")
     	{
     		nom=$('#NomSubmit1').val();
+            nom= nom.charAt(0).toUpperCase() +nom.substring(1);
     	}
     	else
     	{

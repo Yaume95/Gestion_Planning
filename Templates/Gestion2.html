@@ -12,7 +12,7 @@
                         <th class ="Entete MoisSelec" colspan="5">Actions</th>
 
                     </tr>
-                    <tr ng-repeat="x in Lieux |orderBy:'Lieu'">
+                    <tr ng-repeat="x in Lieux">
                         <td class="col-xs-3" id="IDL{{x.IDL}}" contenteditable="false">{{x.Lieu}}</td>
                         <th class="col-xs-2">
                             <div id="actions">
@@ -56,11 +56,11 @@
         </div>
 
             <div class="modal-body">
-                <form name="formLieu">
+                <form  accept-charset="UTF-8"  name="formLieu">
                 <div class="row">
                     <div class="col-xs-1"></div>
                     <label class="col-xs-3 control-label" > Nom du site:</label>
-                    <div class="col-xs-5"><input type="text" type="text" name="ModifNomLieu" ng-model="ModifNomLieu" class="form-control" placeholder="{{LieuModif.Lieu}}" id="NomSubmitLieu" my-text-only is-empty></div>
+                    <div class="col-xs-5"><input type="text" name="ModifNomLieu" ng-model="ModifNomLieu" class="form-control" placeholder="{{LieuModif.Lieu}}" id="NomSubmitLieu" my-text-only is-empty></div>
                     <div class="col-xs-3">
                             <div class="Erreur" ng-hide="!formLieu.ModifNomLieu.$error.textOnly || formLieu.ModifNomLieu.$pristine">
                                 <span class="glyphicon glyphicon-remove "></span>

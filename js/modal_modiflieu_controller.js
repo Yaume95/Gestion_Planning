@@ -7,10 +7,12 @@ app.controller('modifLieuCtrl', ['$scope', '$http', function($scope,$http)
     	if ($('#NomSubmitLieu').val() != "")
     	{
     		nom=$('#NomSubmitLieu').val();
+            nom= nom.charAt(0).toUpperCase() +nom.substring(1);
+            
     	}
     	else
     	{
-    		nom=$scope.LieuModif['Personne'];
+    		nom=$scope.LieuModif['Lieu'];
     	}
 
 

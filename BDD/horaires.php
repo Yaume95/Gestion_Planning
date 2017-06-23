@@ -2,12 +2,7 @@
 	header("Access-Control-Allow-Origin: *");
 	header("Content-Type: application/json; charset=UTF-8");
 
-	$user='root';
-	$pw='';
-	$bdd='gestion_planning';
-	
-	$dbh= new PDO('mysql:host=127.0.0.1;dbname=' . $bdd, $user, $pw);
-
+	include('./connection_bdd.php');
 	$requete = $dbh->prepare("SELECT personne.IDP, horaires.IDL, Date_jour,NbHeures,Etat from horaires join personne on personne.IDP=horaires.IDP join site on site.IDL = horaires.IDL ORDER BY horaires.IDP ASC, horaires.Date_jour ASC");
 	$requete->execute();
 

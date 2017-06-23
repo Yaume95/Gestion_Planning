@@ -2,7 +2,6 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
 
     $scope.affect= function($event,int)
     {
-        $('[data-idl='+idl+'][data-date='+date+'][data-idp='+idp+']').removeClass().addClass('heure ng-binding ng-scope');
         $scope.refresh();
         if(int==0)
         {
@@ -20,6 +19,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
             .then(function successCallback(response) 
             {
                 $scope.refresh();
+                $('#AjoutEtat').modal('hide');
             });
         }
         else if (int==1)
@@ -38,6 +38,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
             .then(function successCallback(response) 
             {
                 $scope.refresh();
+                $('#AjoutEtat').modal('hide');
             });
         }
         else if (int==2)
@@ -56,6 +57,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
             .then(function successCallback(response) 
             {
                 $scope.refresh();
+                $('#AjoutEtat').modal('hide');
             });
         }
         else if (int==3)
@@ -74,6 +76,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
             .then(function successCallback(response) 
             {
                 $scope.refresh();
+                $('#AjoutEtat').modal('hide');
             });
         }
         else if (int==4)
@@ -91,48 +94,64 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
             })
             .then(function successCallback(response) 
             {
+                $('#AjoutEtat').modal('hide');
                 $scope.refresh();
             });
         }
         else if (int==5)
         {
-            $http({ 
-                  method : 'POST',
-                  url : './BDD/ajout_etat.php',
-                  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                  data :  {
-                              IDP: idp,
-                              IDL:idl,
-                              Date_jour:date,
-                              Etat: 'CA avant Avril'
-                          } 
-            })
-            .then(function successCallback(response) 
+            if($scope.SelectionMois.num>4)
             {
-                $scope.refresh();
-            });
+              alert('Vous ne pouvez pas ajouter des CA avant Avril APRÈS Avril...');
+            }
+            else
+            {
+              $http({ 
+                    method : 'POST',
+                    url : './BDD/ajout_etat.php',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    data :  {
+                                IDP: idp,
+                                IDL:idl,
+                                Date_jour:date,
+                                Etat: 'CA avant Avril'
+                            } 
+              })
+              .then(function successCallback(response) 
+              {
+                  $scope.refresh();
+                  $('#AjoutEtat').modal('hide');
+              });
+            }
         }
         else if (int==6)
         {
-            $http({ 
-                  method : 'POST',
-                  url : './BDD/ajout_etat.php',
-                  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                  data :  {
-                              IDP: idp,
-                              IDL:idl,
-                              Date_jour:date,
-                              Etat: 'Demi CA avant Avril'
-                          } 
-            })
-            .then(function successCallback(response) 
+            if($scope.SelectionMois.num>4)
             {
-                $scope.refresh();
-            });
+              alert('Vous ne pouvez pas ajouter des CA avant Avril APRÈS Avril...');
+            }
+            else
+            {
+              $http({ 
+                    method : 'POST',
+                    url : './BDD/ajout_etat.php',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    data :  {
+                                IDP: idp,
+                                IDL:idl,
+                                Date_jour:date,
+                                Etat: 'Demi CA avant Avril'
+                            } 
+              })
+              .then(function successCallback(response) 
+              {
+                  $scope.refresh();
+                  $('#AjoutEtat').modal('hide');
+              });
+            }
         }
 
         $scope.refresh();
-        $('#AjoutEtat').modal('hide');
         $scope.refresh();
         
     }

@@ -1,12 +1,7 @@
 <?php
 	header("Access-Control-Allow-Origin: *");
 	header("Content-Type: application/json; charset=UTF-8");
-
-	$user='root';
-	$pw='';
-	$bdd='gestion_planning';
-	
-	$dbh= new PDO('mysql:host=127.0.0.1;dbname=' . $bdd, $user, $pw);
+	include('./connection_bdd.php');
 
 	$requete = $dbh->prepare("call config_";	$requete->execute();
 
@@ -27,6 +22,4 @@
 	$outp='{"employes":['.$outp.']}';
 
 	echo $outp;
-
-
 ?>

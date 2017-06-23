@@ -1,10 +1,7 @@
 <?php
 
-	$user='root';
-	$pw='';
-	$bdd='gestion_planning';
+	include('./connection_bdd.php');
 	
-	$dbh= new PDO('mysql:host=127.0.0.1;dbname=' . $bdd, $user, $pw);
 
 	$params = json_decode(file_get_contents('php://input'),true);
 

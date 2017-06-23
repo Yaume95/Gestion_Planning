@@ -1,11 +1,6 @@
 <?php
 
-	$user='root';
-	$pw='';
-	$bdd='gestion_planning';
-	
-	$dbh= new PDO('mysql:host=127.0.0.1;dbname=' . $bdd, $user, $pw);
-
+	include('./connection_bdd.php');
 	$params = json_decode(file_get_contents('php://input'),true);
 
 	$dbh->beginTransaction();
@@ -18,7 +13,7 @@
 	$requete->bindParam(':CAavMax', $CAavMax);
 	
 
-	$Nom=$params['Nom'];
+	$Nom=utf8_decode($params['Nom']);
 	$NbHaFaire=$params['NbHaFaire'];
 	$CAapMax=$params['CAapMax'];
 	$CAavMax=$params['CAavMax'];

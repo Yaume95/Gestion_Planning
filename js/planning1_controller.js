@@ -1,5 +1,8 @@
 app.controller('planning1_controller', ['$scope','$http', '$route','$window','$location','$rootScope' ,function($scope, $http,$route,$window,$location,$rootScope) {
 
+    $scope.place=0;
+    compteur=0;
+
     $scope.initFirst=function()
     {
        $http.get("./BDD/employes.php")
@@ -10,12 +13,12 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
           {
             $rootScope.redirect==false;
             $scope.SelectionPersonne = $rootScope.planningRedirect;
+            
           }
           else
           {
             $scope.SelectionPersonne = $scope.Employes[0].IDP;
           }
-          $scope.place=$('[value='+$rootScope.planningRedirect+']').attr('id');
       });
 
       $http.get("./BDD/horaires.php")
@@ -36,6 +39,17 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
       {
         $scope.Lieux =response.data.lieux
       });
+    }
+
+    $scope.Quelleplace = function(idp)
+    {
+        angular.forEach($scope.Employes, function(value,key)
+        {
+            if(value.IDP==idp)
+            {
+              return key;
+            }
+        });
     }
 
     $scope.refresh=function()
@@ -66,23 +80,20 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         if($event.which==3)
         {
             $event.preventDefault();
-            idp = $event.target.attributes['data-idp'].value;
-            idl = $event.target.attributes['data-idl'].value;
-            date= $event.target.attributes['data-date'].value;
-            $('#AjoutEtat').modal();
         } 
     }
 
     $scope.focusin=function($event)
     {
-
-        if($event.which==1)
+        if($event.which==1 && compteur==0)
         {
             
             $event.preventDefault();
             contentCell=$event.target.innerText;
             $event.target.innerText="";
         }
+        compteur+=1;
+
     }
 
     $scope.unableTab=function($event)
@@ -96,9 +107,15 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     $scope.focusout=function($event)
     {
         
-        if(contentCell!="" && event.target.innerText=="")
+        if(contentCell!="" && event.target.innerText=="" && compteur>0)
         {
-          $event.target.innerText=contentCell  ;
+          $event.target.innerText=contentCell;
+          console.log("çachange");
+          compteur=0;
+        }
+        else if (compteur>0)
+        {
+            compteur=0;
         }
     }
 
@@ -114,6 +131,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
         if ($event.keyCode == 13)
         {
+            $event.preventDefault();
             if(!isNaN(content) )
             {
               
@@ -133,18 +151,10 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                                     
                                 } 
                   }).then(function successCallback(response) {
-                      $event.target.blur();
-                      x= $('[data-idp='+idp+'][data-idl='+idl+'][data-date='+date+']');
-                      y=$('#'+date+idl+idp);
-                      x.removeClass().addClass('heure ng-scope ng-binding');
                       console.log("supression");
                       $scope.refresh();
-                  }, function errorCallback(response)
-                  {
-                      
+                      $event.target.blur();
                   });
-                  $scope.refresh();
-                  $("[data-idl="+idl+"][data-date='"+date+"']").css({"backgroundColor":"white"});
                   $scope.refresh();
                   //alert('suppression heures');
               }
@@ -167,32 +177,20 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                                 } 
                   }).then(function successCallback(response) {
                       $event.target.blur();
-                      x= $('[data-idl='+idl+'][data-date='+date+']').removeClass().addClass('heure');
                       $scope.refresh()
                     });
                   
 
               }
-              else if (contentCell!="" && content!="" && !isNaN(content) || (contentCell=="" && content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantAvril,.DemiCAavantAvril,.DemiRepos,.DemiCA')))
+              else if (contentCell!="" && content!="" && !isNaN(content) && Number(content)>0 || (contentCell=="" && content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantAvril,.DemiCAavantAvril,.DemiRepos,.DemiCA')))
               {
-                  console.log("modif");
-
-                  if(isNaN($('#'+date+idl+idp).text()))
-                  {
-                      $('[data-idl='+idl+'][data-date='+date+']').removeClass('heure ng-binding ng-scope');
-                      Oldetat = $scope.compress($('#'+date+idl+idp).text());
-                      $('[data-idl='+idl+'][data-date='+date+']').addClass('heure ng-binding ng-scope').removeClass(Oldetat);
-                      $('[data-idl='+idl+'][data-date='+date+']').css('backgroundColor','white');
-                  }
-                  
+                  console.log("modif");              
 
 
                   if(content!="")
                   {
                       etat='Travail';
-                      $('[data-idl='+idl+'][data-date='+date+']').re
                   }
-
 
           
                   $event.target.blur();
@@ -319,19 +317,19 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
     $scope.rtt_mensuel= function()
     { 
-        var z =0.0;
-        var valeurs = $('.heure');
+        var valeurs = document.querySelectorAll('.Repos');
+        var valeurs2 = document.querySelectorAll('.DemiRepos');
+        z=0.0;
 
-        valeurs.each(valeurs,function(key,value)
+        angular.forEach(valeurs,function(value,key)
         {
-            if(value.hasClass("Repos"))
-            { 
-              z+=1;
-            }
-            else if(value.innerText=="DemiRepos")
-            {
-              z+=0.5
-            }
+            z+=1
+        });
+
+
+        angular.forEach(valeurs2,function(value,key)
+        {
+            z+=0.5
         });
 
         return z;
@@ -340,15 +338,9 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     $scope.maladie_mensuel= function(Nom)
     {
         var z =0.0;
-        var valeurs = document.querySelectorAll('.heure');
+        var valeurs = $('.Maladie');
 
-        angular.forEach(valeurs,function(value,key)
-        {
-            if(value.innerText=="Maladie")
-            { 
-              z+=1;
-            }
-        });
+        z+=valeurs.length;
 
         return z;
     }
@@ -356,38 +348,24 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     $scope.caav_mensuel= function(Nom)
     {
         var z =0.0;
-        var valeurs = document.querySelectorAll('.heure');
+        var valeurs = $('.CAavantAvril');
 
-        angular.forEach(valeurs,function(value,key)
-        {
-            if(value.innerText=="CAavantAvril")
-            { 
-              z+=1;
-            }
-            else if(value.innerText=="DemiCAavantAvril")
-            {
-              z+=0.5
-            }
-        });
+        z+=valeurs.length;
+
+        valeurs=$('.DemiCAavantAvril');
+        z+=0.5*valeurs.length;
 
         return z;
     }
     $scope.ca_mensuel= function(Nom)
     {
         var z =0.0;
-        var valeurs = document.querySelectorAll('.heure');
+        var valeurs = $('.CA');
 
-        angular.forEach(valeurs,function(value,key)
-        {
-            if(value.innerText=="CA")
-            { 
-              z+=1;
-            }
-            else if(value.innerText=="DemiCA")
-            {
-              z+=0.5
-            }
-        });
+        z+=valeurs.length;
+
+        valeurs=$('.DemiCA');
+        z+=0.5*valeurs.length;
 
         return z;
     }
@@ -399,7 +377,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         var x=$scope.compress($('#'+Date+Lieu+Nom).text().valueOf())  ;
         if(isNaN(x))
         {
-            $("[data-idl="+Lieu+"][data-date='"+Date+"']").addClass(x);
+
         }
         else
         {
@@ -409,6 +387,20 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         
     };
 
+    $scope.testclasses  = function(Date,Lieu,Nom)
+    {
+
+        var x=$scope.compress($('#'+Date+Lieu+Nom).text().valueOf())  ;
+        if(isNaN(x))
+        {
+            return x+' heure';
+        }
+        else
+        {
+          return 'heure';
+        }
+        
+    };
 
     $scope.compress = function(string)
     {
@@ -416,3 +408,22 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     }
 
 }]);
+
+app.directive('noRightClick', function() {
+    return {
+        link: function($scope, $element) 
+        {
+          $element.bind("contextmenu",function(e)
+          {
+              e.preventDefault();
+              e.target.blur();
+              idp = e.target.attributes['data-idp'].value;
+              idl = e.target.attributes['data-idl'].value;
+              date= e.target.attributes['data-date'].value;
+              $('#AjoutEtat').modal();
+          });
+
+        }
+            
+    };
+});

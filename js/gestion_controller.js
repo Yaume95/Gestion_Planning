@@ -42,7 +42,10 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
                             IDP: idp                            
                         } 
             })
-            $scope.refresh();
+            .then(function successCallback(response) 
+            {
+                      $scope.refresh();
+            });
         }
         $scope.refresh();
     }
@@ -52,7 +55,7 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
         x=false;
         angular.forEach(Liste, function(value,key)
         {
-            if(value.Personne.toLowerCase().includes(string.toLowerCase()) )
+            if(value.Personne.toLowerCase().search(string.toLowerCase()) >-1 )
             {
                 x = true;
             }

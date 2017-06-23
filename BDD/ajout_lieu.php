@@ -1,11 +1,7 @@
-<?php
+<?php header('Content-Type: text/html; charset=utf-8');
 
-	$user='root';
-	$pw='';
-	$bdd='gestion_planning';
 	
-	$dbh= new PDO('mysql:host=127.0.0.1;dbname=' . $bdd, $user, $pw);
-
+	include('./connection_bdd.php');
 	$params = json_decode(file_get_contents('php://input'),true);
 
 	$dbh->beginTransaction();
@@ -15,7 +11,7 @@
 	$requete->bindParam(':Nom', $Nom);
 	
 
-	$Nom=$params['Nom'];
+	$Nom=utf8_decode($params['Nom']);
 
 	$requete->execute();
 	$dbh->commit();
