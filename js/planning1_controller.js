@@ -1,6 +1,7 @@
 app.controller('planning1_controller', ['$scope','$http', '$route','$window','$location','$rootScope' ,function($scope, $http,$route,$window,$location,$rootScope) {
 
     $scope.place=0;
+    heure_checked=false;
     compteur=0;
 
     $scope.initFirst=function()
@@ -94,6 +95,10 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
     $scope.focusin=function($event)
     {
+        if($($event.target).is('unchecked')) heure_checked=false;
+        else heure_checked= true;
+
+
         if($event.which==1)
         {
             enter_pressed=false;  
@@ -151,7 +156,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                   });
                   $scope.refresh();
               }
-              else if (contentCell=="" && content!="" && Number(content)>0 && !$('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantJanvier,.DemiCAavantJanvier,.DemiRepos,.DemiCA'))
+              else if (contentCell=="" && content!="" && Number(content)>0 && !$('[data-idl='+idl+'][data-date='+date+']').is('.CA,.CAavantJanvier,.DemiCAavantJanvier,.DemiCA'))
               {
 
                  
@@ -175,7 +180,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                   
 
               }
-              else if (contentCell!="" && content!="" && !isNaN(content) && Number(content)>0 || contentCell!="" && content!="" & (contentCell=="" && content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantJanvier,.DemiCAavantJanvier,.DemiRepos,.DemiCA')))
+              else if (contentCell!="" && content!=""  && content!=contentCell && !isNaN(content) && Number(content)>0 || contentCell!="" && content!="" && (contentCell=="" && content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantJanvier,.DemiCAavantJanvier,.DemiRepos,.DemiCA')))
               {
                   console.log("modif");              
 
@@ -212,16 +217,32 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                   .then(function successCallback(response) {
                       $event.target.blur();
                       $scope.refresh()
-                    });
-                  $scope.refresh();
+                  });
               }
               else if( content!="" && Number(content)<=0)
               {
                   alert("Veuillez entrer un nombre d'heures correct");
               }
+              else if (content==contentCell && $scope.compress($('#'+date+idl+idp+3).text())!=1) 
+              {
+                $http({ 
+                        method : 'POST',
+                        url : './BDD/validation.php',
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        data :  {
+                                    IDP: idp,
+                                    IDL: idl,
+                                    Date_jour:date,
+                                } 
+                  })
+                .then(function successCallback(response) {
+                      $event.target.blur();
+                      $scope.refresh()
+                  });
+              }
               else
               {
-                $event.target.blur();
+                  $event.target.blur();
               }
             }
             else if(content!="")
@@ -398,15 +419,14 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     {
 
         var x=$scope.compress($('#'+Date+Lieu+Nom+'1').text().valueOf());
-        if(x!='Travail')
-        {
-            return x;
-        }
-        else if (x=='Travail')
-        {
-          return 'Travail';
-        }
+        var y=$scope.compress($('#'+Date+Lieu+Nom+'3').text().valueOf());
+        // var z=
 
+        if(x!='')
+        {
+          if(y==1)  return x; 
+          else return x+' unchecked';
+        }
         
     };
 

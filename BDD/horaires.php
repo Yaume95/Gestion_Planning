@@ -3,7 +3,7 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 	include('./connection_bdd.php');
-	$requete = $dbh->prepare("SELECT personne.IDP, horaires.IDL, Date_jour,NbHeures,Etat from horaires join personne on personne.IDP=horaires.IDP join site on site.IDL = horaires.IDL ORDER BY horaires.IDP ASC, horaires.Date_jour ASC");
+	$requete = $dbh->prepare("SELECT personne.IDP, horaires.IDL, Date_jour,NbHeures,Etat, checked from horaires join personne on personne.IDP=horaires.IDP join site on site.IDL = horaires.IDL ORDER BY horaires.IDP ASC, horaires.Date_jour ASC");
 	$requete->execute();
 
 
@@ -26,7 +26,7 @@
 	    		$j="Mars";
 	    		break;
 	    	case "04":
-	    		$j="Janvier";
+	    		$j="Avril";
 	    		break;
 			case "05":
 	    		$j="Mai";
@@ -53,7 +53,7 @@
 	    		$j="Décembre";
 	    		break;
 	    }
-    	$outp .= '{"IDL" : "'.$rs['IDL'].'", "IDP" : "'.$rs['IDP'].'", "Date_jour" : "'.$rs["Date_jour"].'", "Mois" : "'. $j.'", "NbHeures" : "'.$rs["NbHeures"].'", "Etat" : "'.$rs["Etat"].'"}';
+    	$outp .= '{"IDL" : "'.$rs['IDL'].'", "IDP" : "'.$rs['IDP'].'", "Date_jour" : "'.$rs["Date_jour"].'", "Mois" : "'. $j.'", "NbHeures" : "'.$rs["NbHeures"].'", "Etat" : "'.$rs["Etat"].'","Checked" : "'.$rs["checked"]. '"}';
 
 	}
 	$outp='{"horaires":['.$outp.']}';

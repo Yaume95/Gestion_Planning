@@ -8,6 +8,9 @@
                 <li ng-hide="true" ng-repeat="chargement in Horaires" ng-if="SelectionPersonne==chargement.IDP && SelectionMois.mois==chargement.Mois && chargement.NbHeures>0" id="{{chargement.Date_jour+chargement.IDL+chargement.IDP}}2">
                     {{chargement.NbHeures}}
                 </li>
+                <li ng-hide="true" ng-repeat="chargement in Horaires" ng-if="SelectionPersonne==chargement.IDP && SelectionMois.mois==chargement.Mois && chargement.NbHeures>0" id="{{chargement.Date_jour+chargement.IDL+chargement.IDP}}3">
+                    {{chargement.Checked}}
+                </li>
             </ul>
         </div>
         <div class="col-md-12">
@@ -38,7 +41,7 @@
                         ng-bind="cellule(b.Date_jour,a.IDL,SelectionPersonne)" 
                         data-idp="{{SelectionPersonne}}" 
                         data-date="{{b.Date_jour}}" 
-                        data-idl="{{a.IDL}}" 
+                        data-idl="{{a.IDL}}"
                         ng-keypress="valide_entrer($event)"
                         ng-click="focusin($event)" 
                         ng-blur="focusout($event)" 

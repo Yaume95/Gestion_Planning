@@ -5,7 +5,7 @@
 	//var_dump($params);
 	$dbh->beginTransaction();
 
-	$requete = $dbh->prepare("UPDATE horaires set NbHeures=:NbHeures , Etat=:Etat where IDP=:IDP and IDL=:IDL and Date_jour=:Date_jour");
+	$requete = $dbh->prepare("UPDATE horaires set NbHeures=:NbHeures , Etat=:Etat , Checked=0 where IDP=:IDP and IDL=:IDL and Date_jour=:Date_jour");
 
 	$requete->bindParam(':IDP', $IDP);
 	$requete->bindParam(':IDL', $IDL);

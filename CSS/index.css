@@ -227,3 +227,8 @@ td,.date,.Entete
 	display: none;
 }
 
+.unchecked
+{
+	color:red;
+}
+
