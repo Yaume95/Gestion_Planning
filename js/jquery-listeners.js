@@ -7,10 +7,5 @@ $(document).ready(function() {
     $('#AjoutEtat').draggable({
       handle: ".modal-header"
   	});
-
-  	$('.Dim .Sam').on("contextmenu", function(e)
-  	{
-  		e.preventDefault();
-  	});
-
+    
 });

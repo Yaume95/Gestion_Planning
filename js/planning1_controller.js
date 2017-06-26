@@ -107,7 +107,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     $scope.focusout=function($event)
     {   
         initialCellContent = contentCell;
-        if(contentCell!=$event.target.innerText && !enter_pressed && $event.which==1)
+        if(contentCell!=$event.target.innerText && !enter_pressed)
         {
           event.target.innerText=initialCellContent;
           compteur=0;
