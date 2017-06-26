@@ -95,10 +95,6 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
     $scope.focusin=function($event)
     {
-        if($($event.target).is('unchecked')) heure_checked=false;
-        else heure_checked= true;
-
-
         if($event.which==1)
         {
             enter_pressed=false;  
@@ -115,7 +111,6 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         if(contentCell!=$event.target.innerText && !enter_pressed)
         {
           event.target.innerText=initialCellContent;
-          compteur=0;
         }
     }
 
@@ -420,7 +415,6 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
         var x=$scope.compress($('#'+Date+Lieu+Nom+'1').text().valueOf());
         var y=$scope.compress($('#'+Date+Lieu+Nom+'3').text().valueOf());
-        // var z=
 
         if(x!='')
         {

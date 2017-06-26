@@ -8,6 +8,8 @@
 
 
 	$outp = "";
+	$x="";
+	$y="";
 	while($rs = $requete->fetch(PDO::FETCH_ASSOC)) 
 	{
 		
@@ -15,8 +17,27 @@
     	{
 	    		$outp .= ",";
 	    }
-	        	
-    	$outp .= '{"Personne" : "'  . utf8_encode($rs["Nom"]).'", "IDP" : "'.$rs['IDP'].'", "Total" : "'.$rs["NbHFaites"].'/'.$rs['NbHaFaire'].'", "RTT" : "'.$rs['RTTpris'].'", "Maladie" : "'.$rs['NbJMal'].'","CAav" :"'.$rs["CAavPris"].'/'.$rs['CAavMax'].'", "CA" : "'.$rs["CAapPris"].'/'.$rs['CAapMax'].'"}';
+
+
+	    if($rs["CAavPris"]==$rs["CAavMax"]&& $rs["CAavPris"]==0)
+	    {
+	    	$x="0";
+	    }
+	    else
+	    {
+	    	$x = $rs["CAavPris"].'/'.$rs['CAavMax'];
+	    }
+
+	    if($rs["CAapPris"]==$rs["CAapMax"] && $rs["CAapPris"]==0)
+	    {
+	    	$y="0";
+	    }
+	    else
+	    {
+	    	$y = $rs["CAapPris"].'/'.$rs['CAapMax'];
+	    }
+
+    	$outp .= '{"Personne" : "'  . utf8_encode($rs["Nom"]).'", "IDP" : "'.$rs['IDP'].'", "Total" : "'.$rs["NbHFaites"].'/'.$rs['NbHaFaire'].'", "RTT" : "'.$rs['RTTpris'].'", "Maladie" : "'.$rs['NbJMal'].'","CAav" :"'.$x.'", "CA" : "'.$y.'"}';
 
 
 	}
