@@ -42,7 +42,7 @@
                         ng-keypress="valide_entrer($event)"
                         ng-click="focusin($event)" 
                         ng-blur="focusout($event)" 
-                        contenteditable="true"
+                        contenteditable="{{b.Jour!='Sam' && b.Jour!='Dim'}}"
                         samedi-dimanche
                         no-right-click></td>
                         <td class="Total" ng-bind="total(a.IDL)"></td>

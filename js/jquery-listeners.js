@@ -8,4 +8,9 @@ $(document).ready(function() {
       handle: ".modal-header"
   	});
 
+  	$('.Dim .Sam').on("contextmenu", function(e)
+  	{
+  		e.preventDefault();
+  	});
+
 });

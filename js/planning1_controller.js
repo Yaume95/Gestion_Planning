@@ -83,19 +83,6 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         } 
     }
 
-    $scope.focusin=function($event)
-    {
-        if($event.which==1 && compteur==0)
-        {
-            
-            $event.preventDefault();
-            contentCell=$event.target.innerText;
-            $event.target.innerText="";
-        }
-        compteur+=1;
-
-    }
-
     $scope.unableTab=function($event)
     {
       if($event.which==9)
@@ -104,33 +91,41 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
       }
     }
 
-    $scope.focusout=function($event)
+
+    $scope.focusin=function($event)
     {
-        
-        if(contentCell!="" && event.target.innerText=="" && compteur>0)
+        if($event.which==1)
         {
-          $event.target.innerText=contentCell;
-          compteur=0;
+            enter_pressed=false;  
+            $event.preventDefault();
+            contentCell=$event.target.innerText;
         }
-        else if (compteur>0)
+
+    }
+
+
+    $scope.focusout=function($event)
+    {   
+        initialCellContent = contentCell;
+        if(contentCell!=$event.target.innerText && !enter_pressed && $event.which==1)
         {
-            compteur=0;
+          event.target.innerText=initialCellContent;
+          compteur=0;
         }
     }
 
     $scope.valide_entrer = function($event)
     {
-        var content = $event.target.innerText;
-        
+        var content = $event.target.innerText;       
         idp = $event.target.attributes['data-idp'].value;
         idl = $event.target.attributes['data-idl'].value;
         date= $event.target.attributes['data-date'].value;
         nbheures= Number(content);
 
-
         if ($event.keyCode == 13)
         {
             $event.preventDefault();
+            enter_pressed=true;
             if(!isNaN(content) )
             {
               
@@ -155,7 +150,6 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                       $event.target.blur();
                   });
                   $scope.refresh();
-                  //alert('suppression heures');
               }
               else if (contentCell=="" && content!="" && Number(content)>0 && !$('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantJanvier,.DemiCAavantJanvier,.DemiRepos,.DemiCA'))
               {
@@ -181,7 +175,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                   
 
               }
-              else if (contentCell!="" && content!="" && !isNaN(content) && Number(content)>0 || (contentCell=="" && content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantJanvier,.DemiCAavantJanvier,.DemiRepos,.DemiCA')))
+              else if (contentCell!="" && content!="" && !isNaN(content) && Number(content)>0 || contentCell!="" && content!="" & (contentCell=="" && content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantJanvier,.DemiCAavantJanvier,.DemiRepos,.DemiCA')))
               {
                   console.log("modif");              
 
@@ -198,9 +192,8 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                   {
                       etat='Maladie';
                   }
-    
-
-                  console.log(etat);
+                  else etat='Travail';
+  
 
           
                   $event.target.blur();
@@ -389,7 +382,8 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
        
         if($('.'+Date).is('.Sam, .Dim'))
         {
-            return '/';
+           if($('.'+Date).is('.Sam')) return 'SAM';
+           else return 'DIM';
         }
         else if ( x=='Travail' || x =='Maladie' || x=='Repos' ||x=='DemiRepos')
         {
@@ -406,12 +400,13 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         var x=$scope.compress($('#'+Date+Lieu+Nom+'1').text().valueOf());
         if(x!='Travail')
         {
-            return x+' heure';
+            return x;
         }
-        else
+        else if (x=='Travail')
         {
-          return 'heure';
+          return 'Travail';
         }
+
         
     };
 
@@ -433,7 +428,7 @@ app.directive('noRightClick', function() {
               idp = e.target.attributes['data-idp'].value;
               idl = e.target.attributes['data-idl'].value;
               date= e.target.attributes['data-date'].value;
-              $('#AjoutEtat').modal();
+              if(e.target.innerText!="SAM" && e.target.innerText!="DIM") $('#AjoutEtat').modal();
           });
 
         }
