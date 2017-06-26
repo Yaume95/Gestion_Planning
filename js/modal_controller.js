@@ -2,9 +2,21 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
 
     $scope.affect= function($event,int)
     {
+
+        nbheures= $('[data-idl='+idl+'][data-date='+date+']').text()
+        if (nbheures=="")
+        {
+          nbheures=0;
+        }
+        else
+        {
+          nbheures=Number(nbheures);
+        }
+        console.log(nbheures);
         $scope.refresh();
         if(int==0)
         {
+            
             $http({ 
                   method : 'POST',
                   url : './BDD/ajout_etat.php',
@@ -13,7 +25,8 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
                               IDP: idp,
                               IDL:idl,
                               Date_jour:date,
-                              Etat: 'Maladie'
+                              Etat: 'Maladie',
+                              NbHeures: nbheures
                           } 
             })
             .then(function successCallback(response) 
@@ -32,7 +45,8 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
                               IDP: idp,
                               IDL:idl,
                               Date_jour:date,
-                              Etat: 'Repos'
+                              Etat: 'Repos',
+                              NbHeures: nbheures
                           } 
             })
             .then(function successCallback(response) 
@@ -51,7 +65,8 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
                               IDP: idp,
                               IDL:idl,
                               Date_jour:date,
-                              Etat: 'Demi Repos'
+                              Etat: 'Demi Repos',
+                              NbHeures: nbheures
                           } 
             })
             .then(function successCallback(response) 
@@ -70,7 +85,8 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
                               IDP: idp,
                               IDL:idl,
                               Date_jour:date,
-                              Etat: 'CA'
+                              Etat: 'CA',
+                              NbHeures: nbheures
                           } 
             })
             .then(function successCallback(response) 
@@ -89,7 +105,8 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
                               IDP: idp,
                               IDL:idl,
                               Date_jour:date,
-                              Etat: 'Demi CA'
+                              Etat: 'Demi CA',
+                              NbHeures: nbheures
                           } 
             })
             .then(function successCallback(response) 
@@ -102,20 +119,21 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
         {
             if($scope.SelectionMois.num>4)
             {
-              alert('Vous ne pouvez pas ajouter des CA avant Avril APRÈS Avril...');
+              alert('Vous ne pouvez pas ajouter des CA avant Janvier APRÈS Janvier...');
             }
             else
             {
-              $http({ 
-                    method : 'POST',
-                    url : './BDD/ajout_etat.php',
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    data :  {
-                                IDP: idp,
-                                IDL:idl,
-                                Date_jour:date,
-                                Etat: 'CA avant Avril'
-                            } 
+            $http({ 
+                  method : 'POST',
+                  url : './BDD/ajout_etat.php',
+                  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                  data :  {
+                              IDP: idp,
+                              IDL:idl,
+                              Date_jour:date,
+                              Etat: 'CA avant Janvier',
+                              NbHeures: nbheures
+                          } 
               })
               .then(function successCallback(response) 
               {
@@ -128,7 +146,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
         {
             if($scope.SelectionMois.num>4)
             {
-              alert('Vous ne pouvez pas ajouter des CA avant Avril APRÈS Avril...');
+              alert('Vous ne pouvez pas ajouter des CA avant Janvier APRÈS Janvier...');
             }
             else
             {
@@ -140,7 +158,8 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
                                 IDP: idp,
                                 IDL:idl,
                                 Date_jour:date,
-                                Etat: 'Demi CA avant Avril'
+                                Etat: 'Demi CA avant Janvier',
+                                NbHeures: nbheures
                             } 
               })
               .then(function successCallback(response) 

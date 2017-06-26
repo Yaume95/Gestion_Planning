@@ -26,7 +26,7 @@
 	    		$j="Mars";
 	    		break;
 	    	case "04":
-	    		$j="Avril";
+	    		$j="Janvier";
 	    		break;
 			case "05":
 	    		$j="Mai";

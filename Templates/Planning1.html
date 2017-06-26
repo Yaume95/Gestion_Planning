@@ -2,10 +2,10 @@
     <div class="container-fluid">
         <div>
             <ul>
-                <li ng-hide="true" ng-repeat="chargement in Horaires" ng-if="SelectionPersonne==chargement.IDP && SelectionMois.mois==chargement.Mois && chargement.Etat!='Travail'" id="{{chargement.Date_jour+chargement.IDL+chargement.IDP}}">
+                <li ng-hide="true" ng-repeat="chargement in Horaires" ng-if="SelectionPersonne==chargement.IDP && SelectionMois.mois==chargement.Mois" id="{{chargement.Date_jour+chargement.IDL+chargement.IDP}}1">
                     {{chargement.Etat}}
                 </li>
-                <li ng-hide="true" ng-repeat="chargement in Horaires" ng-if="SelectionPersonne==chargement.IDP && SelectionMois.mois==chargement.Mois && chargement.NbHeures>0" id="{{chargement.Date_jour+chargement.IDL+chargement.IDP}}">
+                <li ng-hide="true" ng-repeat="chargement in Horaires" ng-if="SelectionPersonne==chargement.IDP && SelectionMois.mois==chargement.Mois && chargement.NbHeures>0" id="{{chargement.Date_jour+chargement.IDL+chargement.IDP}}2">
                     {{chargement.NbHeures}}
                 </li>
             </ul>
@@ -23,7 +23,7 @@
                             </select>
                             <select class="form-control" ng-model="SelectionMois" ng-options="x.mois for x in Mois" ng-init="SelectionMois=Mois[0]"></select>
                         </th>
-                        <th ng-repeat="x in Calendrier" ng-if="x.Mois==SelectionMois.mois" class='date'>
+                        <th ng-repeat="x in Calendrier" ng-if="x.Mois==SelectionMois.mois" class='date {{x.Jour}} {{x.Date_jour}}'>
                             {{x.Jour}}
                             <br>
                             {{x.Date_jour[8] + x.Date_jour[9]}}
@@ -42,7 +42,8 @@
                         ng-keypress="valide_entrer($event)"
                         ng-click="focusin($event)" 
                         ng-blur="focusout($event)" 
-                        contenteditable="true" 
+                        contenteditable="true"
+                        samedi-dimanche
                         no-right-click></td>
                         <td class="Total" ng-bind="total(a.IDL)"></td>
                     </tr>
@@ -52,7 +53,7 @@
                       <th rowspan="2" colspan="2"> Heures :</th> <td colspan="3" ng-bind="total_mensuel()">  </td>
                       <th rowspan="2" colspan="2"> RTT :</th> <td colspan="3" ng-bind="rtt_mensuel()">  </td>
                       <th rowspan="2" colspan="3">Nb Maladie :</th> <td colspan="3" ng-bind="maladie_mensuel()"></td>
-                      <th rowspan="2" colspan="3">CA avant Avril:</th> <td colspan="3" ng-bind="caav_mensuel()"></td>
+                      <th rowspan="2" colspan="3">CA avant Janvier:</th> <td colspan="3" ng-bind="caav_mensuel()"></td>
                       <th rowspan="2" colspan="2">CA :</th> <td colspan="3" ng-bind="ca_mensuel()"></td>
             </table>
         </div>
@@ -74,7 +75,7 @@
                       <td class="col-xs-3 affiche" id="RTT">{{Employes[place].RTT}}</td>
                   </tr>
                   <tr>
-                      <th class="col-xs-2"> CA avant Avril : </th>
+                      <th class="col-xs-2"> CA avant Janvier : </th>
                       <td class="col-xs-3 affiche">{{Employes[place].CAav }}</td>
                   </tr>
                   <tr>
@@ -133,13 +134,20 @@
                 <br>  
                 <div class="row ">
                     <div class="col-xs-1"></div>
-                    <button class="btn col-xs-10" ng-click="affect($event,5)" id="btn-caavA">CA avant Avril</button>
+                    <button class="btn col-xs-10" ng-click="affect($event,5)" id="btn-caavA">CA avant Janvier</button>
                     <div class="col-xs-1"></div>
                 </div>
                 <br>
                 <div class="row ">
                     <div class="col-xs-1"></div>
-                    <button class="btn col-xs-10" ng-click="affect($event,6)" id="btn-demicaavA">1/2 CA avant Avril</button>
+                    <button class="btn col-xs-10" ng-click="affect($event,6)" id="btn-demicaavA">1/2 CA avant Janvier</button>
+                    <div class="col-xs-1"></div>
+                </div>
+
+                <br>
+                <div class="row ">
+                    <div class="col-xs-1"></div>
+                    <button class="btn col-xs-10" ng-click="affect($event,7)" id="btn-ferie">Ajouter un jour férié</button>
                     <div class="col-xs-1"></div>
                 </div>
                 <br>  

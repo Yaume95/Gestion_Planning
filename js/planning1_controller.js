@@ -110,7 +110,6 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         if(contentCell!="" && event.target.innerText=="" && compteur>0)
         {
           $event.target.innerText=contentCell;
-          console.log("çachange");
           compteur=0;
         }
         else if (compteur>0)
@@ -135,7 +134,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
             if(!isNaN(content) )
             {
               
-              if(contentCell!="" && content==""  || (contentCell=="" && content=="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantAvril,.DemiCAavantAvril,.DemiRepos,.DemiCA')))
+              if(contentCell!="" && content==""  || (contentCell=="" && content=="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantJanvier,.DemiCAavantJanvier,.DemiRepos,.DemiCA')))
               {
                   contentCell="";
                   $event.target.blur();
@@ -158,7 +157,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                   $scope.refresh();
                   //alert('suppression heures');
               }
-              else if (contentCell=="" && content!="" && Number(content)>0 && !$('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantAvril,.DemiCAavantAvril,.DemiRepos,.DemiCA'))
+              else if (contentCell=="" && content!="" && Number(content)>0 && !$('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantJanvier,.DemiCAavantJanvier,.DemiRepos,.DemiCA'))
               {
 
                  
@@ -182,15 +181,26 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                   
 
               }
-              else if (contentCell!="" && content!="" && !isNaN(content) && Number(content)>0 || (contentCell=="" && content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantAvril,.DemiCAavantAvril,.DemiRepos,.DemiCA')))
+              else if (contentCell!="" && content!="" && !isNaN(content) && Number(content)>0 || (contentCell=="" && content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos,.Maladie,.CA,.CAavantJanvier,.DemiCAavantJanvier,.DemiRepos,.DemiCA')))
               {
                   console.log("modif");              
 
 
-                  if(content!="")
+                  if(content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Repos'))
                   {
-                      etat='Travail';
+                      etat='Repos';
                   }
+                  else if(content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.DemiRepos'))
+                  {
+                      etat= 'Demi Repos';
+                  }
+                  else if(content!="" && $('[data-idl='+idl+'][data-date='+date+']').is('.Maladie'))
+                  {
+                      etat='Maladie';
+                  }
+    
+
+                  console.log(etat);
 
           
                   $event.target.blur();
@@ -348,11 +358,11 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     $scope.caav_mensuel= function(Nom)
     {
         var z =0.0;
-        var valeurs = $('.CAavantAvril');
+        var valeurs = $('.CAavantJanvier');
 
         z+=valeurs.length;
 
-        valeurs=$('.DemiCAavantAvril');
+        valeurs=$('.DemiCAavantJanvier');
         z+=0.5*valeurs.length;
 
         return z;
@@ -374,24 +384,27 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     $scope.cellule  = function(Date,Lieu,Nom)
     {
 
-        var x=$scope.compress($('#'+Date+Lieu+Nom).text().valueOf())  ;
-        if(isNaN(x))
+        var x=$scope.compress($('#'+Date+Lieu+Nom+'1').text().valueOf())  ;
+        var y=$('#'+Date+Lieu+Nom+'2').text().valueOf() ;
+       
+        if($('.'+Date).is('.Sam, .Dim'))
         {
+            return '/';
+        }
+        else if ( x=='Travail' || x =='Maladie' || x=='Repos' ||x=='DemiRepos')
+        {
+            return y;
+        }
 
-        }
-        else
-        {
-          x= $scope.compress(x);
-          return x;
-        }
         
     };
+
 
     $scope.testclasses  = function(Date,Lieu,Nom)
     {
 
-        var x=$scope.compress($('#'+Date+Lieu+Nom).text().valueOf())  ;
-        if(isNaN(x))
+        var x=$scope.compress($('#'+Date+Lieu+Nom+'1').text().valueOf());
+        if(x!='Travail')
         {
             return x+' heure';
         }

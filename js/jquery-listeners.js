@@ -7,4 +7,5 @@ $(document).ready(function() {
     $('#AjoutEtat').draggable({
       handle: ".modal-header"
   	});
+
 });

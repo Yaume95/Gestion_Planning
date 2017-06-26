@@ -5,7 +5,7 @@
 	//var_dump($params);
 	$dbh->beginTransaction();
 
-	$requete = $dbh->prepare("INSERT INTO horaires (IDP,IDL,Date_jour,NbHeures,Etat) VALUES(:IDP,:IDL,:Date_jour,:NbHeures,'Travail');");
+	$requete = $dbh->prepare("INSERT INTO horaires (IDP,IDL,Date_jour,NbHeures,Etat) VALUES(:IDP,:IDL,:Date_jour,:NbHeures,'Travail') ON DUPLICATE KEY UPDATE NbHeures=:NbHeures;");
 
 	$requete->bindParam(':IDP', $IDP);
 	$requete->bindParam(':IDL', $IDL);
