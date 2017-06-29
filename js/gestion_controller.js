@@ -64,6 +64,29 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
         return x;
     }
 
+    $scope.vaccataire= function(Personne)
+    {
+        if(Personne.Vaccataire==1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    $scope.titre=function(personne)
+    {
+        if(personne.Vaccataire==1)
+        {
+            return 'Vaccataire';
+        }
+        else
+        {
+            return 'Titulaire';
+        }
+    }
     $scope.modification=function(object)
     {
 
@@ -74,6 +97,10 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
         $scope.PersonneModif['Total']=substr(object.Total,"/");
         $scope.PersonneModif['CA']=substr(object.CA,"/");
         $scope.PersonneModif['CAav']=substr(object.CAav,"/");
+        $scope.PersonneModif['Vaccataire']=object.Vaccataire;
+        $scope.PersonneModif['Matricule']=object.Matricule  ;
+
+        console.log($scope.PersonneModif.Vaccataire);
 
         $scope.refresh();
 

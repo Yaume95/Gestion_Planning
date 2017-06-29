@@ -117,11 +117,11 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
         }
         else if (int==5)
         {
-            if($scope.SelectionMois.num>4)
+            /*if($scope.SelectionMois.num>4)
             {
               alert('Vous ne pouvez pas ajouter des CA avant Janvier APRÈS Janvier...');
             }
-            else
+            else*/
             {
             $http({ 
                   method : 'POST',
@@ -144,11 +144,11 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
         }
         else if (int==6)
         {
-            if($scope.SelectionMois.num>4)
+            /*if($scope.SelectionMois.num>4)
             {
               alert('Vous ne pouvez pas ajouter des CA avant Janvier APRÈS Janvier...');
             }
-            else
+            else*/
             {
               $http({ 
                     method : 'POST',
@@ -166,6 +166,43 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
               {
                   $scope.refresh();
                   $('#AjoutEtat').modal('hide');
+              });
+            }
+        }
+        else if (int==7)
+        {
+            {
+              $http({ 
+                    method : 'POST',
+                    url : './BDD/ajout_jour_ferie.php',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    data :  {
+                                Date_jour:date
+                            } 
+              })
+              .then(function successCallback(response) 
+              {
+                  $scope.refreshCal();
+                  $('#AjoutEtat').modal('hide');
+              });
+            }
+        }
+        else if (int==8)
+        {
+            {
+              $http({ 
+                    method : 'POST',
+                    url : './BDD/suppression_jour_ferie.php',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    data :  {
+                                Date_jour:date
+                            } 
+              })
+              .then(function successCallback(response) 
+              {
+                  $scope.refreshCal();
+
+                  $('#SuppressionFerie').modal('hide');
               });
             }
         }

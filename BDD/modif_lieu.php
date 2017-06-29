@@ -5,15 +5,17 @@
 
 	$dbh->beginTransaction();
 
-	$requete = $dbh->prepare("UPDATE site set NomLieu=:Nom where IDL=:IDL");
+	$requete = $dbh->prepare("UPDATE site set NomLieu=:Nom,Categorie=:Categorie where IDL=:IDL");
 
 	$requete->bindParam(':IDL', $IDL);
 	$requete->bindParam(':Nom', $Nom);
+	$requete->bindParam(':Categorie', $Categorie);
 
 	
 
 
 	$IDL=$params['IDL'];
+	$Categorie=$params['Categorie'];
 	$Nom=utf8_decode($params['Nom']);
 
 

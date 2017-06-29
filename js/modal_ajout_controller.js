@@ -8,6 +8,9 @@ app.controller('ajoutCtrl', ['$scope', '$http', function($scope,$http)
         totalH=$('#HSubmit2').val();      
         maxCA=$('#CASubmit2').val();    
         maxCAav=$('#CAavSubmit2').val();    
+        matricule=$('#MatSubmit2').val();
+        vac= $('#VacSubmit2').is(':checked');
+
         $http({ 
         method : 'POST',
         url : './BDD/ajout_personne.php',
@@ -17,7 +20,9 @@ app.controller('ajoutCtrl', ['$scope', '$http', function($scope,$http)
                     Nom: nom,
                     NbHaFaire: totalH,
                     CAapMax: maxCA,
-                    CAavMax: maxCAav
+                    CAavMax: maxCAav,
+                    Vaccataire: vac,
+                    Matricule: matricule
                     
                 } 
         })
@@ -30,6 +35,7 @@ app.controller('ajoutCtrl', ['$scope', '$http', function($scope,$http)
             $('#HSubmit2').val(null);      
             $('#CASubmit2').val(null);    
             $('#CAavSubmit2').val(null);
+            $('#MatSubmit2').val(null);
             $scope.refresh();
 
         });

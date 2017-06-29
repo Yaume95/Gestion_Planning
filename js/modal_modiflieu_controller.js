@@ -5,18 +5,28 @@ app.controller('modifLieuCtrl', ['$scope', '$http', function($scope,$http)
     $scope.envoyer_modifs_lieu=function()
     {
     	if ($('#NomSubmitLieu').val() != "")
-    	{
-    		nom=$('#NomSubmitLieu').val();
+        {
+            nom=$('#NomSubmitLieu').val();
             nom= nom.charAt(0).toUpperCase() +nom.substring(1);
             
-    	}
-    	else
-    	{
-    		nom=$scope.LieuModif['Lieu'];
-    	}
+        }
+        else
+        {
+            nom=$scope.LieuModif['Lieu'];
+        }
+
+        if ($('#CatSubmitLieu').val() != "")
+        {
+            cat=$('#CatSubmitLieu').val();
+        }
+        else
+        {
+            cat=$scope.LieuModif['Categorie'];
+        }
 
 
     	idl= $scope.LieuModif['IDL'];
+
 
         $http({ 
             method : 'POST',
@@ -25,13 +35,15 @@ app.controller('modifLieuCtrl', ['$scope', '$http', function($scope,$http)
             data :  {
 
                         IDL: idl,
-                        Nom: nom                        
+                        Nom: nom,                        
+                        Categorie: cat                        
                     } 
         })
         .then(function successCallback(response)
         {
             $('#ModificationLieu').modal('hide');
-        	$('#NomSubmitLieu').val("");
+            $('#NomSubmitLieu').val("");
+        	$('#CatSubmitLieu').val("");
             $scope.formLieu.$setPristine();
         	$scope.refresh();
         });

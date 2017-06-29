@@ -37,13 +37,29 @@ app.controller('modifCtrl', ['$scope', '$http', function($scope,$http)
     	
 
     	if ($('#CAavSubmit1').val() != "")
-    	{
-    		maxCAav=$('#CAavSubmit1').val();
-    	}
-    	else
-    	{
-    		maxCAav=$scope.PersonneModif['CAav'];
-    	}
+        {
+            maxCAav=$('#CAavSubmit1').val();
+        }
+        else
+        {
+            maxCAav=$scope.PersonneModif['CAav'];
+        }
+
+        if ($('#MatSubmit1').val() != "")
+        {
+            Mat=$('#MatSubmit1').val();
+        }
+        else
+        {
+            Mat=$scope.PersonneModif['Matricule'];
+        }
+
+
+        vac= $('#VacSubmit1').is(':checked');
+
+        console.log(vac);
+
+
 
     	idp= $scope.PersonneModif['IDP'];
 
@@ -58,6 +74,8 @@ app.controller('modifCtrl', ['$scope', '$http', function($scope,$http)
                         NbHaFaire: totalH,
                         CAapMax: maxCA,
                         CAavMax: maxCAav,
+                        Matricule: Mat,
+                        Vaccataire: vac
                         
                     } 
         })
@@ -67,7 +85,8 @@ app.controller('modifCtrl', ['$scope', '$http', function($scope,$http)
         	$('#NomSubmit1').val("");
 	    	$('#HSubmit1').val("");
 	    	$('#CASubmit1').val("");
-	    	$('#CAavSubmit1').val("");
+            $('#CAavSubmit1').val("");
+	    	$('#MatSubmit1').val("");
             $scope.myform1.$setPristine();
         	$scope.refresh();
 

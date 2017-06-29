@@ -17,7 +17,6 @@
             <div class="col-xs-2"></div>
         </div>
 
-
         <!-- ==================================== Affichage du Personnel ==================================== --> 
         <div class="col-xs-12">
 
@@ -25,19 +24,21 @@
                 <table class="table table-bordered" ng-if="include(Recherche,Employes)">
                     <tr>
                         <th class ="Entete"> Nom </th>
+                        <th class ="Entete"> Titre </th>
                         <th class ="Entete"> Heures </th>
                         <th class ="Entete"> CA </th>
-                        <th class ="Entete"> CA (avant Janvier) </th>
+                        <th class ="Entete"> CA (av Janv) </th>
                         <th class ="Entete"> Nb Maladies </th>
                         <th class ="Entete"> RTT </th>
                         <th class ="Entete MoisSelec" colspan="5">Actions</th>
 
                     </tr>
                     <tr ng-repeat="x in Employes | filter:Recherche" id={{x.IDP}}>
-                        <td class="col-xs-2">{{x.Personne}}</td>
-                        <td class="col-xs-2">{{x.Total}}</td>
+                        <td class="col-xs-1">{{x.Personne}}</td>
+                        <td class="col-xs-1">{{titre(x)}}</td>
+                        <td class="col-xs-1">{{x.Total}}</td>
                         <td class="col-xs-1">{{x.CA}}</td>
-                        <td class="col-xs-2">{{x.CAav}}</td>
+                        <td class="col-xs-1">{{x.CAav}}</td>
                         <td class="col-xs-1">{{x.Maladie}}</td>
                         <td class="col-xs-1">{{x.RTT}}</td>
                         <th class="col-xs-3">
@@ -96,6 +97,18 @@
                     </div>
                 </div>
                 <br>
+
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <label class="col-xs-3 control-label" > N° Matricule :</label>
+                    <div class="col-xs-5"><input type="text" type="text" name="ModifMat" ng-model="ModifMat" class="form-control" placeholder="{{PersonneModif.Matricule}}" id="MatSubmit1" is-empty></div>
+                    <div class="col-xs-3">
+                            <div class="OK" ng-hide="myform1.ModifMat.$pristine || !myform1.ModifMat.$error.textTooShort || !myform1.ModifMat.$error.isEmpty">
+                                <span class="glyphicon glyphicon-ok "></span>
+                            </div>        
+                    </div>
+                </div>
+                <br>
                 <div class="row">
                     <div class="col-xs-1"></div>
                     <label class="col-xs-3 control-label"> Heures à faire :</label>
@@ -142,6 +155,14 @@
                 </div>
                 <br>
                 <div class="row">
+                    <div class="col-xs-1"></div>
+                        <label class="col-xs-3 control-label"> Vaccataire :</label>
+                        <div class="col-xs-5"><input type="checkbox" ng-checked="vaccataire(PersonneModif)" id="VacSubmit1"></div>
+                        <div class="col-xs-3">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
                     <div class="col-xs-4"></div>
                     <div class="col-xs-2">
                         <button class="btn btn-primary" ng-click="envoyer_modifs()" 
@@ -159,7 +180,7 @@
     </div>
 </div>
 
-
+    
 <!-- =============================== Modal Ajout d'une Personne =============================== -->
 
 <div class="modal fade " id="Ajout" role="dialog" ng-controller="ajoutCtrl" >
@@ -191,7 +212,18 @@
                             </div>        
                     </div>
                 </div>
-                <br><br>
+                <br>
+                <div class="row form-group">
+                    <div class="col-xs-1"></div>
+                    <label class="col-xs-3 " > N° de Matricule :</label>
+                    <div class="col-xs-4"><input type="text" type="text" name="AjoutMat" class="form-control" ng-model="AjoutMat" placeholder="Entrez le Matricule de la personne" id="MatSubmit2" required my-text-only></div>
+                    <div class="col-xs-4">
+                            <div class="OK" ng-hide="myform.AjoutMat.$error.required || !myform.AjoutMat.$error.textTooShort || myform.AjoutMat.$pristine">
+                                <span class="glyphicon glyphicon-ok "></span>
+                            </div>        
+                    </div>
+                </div>
+                <br>
                 <div class="row form-group">
                         <div class="col-xs-1"></div>
                         <label class="col-xs-3 control-label"> Heures à faire :</label>
@@ -213,7 +245,7 @@
                             
                         </div>
                 </div>
-                <br><br>
+                <br>
                 <div class="row form-group">
                         <div class="col-xs-1"></div>
                         <label class="col-xs-3 control-label"> Congés Annuel :</label>
@@ -233,7 +265,7 @@
                             
                         </div>
                 </div>
-                <br><br>
+                <br>
                 <div class="row form-group">
                         <div class="col-xs-1"></div>
                         <label class="col-xs-3 control-label"> CA avant Janvier :</label>
@@ -249,7 +281,15 @@
                             
                         </div>
                 </div>
-                <br><br>
+                <br>
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                        <label class="col-xs-3 control-label"> Vaccataire :</label>
+                        <div class="col-xs-5"><input type="checkbox" ng-checked="vaccataire(PersonneModif)" id="VacSubmit2"></div>
+                        <div class="col-xs-3">
+                    </div>
+                </div>
+                <br>
 
                 <div class="row form-group">
                     <div class="col-xs-4"></div>

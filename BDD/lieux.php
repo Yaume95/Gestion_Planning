@@ -3,7 +3,7 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 	include('./connection_bdd.php');
-	$requete = $dbh->prepare("SELECT NomLieu,IDL FROM site order by nomlieu");
+	$requete = $dbh->prepare("SELECT * FROM site order by nomlieu");
 	$requete->execute();
 
 
@@ -16,7 +16,7 @@
 	    		$outp .= ",";
 	    }
 	        	
-    	$outp .= '{"Lieu" : "'  . utf8_encode($rs["NomLieu"]).'", "IDL" : "'.$rs['IDL'].'"}';
+    	$outp .= '{"Lieu" : "'  . utf8_encode($rs["NomLieu"]).'", "IDL" : "'.$rs['IDL'].'", "Categorie" :"'.$rs['Categorie'].'"}';
 
 
 	}

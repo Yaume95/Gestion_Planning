@@ -2,11 +2,14 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
     $scope.place=0;
     heure_checked=false;
+
     compteur=0;
+    pattern = /^((SAM)*(DIM)*(Férié)*)*$/;
 
     $scope.initFirst=function()
     {
-       $http.get("./BDD/employes.php")
+      $scope.Ferie=false;
+      $http.get("./BDD/employes.php")
       .then(function (response) 
       {
           $scope.Employes = response.data.employes;
@@ -66,7 +69,16 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
       {
           $scope.Horaires = response.data.horaires
       }); 
-   }
+    }
+
+    $scope.refreshCal=function()
+    {
+       $http.get("./BDD/calendrier.php")
+      .then(function (response) 
+      {
+          $scope.Calendrier = response.data.calendrier;
+      });
+    }
 
    $scope.reset=function()
    {
@@ -108,9 +120,11 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     $scope.focusout=function($event)
     {   
         initialCellContent = contentCell;
+
         if(contentCell!=$event.target.innerText && !enter_pressed)
         {
-          event.target.innerText=initialCellContent;
+
+           event.target.innerText=initialCellContent;
         }
     }
 
@@ -252,6 +266,10 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
               $event.target.blur();
             }
         }
+        else if ($event.which==32)
+        {
+            $event.preventDefault();
+        }
 
         
     }
@@ -271,6 +289,8 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         {mois : "Novembre", num : 11},
         {mois : "Décembre", num : 12}
       ];
+
+
 
 
     $scope.Place = function(int)
@@ -295,11 +315,14 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     }
 
 
-    $scope.total_mensuel = function()
+    
+
+    
+    $scope.total = function(Lieu)
     {
         
         var z =0.0;
-        var valeurs = document.querySelectorAll('.heure');
+        var valeurs = document.querySelectorAll('[data-idl="'+Lieu+'"');
 
 
 
@@ -314,12 +337,11 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         return z;
     };
 
-    
-    $scope.total = function(Lieu)
+    $scope.total_mensuel = function(idp)
     {
         
         var z =0.0;
-        var valeurs = document.querySelectorAll('[data-idl="'+Lieu+'"');
+        valeurs=document.querySelectorAll('.checked');
 
 
 
@@ -390,7 +412,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     }
 
 
-    $scope.cellule  = function(Date,Lieu,Nom)
+    $scope.cellule  = function(Date,Lieu,Nom,Ferie)
     {
 
         var x=$scope.compress($('#'+Date+Lieu+Nom+'1').text().valueOf())  ;
@@ -401,6 +423,10 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
            if($('.'+Date).is('.Sam')) return 'SAM';
            else return 'DIM';
         }
+        else if(Ferie==1)
+        {
+          return 'Férié';
+        }
         else if ( x=='Travail' || x =='Maladie' || x=='Repos' ||x=='DemiRepos')
         {
             return y;
@@ -410,6 +436,13 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     };
 
 
+    $scope.InOrOut=function(idl,idp)
+    {
+        valeurs=$('[data-idl='+idl+'][data-idl='+idl+']').text();
+        if(pattern.test(valeurs)) return 'Exclus';
+
+    };
+
     $scope.testclasses  = function(Date,Lieu,Nom)
     {
 
@@ -418,7 +451,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
         if(x!='')
         {
-          if(y==1)  return x; 
+          if(y==1)  return x+' checked'; 
           else return x+' unchecked';
         }
         
@@ -427,7 +460,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     $scope.compress = function(string)
     {
       return string.replace(/\s+/g, '');
-    }
+    };
 
 }]);
 
@@ -437,12 +470,14 @@ app.directive('noRightClick', function() {
         {
           $element.bind("contextmenu",function(e)
           {
+              contentCell=e.target.innerHTML;
               e.preventDefault();
               e.target.blur();
               idp = e.target.attributes['data-idp'].value;
               idl = e.target.attributes['data-idl'].value;
               date= e.target.attributes['data-date'].value;
-              if(e.target.innerText!="SAM" && e.target.innerText!="DIM") $('#AjoutEtat').modal();
+              if(e.target.innerText!="SAM" && e.target.innerText!="DIM" && e.target.innerText!="Férié") $('#AjoutEtat').modal();
+              else if(e.target.innerText=="Férié") $('#SuppressionFerie').modal();
           });
 
         }

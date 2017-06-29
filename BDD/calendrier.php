@@ -80,7 +80,7 @@
 	    	
 	    }
     	
-    	$outp .= '{"Date_jour" : "'  . $rs["Date_jour"].'", "Jour" : "'.$i.'", "Mois" : "'.$j.'" }';
+    	$outp .= '{"Date_jour" : "'  . $rs["Date_jour"].'", "Jour" : "'.$i.'", "Mois" : "'.$j.'", "Ferie" : "'.$rs['Ferie'].'" }';
 
 	}
 	$outp='{"calendrier":['.$outp.']}';

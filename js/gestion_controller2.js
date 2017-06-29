@@ -86,6 +86,7 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
 
         $scope.LieuModif['Lieu']=object.Lieu;
         $scope.LieuModif['IDL']=object.IDL;
+        $scope.LieuModif['Categorie']=object.Categorie;
 
 
         $scope.refresh()

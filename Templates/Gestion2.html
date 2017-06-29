@@ -9,12 +9,14 @@
                 <div class="col-xs-8"><table class="table table-bordered" >
                     <tr>
                         <th class ="Entete"> Nom du site </th>
+                        <th class ="Entete"> Catégorie</th>
                         <th class ="Entete MoisSelec" colspan="5">Actions</th>
 
                     </tr>
-                    <tr ng-repeat="x in Lieux">
-                        <td class="col-xs-3" id="IDL{{x.IDL}}" contenteditable="false">{{x.Lieu}}</td>
-                        <th class="col-xs-2">
+                    <tr ng-repeat="x in Lieux |orderBy:'Categorie'">
+                        <td class="col-xs-2" id="IDL{{x.IDL}}" >{{x.Lieu}}</td>
+                        <td class="col-xs-1" >{{x.Categorie}}</td>
+                        <th class="col-xs-3">
                             <div id="actions">
                                 <button type="button" class="btn btn-danger col-xs-4" ng-click="validSuppression(x.IDL)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
                                 <button type="button" class="btn btn-primary col-xs-4" ng-click="modificationLieu(x)"><span class="glyphicon glyphicon-th-list"></span> Modifier </button>
@@ -62,11 +64,22 @@
                     <label class="col-xs-3 control-label" > Nom du site:</label>
                     <div class="col-xs-5"><input type="text" name="ModifNomLieu" ng-model="ModifNomLieu" class="form-control" placeholder="{{LieuModif.Lieu}}" id="NomSubmitLieu" my-text-only is-empty></div>
                     <div class="col-xs-3">
-                            <div class="Erreur" ng-hide="!formLieu.ModifNomLieu.$error.textOnly || formLieu.ModifNomLieu.$pristine">
+                            <div class="OK" ng-hide="formLieu.ModifNomLieu.$pristine || !formLieu.ModifNomLieu.$error.textTooShort || !formLieu.ModifNomLieu.$error.isEmpty">
+                                <span class="glyphicon glyphicon-ok "></span>
+                            </div>        
+                    </div>
+                </div>
+                <div class="row">
+                    <br><br>
+                    <div class="col-xs-1"></div>
+                    <label class="col-xs-3 control-label" > Catégorie:</label>
+                    <div class="col-xs-5"><input type="text" name="ModifCatLieu" ng-model="ModifCatLieu" class="form-control" placeholder="{{LieuModif.Categorie}}" id="CatSubmitLieu" my-is-number is-empty></div>
+                    <div class="col-xs-3">
+                            <div class="Erreur" ng-hide="!formLieu.ModifCatLieu.$error.number || formLieu.ModifCatLieu.$pristine">
                                 <span class="glyphicon glyphicon-remove "></span>
-                                <label class="texte">Ni chiffres ni charactères spéciaux</label>
+                                <label class="texte">Chiffres seulement</label>
                             </div>
-                            <div class="OK" ng-hide="formLieu.ModifNomLieu.$error.textOnly || formLieu.ModifNomLieu.$pristine || !formLieu.ModifNomLieu.$error.textTooShort || !formLieu.ModifNomLieu.$error.isEmpty">
+                            <div class="OK" ng-hide="formLieu.ModifCatLieu.$pristine || formLieu.ModifCatLieu.$error.number || !formLieu.ModifCatLieu.$error.isEmpty">
                                 <span class="glyphicon glyphicon-ok "></span>
                             </div>        
                     </div>
@@ -78,7 +91,7 @@
                     <div class="col-xs-5"></div>
                     <div class="col-xs-2">
                         <button class="btn btn-primary" ng-click="envoyer_modifs_lieu()" 
-                                ng-disabled="(formLieu.ModifNomLieu.$error.textOnly || !formLieu.ModifNomLieu.$error.textTooShort &&  formLieu.ModifNomLieu.$error.isEmpty)">Confirmer
+                                ng-disabled="(!formLieu.ModifNomLieu.$error.textTooShort &&  formLieu.ModifNomLieu.$error.isEmpty)">Confirmer
                         </button>
                     </div>
                     <div class="col-xs-5"></div>
