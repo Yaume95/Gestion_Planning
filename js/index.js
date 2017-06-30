@@ -22,6 +22,10 @@ app.config(function($routeProvider) {
     .when("/Gestion_Lieux", {
         templateUrl : "Templates/Gestion2.html",
         controller : "gestion_controller2"
+    })
+    .when("/Recap_mois", {
+        templateUrl : "Templates/Gestion3.html",
+        controller : "gestion_controller3"
     });
 });
 
