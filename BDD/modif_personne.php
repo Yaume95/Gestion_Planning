@@ -5,10 +5,11 @@
 
 	$dbh->beginTransaction();
 
-	$requete = $dbh->prepare("UPDATE personne set Nom=:Nom , NbHaFaire=:NbHaFaire, CAapMax=:CAapMax, CAavMax=:CAavMax, Vaccataire=:Vaccataire, Matricule=:Matricule where IDP=:IDP");
+	$requete = $dbh->prepare("UPDATE personne set Nom=:Nom ,Prenom=:Prenom, NbHaFaire=:NbHaFaire, CAapMax=:CAapMax, CAavMax=:CAavMax, Vaccataire=:Vaccataire, Matricule=:Matricule where IDP=:IDP");
 
 	$requete->bindParam(':IDP', $IDP);
 	$requete->bindParam(':Nom', $Nom);
+	$requete->bindParam(':Prenom', $Prenom);
 	$requete->bindParam(':NbHaFaire', $NbHaFaire);
 	$requete->bindParam(':CAapMax', $CAapMax);
 	$requete->bindParam(':CAavMax', $CAavMax);
@@ -19,6 +20,7 @@
 
 	$IDP=$params['IDP'];
 	$Nom=utf8_decode($params['Nom']);
+	$Prenom=utf8_decode($params['Prenom']);
 	$NbHaFaire=$params['NbHaFaire'];
 	$CAapMax=$params['CAapMax'];
 	$CAavMax=$params['CAavMax'];

@@ -5,9 +5,10 @@
 
 	$dbh->beginTransaction();
 
-	$requete = $dbh->prepare("INSERT INTO personne(Nom,NbHaFaire,CAapMax,CAavMax,Vaccataire,Matricule) VALUES(:Nom,:NbHaFaire,:CAapMax,:CAavMax,:Vaccataire,:Matricule) ");
+	$requete = $dbh->prepare("INSERT INTO personne(Nom,Prenom,NbHaFaire,CAapMax,CAavMax,Vaccataire,Matricule) VALUES(:Nom,:Prenom,:NbHaFaire,:CAapMax,:CAavMax,:Vaccataire,:Matricule) ");
 
 	$requete->bindParam(':Nom', $Nom);
+	$requete->bindParam(':Prenom', $Prenom);
 	$requete->bindParam(':NbHaFaire', $NbHaFaire);
 	$requete->bindParam(':CAapMax', $CAapMax);
 	$requete->bindParam(':CAavMax', $CAavMax);
@@ -16,6 +17,7 @@
 	
 
 	$Nom=utf8_decode($params['Nom']);
+	$Prenom=utf8_decode($params['Prenom']);
 	$NbHaFaire=$params['NbHaFaire'];
 	$CAapMax=$params['CAapMax'];
 	$CAavMax=$params['CAavMax'];

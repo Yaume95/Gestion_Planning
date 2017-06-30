@@ -23,7 +23,7 @@
             <div class="col-xs-12">
                 <table class="table table-bordered" ng-if="include(Recherche,Employes)">
                     <tr>
-                        <th class ="Entete"> Nom </th>
+                        <th class ="Entete"> Employé </th>
                         <th class ="Entete"> Titre </th>
                         <th class ="Entete"> Heures </th>
                         <th class ="Entete"> CA </th>
@@ -34,7 +34,7 @@
 
                     </tr>
                     <tr ng-repeat="x in Employes | filter:Recherche" id={{x.IDP}}>
-                        <td class="col-xs-1">{{x.Personne}}</td>
+                        <td class="col-xs-1">{{x.Prenom[0]}}.{{x.Personne}}</td>
                         <td class="col-xs-1">{{titre(x)}}</td>
                         <td class="col-xs-1">{{x.Total}}</td>
                         <td class="col-xs-1">{{x.CA}}</td>
@@ -92,6 +92,21 @@
                                 <label class="texte">Ni chiffres ni charactères spéciaux</label>
                             </div>
                             <div class="OK" ng-hide="myform1.ModifNom.$error.textOnly || myform1.ModifNom.$pristine || !myform1.ModifNom.$error.textTooShort || !myform1.ModifNom.$error.isEmpty">
+                                <span class="glyphicon glyphicon-ok "></span>
+                            </div>        
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <label class="col-xs-3 control-label" > Prénom :</label>
+                    <div class="col-xs-5"><input type="text" type="text" name="ModifPrenom" ng-model="ModifPrenom" class="form-control" placeholder="{{PersonneModif.Prenom}}" id="PrenomSubmit1" my-text-only is-empty></div>
+                    <div class="col-xs-3">
+                            <div class="Erreur" ng-hide="!myform1.ModifPrenom.$error.textOnly || myform1.ModifPrenom.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span>
+                                <label class="texte">Ni chiffres ni charactères spéciaux</label>
+                            </div>
+                            <div class="OK" ng-hide="myform1.ModifPrenom.$error.textOnly || myform1.ModifPrenom.$pristine || !myform1.ModifPrenom.$error.textTooShort || !myform1.ModifNom.$error.isEmpty">
                                 <span class="glyphicon glyphicon-ok "></span>
                             </div>        
                     </div>
@@ -208,6 +223,25 @@
                                 <label class="texte">Ni chiffres ni charactères spéciaux</label>
                             </div>
                             <div class="OK" ng-hide="myform.AjoutNom.$error.textOnly || myform.AjoutNom.$error.required || !myform.AjoutNom.$error.textTooShort || myform.AjoutNom.$pristine">
+                                <span class="glyphicon glyphicon-ok "></span>
+                            </div>        
+                    </div>
+                </div>
+                <br>
+                <div class="row form-group">
+                    <div class="col-xs-1"></div>
+                    <label class="col-xs-3 " > Prenom :</label>
+                    <div class="col-xs-4"><input type="text" type="text" name="AjoutPrenom" class="form-control" ng-model="AjoutPrenom" placeholder="Entrez le Prenom" id="PrenomSubmit2" required my-text-only></div>
+                    <div class="col-xs-4">
+                            <div class="Erreur" ng-hide="!myform.AjoutPrenom.$error.required || myform.AjoutPrenom.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span> 
+                                <label class="texte">Champ nécessaire</label>
+                            </div>
+                            <div class="Erreur" ng-hide="!myform.AjoutPrenom.$error.textOnly || myform.AjoutPrenom.$pristine">
+                                <span class="glyphicon glyphicon-remove "></span>
+                                <label class="texte">Ni chiffres ni charactères spéciaux</label>
+                            </div>
+                            <div class="OK" ng-hide="myform.AjoutPrenom.$error.textOnly || myform.AjoutPrenom.$error.required || !myform.AjoutPrenom.$error.textTooShort || myform.AjoutPrenom.$pristine">
                                 <span class="glyphicon glyphicon-ok "></span>
                             </div>        
                     </div>

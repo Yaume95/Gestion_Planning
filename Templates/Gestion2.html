@@ -15,7 +15,7 @@
                     </tr>
                     <tr ng-repeat="x in Lieux |orderBy:'Categorie'">
                         <td class="col-xs-2" id="IDL{{x.IDL}}" >{{x.Lieu}}</td>
-                        <td class="col-xs-1" >{{x.Categorie}}</td>
+                        <td class="col-xs-1" ng-bind="CorrespondanceNom(x.Categorie)"></td>
                         <th class="col-xs-3">
                             <div id="actions">
                                 <button type="button" class="btn btn-danger col-xs-4" ng-click="validSuppression(x.IDL)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
@@ -30,24 +30,59 @@
                 <div ng-if="AjoutDemande" class="row"> 
                     <div class="col-xs-2"></div>
                     <div class="col-xs-10">
-                        <div class="col-xs-1"><label id="AjoutNomLieu">Nom : </label></div>
-                        <div class="col-xs-6"><input type="text" placeholder="Entrez le nom du nouveau site" ng-model="AjoutNomLieu" class ="form-control"></div>
+                        <div class="col-xs-2"><label class="Ajout">Nom du lieu: </label></div>
+                        <div class="col-xs-5"><input type="text" placeholder="Entrez le nom du nouveau site" ng-model="AjoutNomLieu" class ="form-control"></div>
                         <div class="col-xs-1"><input type="submit" ng-click="annulerDemande()" value="Annuler" class ="btn btn-danger"></div>
-                        <div class="col-xs-1"><input type="submit" ng-click="confirmerDemande(AjoutNomLieu)" value="Confirmer" class ="btn btn-success"></div>
+                        <div class="col-xs-1"><input type="submit" ng-click="confirmerDemande(AjoutNomLieu,SelectionCat.Categorie)" value="Confirmer" class ="btn btn-success"></div>
                     </div>
-                    <div class="col-xs-2"></div>    
-                    <br><br><br>
-                </div>
-                <div ng-if="AjoutDemande==false">
                     <div class="col-xs-2"></div>
-                    <div class="col-xs-4"><button id="AjoutLieu" class="btn btn-success"  ng-click="demandeAjout()"><span class="glyphicon glyphicon-plus"></span> Ajouter un lieu</button></div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10">
+                        <div class="col-xs-2"><label class="Ajout">Catégorie : </label></div>
+                        <div class="col-xs-5"><select class="form-control Exclus" ng-model="SelectionCat" ng-options="x.Nom_Cat for x in Categories"></select></div>
+                    </div>
+                    <div class="col-xs-2"></div>
+
+                </div>
+
+                <div ng-if="AjoutDemandeCat" class="row"> 
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10">
+                        <div class="col-xs-2"><label class="Ajout">Nom de la catégorie : </label></div>
+                        <div class="col-xs-5"><input type="text" placeholder="Entrez la catégorie à rajouter    " ng-model="AjoutCat" class ="form-control"></div>
+                        <div class="col-xs-1"><input type="submit" ng-click="annulerDemandeCat()" value="Annuler" class ="btn btn-danger"></div>
+                        <div class="col-xs-1"><input type="submit" ng-click="confirmerDemandeCat(AjoutCat)" value="Confirmer" class ="btn btn-success"></div>
+                    </div>
+                    <div class="col-xs-2"></div>
+
+                </div>
+                <div ng-if="AjoutDemande==false && AjoutDemandeCat==false">
+                    <div class="col-xs-12">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-2">
+                            <button id="AjoutLieu" class="btn btn-success"  ng-click="demandeAjout()"><span class="glyphicon glyphicon-plus"></span> Ajouter un lieu</button>
+                        </div>
+                        <div class="col-xs-2">
+                            <button id="AjoutCat" class="btn btn-success"  ng-click="demandeAjoutCat()"><span class="glyphicon glyphicon-plus"></span> Ajouter une catégorie</button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                    </div>
                 </div>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
     </div>
 </div>
+<br>
+<br>
+<br>
 
-<!-- =============================== Modal Modification d'une Personne =============================== -->
+<!-- =============================== Modal Modification d'un Lieu =============================== -->
 
 <div class="modal fade" id="ModificationLieu" role="dialog" ng-controller="modifLieuCtrl">
     <div class="modal-dialog modal-lg">
@@ -73,15 +108,10 @@
                     <br><br>
                     <div class="col-xs-1"></div>
                     <label class="col-xs-3 control-label" > Catégorie:</label>
-                    <div class="col-xs-5"><input type="text" name="ModifCatLieu" ng-model="ModifCatLieu" class="form-control" placeholder="{{LieuModif.Categorie}}" id="CatSubmitLieu" my-is-number is-empty></div>
-                    <div class="col-xs-3">
-                            <div class="Erreur" ng-hide="!formLieu.ModifCatLieu.$error.number || formLieu.ModifCatLieu.$pristine">
-                                <span class="glyphicon glyphicon-remove "></span>
-                                <label class="texte">Chiffres seulement</label>
-                            </div>
-                            <div class="OK" ng-hide="formLieu.ModifCatLieu.$pristine || formLieu.ModifCatLieu.$error.number || !formLieu.ModifCatLieu.$error.isEmpty">
-                                <span class="glyphicon glyphicon-ok "></span>
-                            </div>        
+                    <div class="col-xs-5">  
+                        <select class="form-control input-md Exclus" id="CatSubmitLieu" ng-model="SelectionModifCat" ng-init="">
+                                <option ng-repeat="(count,x) in Categories" id="Categorie{{x.Categorie}}" value="{{x.Categorie}}">{{Categories[count].Nom_Cat}}</option>
+                        </select>     
                     </div>
                 </div>
                 <br>

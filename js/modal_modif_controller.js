@@ -6,14 +6,24 @@ app.controller('modifCtrl', ['$scope', '$http', function($scope,$http)
     $scope.envoyer_modifs=function()
     {
     	if ($('#NomSubmit1').val() != "")
-    	{
-    		nom=$('#NomSubmit1').val();
+        {
+            nom=$('#NomSubmit1').val();
             nom= nom.charAt(0).toUpperCase() +nom.substring(1);
-    	}
-    	else
-    	{
-    		nom=$scope.PersonneModif['Personne'];
-    	}
+        }
+        else
+        {
+            nom=$scope.PersonneModif['Personne'];
+        }
+
+        if ($('#PrenomSubmit1').val() != "")
+        {
+            prenom=$('#PrenomSubmit1').val();
+            prenom= prenom.charAt(0).toUpperCase() +prenom.substring(1);
+        }
+        else
+        {
+            prenom=$scope.PersonneModif['Personne'];
+        }
 
 
     	if ($('#HSubmit1').val() != "")
@@ -71,6 +81,7 @@ app.controller('modifCtrl', ['$scope', '$http', function($scope,$http)
 
                         IDP: idp,
                         Nom: nom,
+                        Prenom: prenom,
                         NbHaFaire: totalH,
                         CAapMax: maxCA,
                         CAavMax: maxCAav,
@@ -82,7 +93,8 @@ app.controller('modifCtrl', ['$scope', '$http', function($scope,$http)
         .then(function successCallback(response)
         {
         	$('#Modification').modal('hide');
-        	$('#NomSubmit1').val("");
+            $('#NomSubmit1').val("");
+        	$('#PrenomSubmit1').val("");
 	    	$('#HSubmit1').val("");
 	    	$('#CASubmit1').val("");
             $('#CAavSubmit1').val("");

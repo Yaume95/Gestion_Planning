@@ -6,11 +6,13 @@
 
 	$dbh->beginTransaction();
 
-	$requete = $dbh->prepare("INSERT INTO site(NomLieu) VALUES(:Nom) ");
+	$requete = $dbh->prepare("INSERT INTO site(NomLieu,Categorie) VALUES(:Nom,:Categorie) ");
 
 	$requete->bindParam(':Nom', $Nom);
+	$requete->bindParam(':Categorie', $Categorie);
 	
 
+	$Categorie=utf8_decode($params['Categorie']);
 	$Nom=utf8_decode($params['Nom']);
 
 	$requete->execute();

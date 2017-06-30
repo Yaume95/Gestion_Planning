@@ -37,7 +37,7 @@
 	    	$y = $rs["CAapPris"].'/'.$rs['CAapMax'];
 	    }
 
-    	$outp .= '{"Personne" : "'  . utf8_encode($rs["Nom"]).'", "IDP" : "'.$rs['IDP'].'", "Total" : "'.$rs["NbHFaites"].'/'.$rs['NbHaFaire'].'", "RTT" : "'.$rs['RTTpris'].'", "Maladie" : "'.$rs['NbJMal'].'","CAav" :"'.$x.'", "CA" : "'.$y.'", "Vaccataire" : "'.$rs['Vaccataire'].'", "Matricule" : "'.$rs['Matricule'].'"}';
+    	$outp .= '{"Personne" : "'  . utf8_encode($rs["Nom"]).'", "Prenom" :"'.$rs['Prenom'].'", "IDP" : "'.$rs['IDP'].'", "Total" : "'.$rs["NbHFaites"].'/'.$rs['NbHaFaire'].'", "RTT" : "'.$rs['RTTpris'].'", "Maladie" : "'.$rs['NbJMal'].'","CAav" :"'.$x.'", "CA" : "'.$y.'", "Vaccataire" : "'.$rs['Vaccataire'].'", "Matricule" : "'.$rs['Matricule'].'"}';
 
 
 	}

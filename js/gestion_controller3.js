@@ -43,5 +43,21 @@ app.controller('gestion_controller3', ['$scope','$http','$window','$location','$
         {mois : "Décembre", num : 12}
     ];
 
+    $scope.total_mensuel= function(idp,mois)
+    {
+        z=0.0;
+
+        angular.forEach($scope.Horaires, function(horaire,key)
+        {
+            console.log(horaire.IDP,horaire.Mois)
+            if(horaire.IDP==idp && horaire.Mois==mois)
+            {
+                z+=Number(horaire.NbHeures);
+            }
+        });
+
+        return z;
+    }
+
 
 }])

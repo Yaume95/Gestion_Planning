@@ -5,6 +5,8 @@ app.controller('ajoutCtrl', ['$scope', '$http', function($scope,$http)
 
         nom=$('#NomSubmit2').val();
         nom= nom.charAt(0).toUpperCase() +nom.substring(1);
+        prenom=$('#PrenomSubmit2').val();
+        prenom= prenom.charAt(0).toUpperCase() +prenom.substring(1);
         totalH=$('#HSubmit2').val();      
         maxCA=$('#CASubmit2').val();    
         maxCAav=$('#CAavSubmit2').val();    
@@ -18,6 +20,7 @@ app.controller('ajoutCtrl', ['$scope', '$http', function($scope,$http)
         data :  {
 
                     Nom: nom,
+                    Prenom: prenom,
                     NbHaFaire: totalH,
                     CAapMax: maxCA,
                     CAavMax: maxCAav,
@@ -32,6 +35,7 @@ app.controller('ajoutCtrl', ['$scope', '$http', function($scope,$http)
 
             $('#Ajout').modal('hide');
             $('#NomSubmit2').val(null);      
+            $('#PrenomSubmit2').val(null);      
             $('#HSubmit2').val(null);      
             $('#CASubmit2').val(null);    
             $('#CAavSubmit2').val(null);

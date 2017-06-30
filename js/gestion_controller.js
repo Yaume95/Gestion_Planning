@@ -94,6 +94,7 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
 
         $scope.PersonneModif['IDP']=object.IDP;
         $scope.PersonneModif['Personne']=object.Personne;
+        $scope.PersonneModif['Prenom']=object.Prenom;
         $scope.PersonneModif['Total']=substr(object.Total,"/");
         $scope.PersonneModif['CA']=substr(object.CA,"/");
         $scope.PersonneModif['CAav']=substr(object.CAav,"/");

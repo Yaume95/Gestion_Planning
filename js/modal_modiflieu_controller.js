@@ -15,18 +15,9 @@ app.controller('modifLieuCtrl', ['$scope', '$http', function($scope,$http)
             nom=$scope.LieuModif['Lieu'];
         }
 
-        if ($('#CatSubmitLieu').val() != "")
-        {
-            cat=$('#CatSubmitLieu').val();
-        }
-        else
-        {
-            cat=$scope.LieuModif['Categorie'];
-        }
-
-
+    
+        cat=$('#CatSubmitLieu option:selected').val();
     	idl= $scope.LieuModif['IDL'];
-
 
         $http({ 
             method : 'POST',

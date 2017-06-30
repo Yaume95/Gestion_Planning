@@ -33,10 +33,15 @@
 #AjoutLieu
 {
     width:100%;
-    margin-left:20px;
 }
 
-#AjoutNomLieu
+
+#AjoutCat
+{
+    width:100%;
+}
+
+.Ajout
 {
     margin-left: 15px;    
     margin-top: 5px;    
