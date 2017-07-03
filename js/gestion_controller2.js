@@ -16,10 +16,12 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
         .then(function (response)
         {
             $scope.Categories =response.data.categories;
+            $scope.SuppressonCat=$scope.Categories[0].Nom_Cat;
         });
 
         $scope.AjoutDemande=false;
         $scope.AjoutDemandeCat=false;
+        $scope.SupprDemandeCat=false;
 	}
 
     $scope.demandeAjout= function()
@@ -32,6 +34,11 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
         $scope.AjoutDemandeCat=true;
     }
 
+    $scope.demandeSupprCat= function()
+    {
+        $scope.SupprDemandeCat=true;
+    }
+
     $scope.annulerDemande= function()
     {
         $scope.AjoutDemande=false;
@@ -40,6 +47,11 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
     $scope.annulerDemandeCat= function()
     {
         $scope.AjoutDemandeCat=false;
+    }
+
+    $scope.annulerDemandeSupprCat= function()
+    {
+        $scope.SupprDemandeCat=false;
     }
 
     $scope.confirmerDemande= function(nom,cat)
@@ -81,6 +93,27 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
             $scope.refresh();
         });
         $scope.AjoutDemandeCat=false;
+    
+        $scope.refresh();
+    }
+
+    $scope.confirmerDemandeSupprCat= function(nom)
+    {
+        console.log(nom);
+
+        $http({ 
+            method : 'POST',
+            url : './BDD/suppression_categorie.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data :  {
+                        NomCat: nom                         
+                    } 
+        })
+        .then(function successCallback(response) {
+
+            $scope.refresh();
+        });
+        $scope.SupprDemandeCat=false;
     
         $scope.refresh();
     }
@@ -136,7 +169,7 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
 
         $scope.SelectionModifCat=$scope.LieuModif['Categorie'];
 
-
+        console.log($scope.LieuModif.Categorie,$scope.SelectionModifCat)
         $scope.refresh()
     }
 

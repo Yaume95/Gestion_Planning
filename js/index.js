@@ -4,8 +4,7 @@ var app = angular.module('Planning', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
-        templateUrl : "Templates/Planning1.html",
-        controller : "planning1_controller"
+        templateUrl : "Templates/identification.html",
     })
     .when("/Planning_Personnel", {
         templateUrl : "Templates/Planning1.html",

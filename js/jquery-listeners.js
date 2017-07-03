@@ -7,5 +7,7 @@ $(document).ready(function() {
     $('#AjoutEtat').draggable({
       handle: ".modal-header"
   	});
+
+  	document.body.style.zoom = 0.9
     
 });

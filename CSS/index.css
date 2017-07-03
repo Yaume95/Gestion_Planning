@@ -8,7 +8,6 @@ body
 {
 	background-color: #F8F8F8;
 }
-
 .Maladie
 {
 	background-color: #E30C2A;
@@ -212,11 +211,13 @@ td,.date,.Entete
 	margin-right:40px;
 }
 
-#actions
+.actions
 {
 	display:flex;
 	justify-content: space-around;
 }
+
+
 
 .calendar
 {

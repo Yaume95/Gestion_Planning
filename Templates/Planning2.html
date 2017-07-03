@@ -18,7 +18,7 @@
                         <th class="MoisSelec" colspan="33"><span class="glyphicon glyphicon-calendar calendar"></span>{{SelectionMois.mois}}</th>
                     </tr>
                     <th>
-                        <select class="form-control" ng-model="SelectionMois" ng-options="x.mois for x in Mois" ng-init="SelectionMois=Mois[0]"></select>
+                        <select class="form-control" ng-model="SelectionMois" ng-options="x.mois for x in Mois" ng-init="SelectionMois=moisact()"></select>
                     </th>
                     <th ng-repeat="x in Calendrier" ng-if="x.Mois==SelectionMois.mois" class="date">
                         {{x.Jour}}

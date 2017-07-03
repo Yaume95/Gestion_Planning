@@ -5,8 +5,9 @@
         <div class="col-xs-12">
 
             <div class="col-xs-12">
-                <div class="col-xs-2"></div>
-                <div class="col-xs-8"><table class="table table-bordered" >
+                <div class="col-xs-3"></div>
+                <div class="col-xs-6">
+                <table class="table table-bordered" >
                     <tr>
                         <th class ="Entete"> Nom du site </th>
                         <th class ="Entete"> Catégorie</th>
@@ -17,58 +18,80 @@
                         <td class="col-xs-2" id="IDL{{x.IDL}}" >{{x.Lieu}}</td>
                         <td class="col-xs-1" ng-bind="CorrespondanceNom(x.Categorie)"></td>
                         <th class="col-xs-3">
-                            <div id="actions">
-                                <button type="button" class="btn btn-danger col-xs-4" ng-click="validSuppression(x.IDL)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
-                                <button type="button" class="btn btn-primary col-xs-4" ng-click="modificationLieu(x)"><span class="glyphicon glyphicon-th-list"></span> Modifier </button>
+                            <div class="actions">
+                                <div class="col-xs-3">
+                                    <button type="button" class="btn btn-danger " ng-click="validSuppression(x.IDL)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
+                                </div>
+                                <div class="col-xs-3">
+                                    <button type="button" class="btn btn-primary" ng-click="modificationLieu(x)"><span class="glyphicon glyphicon-th-list"></span> Modifier </button>
+                                </div>
                             </div>
                         </th>
                     </tr>
-                </table></div>
-                <div class="col-xs-2"></div>             
+                </table>
+                </div>
+                <div class="col-xs-3"></div>             
             </div>
             <div class="col-xs-12">
                 <div ng-if="AjoutDemande" class="row"> 
-                    <div class="col-xs-2"></div>
-                    <div class="col-xs-10">
+                    <div class="col-xs-3"></div>
+                    <div class="col-xs-6">
                         <div class="col-xs-2"><label class="Ajout">Nom du lieu: </label></div>
-                        <div class="col-xs-5"><input type="text" placeholder="Entrez le nom du nouveau site" ng-model="AjoutNomLieu" class ="form-control"></div>
-                        <div class="col-xs-1"><input type="submit" ng-click="annulerDemande()" value="Annuler" class ="btn btn-danger"></div>
-                        <div class="col-xs-1"><input type="submit" ng-click="confirmerDemande(AjoutNomLieu,SelectionCat.Categorie)" value="Confirmer" class ="btn btn-success"></div>
+                        <div class="col-xs-6"><input type="text" placeholder="Entrez le nom du nouveau site" ng-model="AjoutNomLieu" class ="form-control"></div>
+                        <div class="col-xs-2"><input type="submit" ng-click="annulerDemande()" value="Annuler" class ="btn btn-danger"></div>
+                        <div class="col-xs-2"><input type="submit" ng-click="confirmerDemande(AjoutNomLieu,SelectionCat.Categorie)" value="Confirmer" class ="btn btn-success"></div>
                     </div>
-                    <div class="col-xs-2"></div>
+                    <div class="col-xs-3"></div>
                     <br>
                     <br>
                     <br>
-                    <div class="col-xs-2"></div>
-                    <div class="col-xs-10">
+                    <div class="col-xs-3"></div>
+
+                    <div class="col-xs-6">
                         <div class="col-xs-2"><label class="Ajout">Catégorie : </label></div>
-                        <div class="col-xs-5"><select class="form-control Exclus" ng-model="SelectionCat" ng-options="x.Nom_Cat for x in Categories"></select></div>
+                        <div class="col-xs-6"><select class="form-control Exclus" ng-model="SelectionCat" ng-options="x.Nom_Cat for x in Categories" ng-init="SelectionCat=Categories[0]"></select></div>
                     </div>
-                    <div class="col-xs-2"></div>
+                    <div class="col-xs-3"></div>
 
                 </div>
 
                 <div ng-if="AjoutDemandeCat" class="row"> 
-                    <div class="col-xs-2"></div>
-                    <div class="col-xs-10">
-                        <div class="col-xs-2"><label class="Ajout">Nom de la catégorie : </label></div>
-                        <div class="col-xs-5"><input type="text" placeholder="Entrez la catégorie à rajouter    " ng-model="AjoutCat" class ="form-control"></div>
-                        <div class="col-xs-1"><input type="submit" ng-click="annulerDemandeCat()" value="Annuler" class ="btn btn-danger"></div>
-                        <div class="col-xs-1"><input type="submit" ng-click="confirmerDemandeCat(AjoutCat)" value="Confirmer" class ="btn btn-success"></div>
+                    <div class="col-xs-3"></div>
+                    <div class="col-xs-6">
+                        <div class="col-xs-3"><label class="Ajout">Nom de la catégorie : </label></div>
+                        <div class="col-xs-5"><input type="text" placeholder="Entrez la catégorie à rajouter" ng-model="AjoutCat" class ="form-control"></div>
+                        <div class="col-xs-2"><input type="submit" ng-click="annulerDemandeCat()" value="Annuler" class ="btn btn-danger"></div>
+                        <div class="col-xs-2"><input type="submit" ng-click="confirmerDemandeCat(AjoutCat)" value="Confirmer" class ="btn btn-success"></div>
                     </div>
                     <div class="col-xs-2"></div>
 
                 </div>
-                <div ng-if="AjoutDemande==false && AjoutDemandeCat==false">
+
+                <div ng-if="SupprDemandeCat" class="row"> 
+                    <div class="col-xs-3"></div>
+                    <div class="col-xs-6">
+                        <div class="col-xs-2"><label class="Ajout">Catégorie : </label></div>
+                        <div class="col-xs-6"><select class="form-control Exclus" ng-model="SuppressionCat" ng-options="x.Nom_Cat for x in Categories" ng-init="SuppressionCat=Categories[0]" ></select></div>
+                        <div class="col-xs-2"><input type="submit" ng-click="annulerDemandeSupprCat()" value="Annuler" class ="btn btn-danger"></div>
+                        <div class="col-xs-2"><input type="submit" ng-click="confirmerDemandeSupprCat(SuppressionCat.Nom_Cat)" value="Confirmer" class ="btn btn-success"></div>
+                    </div>
+                    
+
+                </div>
+                <div ng-if="AjoutDemande==false && AjoutDemandeCat==false && SupprDemandeCat==false">
                     <div class="col-xs-12">
-                        <div class="col-xs-2"></div>
-                        <div class="col-xs-2">
-                            <button id="AjoutLieu" class="btn btn-success"  ng-click="demandeAjout()"><span class="glyphicon glyphicon-plus"></span> Ajouter un lieu</button>
+                        <div class="col-xs-3"></div>
+                        <div class="actions2">
+                            <div class="col-xs-2">
+                            <button id="SupprCat" class="btn btn-success"  ng-click="demandeSupprCat()"><span class="glyphicon glyphicon-minus"></span> Supprimer une catégorie</button>
+                            </div>
+                            <div class="col-xs-2">
+                                <button id="AjoutCat" class="btn btn-success"  ng-click="demandeAjoutCat()"><span class="glyphicon glyphicon-plus"></span> Ajouter une catégorie</button>
+                            </div>
+                            <div class="col-xs-2">
+                                <button id="AjoutLieu" class="btn btn-success"  ng-click="demandeAjout()"><span class="glyphicon glyphicon-plus"></span> Ajouter un lieu</button>
+                            </div>
                         </div>
-                        <div class="col-xs-2">
-                            <button id="AjoutCat" class="btn btn-success"  ng-click="demandeAjoutCat()"><span class="glyphicon glyphicon-plus"></span> Ajouter une catégorie</button>
-                        </div>
-                        <div class="col-xs-2"></div>
                     </div>
                 </div>
             </div>
@@ -78,6 +101,9 @@
         <br>
     </div>
 </div>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -109,8 +135,8 @@
                     <div class="col-xs-1"></div>
                     <label class="col-xs-3 control-label" > Catégorie:</label>
                     <div class="col-xs-5">  
-                        <select class="form-control input-md Exclus" id="CatSubmitLieu" ng-model="SelectionModifCat" ng-init="">
-                                <option ng-repeat="(count,x) in Categories" id="Categorie{{x.Categorie}}" value="{{x.Categorie}}">{{Categories[count].Nom_Cat}}</option>
+                        <select class="form-control input-md Exclus" id="CatSubmitLieu" ng-model="SelectionModifCat">
+                                <option ng-repeat="(count,x) in Categories" value="{{x.Categorie}}">{{Categories[count].Nom_Cat}}</option>
                         </select>     
                     </div>
                 </div>

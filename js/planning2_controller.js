@@ -38,6 +38,12 @@ app.controller('planning2_controller', ['$scope','$http','$window','$location' ,
         });
 	}
 
+    $scope.moisact=function()
+    {
+       d= new Date();
+       return $scope.Mois[d.getMonth()];
+    }
+
 	$scope.celluleLieu=function(date,idl)
 	{
 		var x= $('#'+date+idl).children('.nombre').text();

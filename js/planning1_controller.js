@@ -80,13 +80,18 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
       });
     }
 
-   $scope.reset=function()
-   {
+    $scope.moisact=function()
+    {
+       d= new Date();
+       return $scope.Mois[d.getMonth()];
+    }
+
+
+    $scope.reset=function()
+    {
       $('.heure').removeClass().addClass(' heure ');
       $scope.place= $('[value='+$scope.SelectionPersonne+']').attr('id');
-   }
- 
- 
+    }
 
     $scope.clickdroit=function($event)
     {
@@ -420,8 +425,16 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
        
         if($('.'+Date).is('.Sam, .Dim'))
         {
-           if($('.'+Date).is('.Sam')) return 'SAM';
-           else return 'DIM';
+           if($('.'+Date).is('.Sam'))
+           {
+              $('[data-idl='+Lieu+'][data-date='+Date+']').css('border-left','2px solid darkgrey');
+              return 'SAM';
+           } 
+           else
+           {
+              $('[data-idl='+Lieu+'][data-date='+Date+']').css('border-right','2px solid darkgrey');
+              return 'DIM';
+           } 
         }
         else if(Ferie==1)
         {

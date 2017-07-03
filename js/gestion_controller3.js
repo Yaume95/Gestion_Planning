@@ -6,10 +6,18 @@ app.controller('gestion_controller3', ['$scope','$http','$window','$location','$
 	$scope.initGestion3=function()
 	{
 
-        $http.get("./BDD/lieux.php")
+        $http.get("./BDD/totaux.php")
         .then(function (response)
         {
-            $scope.Lieux =response.data.lieux
+            $scope.Totaux =response.data.totaux
+        });
+
+        $http.get("./BDD/categories.php")
+        .then(function (response)
+        {
+            $scope.Categories =response.data.categories;
+            $scope.SelectedCat=$scope.Categories[0];
+
         });
 
         $http.get("./BDD/horaires.php")
@@ -18,13 +26,13 @@ app.controller('gestion_controller3', ['$scope','$http','$window','$location','$
             $scope.Horaires =response.data.horaires
         });
 
-        $http.get("./BDD/employes.php")
-        .then(function (response)
-        {
-            $scope.Employes =response.data.employes
-        });
-
     };
+
+    $scope.moisact=function()
+    {
+       d= new Date();
+       return $scope.Mois[d.getMonth()];
+    }
 
 
     $scope.Mois = 
