@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 03 Juillet 2017 à 08:16
+-- Généré le :  Lun 03 Juillet 2017 à 15:05
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -157,6 +157,17 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `eraseTest` ()  BEGIN
 END$$
 
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `admin`
+--
+
+CREATE TABLE `admin` (
+  `Id` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `Mdp` varchar(20) CHARACTER SET utf8 NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -558,9 +569,7 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`NumCat`, `NomCat`) VALUES
 (1, 'Études'),
-(2, 'Périscolaire'),
-(4, 'Qsdqsdqsd'),
-(5, 'Test');
+(2, 'Périscolaire');
 
 -- --------------------------------------------------------
 
@@ -582,7 +591,7 @@ CREATE TABLE `horaires` (
 --
 
 INSERT INTO `horaires` (`IDP`, `IDL`, `Date_jour`, `NbHeures`, `Etat`, `Checked`) VALUES
-(124, 95, '2017-01-11', 5, 'Travail', 1),
+(123, 110, '2017-01-02', 5, 'Travail', 1),
 (123, 95, '2017-01-05', 5, 'Travail', 1),
 (123, 98, '2017-01-13', 5, 'Travail', 1),
 (123, 95, '2017-01-12', 7.5, 'Maladie', 1),
@@ -908,15 +917,24 @@ CREATE TABLE `personne` (
 --
 
 INSERT INTO `personne` (`IDP`, `Prenom`, `Nom`, `NbHaFaire`, `NbHFaites`, `CAavPris`, `CAavMax`, `CAapPris`, `CAapMax`, `NbJMal`, `RTTpris`, `HSupp`, `Vaccataire`, `Matricule`) VALUES
-(123, 'Arcadia', 'Lozach', 1010.5, 244.5, 0, 0, 0, 25, 8, 0, 0, 0, 'DBSBFLQS?SDT5'),
+(123, 'Arcadia', 'Lozach', 1010.5, 249.5, 0, 0, 0, 25, 8, 0, 0, 0, 'DBSBFLQS?SDT5'),
 (126, '', 'Meriem', 1018, 0, 0, 0, 0, 25, 0, 0, 0, 0, 'DFNSD541DAZED'),
 (125, '', 'Florence', 1486.75, 0, 0, 0, 0, 25, 0, 0, 0, 1, 'DFNSDLFNLS5DZ'),
 (131, '', 'Soraya', 747, 0, 0, 0, 0, 25, 0, 0, 0, 0, 'BFIDKFLSCNPDS'),
-(124, '', 'Badia', 1509, 5, 0, 0, 0, 25, 0, 0, 0, 1, 'DFDSFDSFDZD'),
+(124, '', 'Badia', 1509, 0, 0, 0, 0, 25, 0, 0, 0, 1, 'DFDSFDSFDZD'),
 (127, '', 'Mireille', 1600, 0, 0, 0, 0, 25, 0, 0, 0, 0, '#?LFMQDS3D54'),
 (128, '', 'Nathalie D', 1041.5, 0, 0, 0, 0, 25, 0, 0, 0, 0, 'BFIDKFLSCNPDS'),
 (129, '', 'Nathalie V', 1234.5, 0, 0, 0, 0, 25, 0, 0, 0, 0, 'BFIDKFLSCNPDS'),
-(130, '', 'Sandrine', 1425.25, 0, 0, 0, 0, 5, 0, 0, 0, 0, 'BFIDKFLSCNPDS');
+(130, '', 'Sandrine', 1425.25, 0, 0, 0, 0, 5, 0, 0, 0, 0, 'BFIDKFLSCNPDS'),
+(135, 'A', 'Françoise', 1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, '12151515151'),
+(136, ' ', 'Marylyne', 1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, '151565161'),
+(137, '', 'Odile', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '165156165'),
+(138, '', 'Salima', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1561656'),
+(139, 'Marie', 'Attal', 1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, '165166156'),
+(140, 'Camille', 'Lubin', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '155161616161'),
+(141, 'Carine', 'Mule', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '15165161616'),
+(142, 'Julie', 'Armant', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1651565'),
+(143, 'Sonia', 'Bonatto', 1200, 0, 0, 0, 0, 0, 0, 0, 0, 0, '15161616516154');
 
 --
 -- Déclencheurs `personne`
@@ -943,18 +961,18 @@ CREATE TABLE `site` (
 --
 
 INSERT INTO `site` (`IDL`, `NomLieu`, `Categorie`) VALUES
-(96, 'Mairie', 1),
-(95, 'Ancienne Mairie', 2),
-(91, 'Fontaine', 1),
-(93, 'Arts Plastiques', 1),
+(96, 'Mairie', 2),
+(95, 'Ancienne Mairie', 1),
+(91, 'Fontaine', 2),
+(93, 'Arts Plastiques', 2),
 (94, 'Salle A.Hugo', 1),
 (92, 'École Musique', 1),
 (97, 'Salle des Fêtes', 1),
-(98, 'CLP', 1),
+(98, 'CLP', 2),
 (99, 'Crèche', 1),
 (102, 'Victor Hugo', 2),
 (107, 'Jules Ferry', 1),
-(110, 'Gambetta', 1);
+(110, 'Gambetta', 2);
 
 --
 -- Déclencheurs `site`
@@ -967,6 +985,12 @@ DELIMITER ;
 --
 -- Index pour les tables exportées
 --
+
+--
+-- Index pour la table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Index pour la table `calendrier`
@@ -1009,12 +1033,12 @@ ALTER TABLE `site`
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `NumCat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `NumCat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `personne`
 --
 ALTER TABLE `personne`
-  MODIFY `IDP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `IDP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 --
 -- AUTO_INCREMENT pour la table `site`
 --
