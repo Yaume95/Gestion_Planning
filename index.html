@@ -6,12 +6,14 @@
     <title>Application Service Enfant-Jeunesse</title>
 
 
+    <script src="Ressources/sha1-min.js"></script>
     <script src="Ressources/angular.min.js"></script>
     <script src="Ressources/angular-route.js"></script>
     <script src="Ressources/jquery.min.js"></script>
     <script src="Ressources/jquery-ui.min.js" type="text/javascript"></script>
     <script src="Ressources/bootstrap.min.js"></script>
     <script src="./js/jquery-listeners.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-cookies.min.js"></script>
     
     <link rel="stylesheet" href="Ressources/bootstrap.min.css">
     <link rel="stylesheet" href="CSS/index.css">
@@ -25,39 +27,41 @@
 
 <body ng-app="Planning">
 
+<div ng-controller="enteteController">
+    <nav class="navbar navbar-inverse" ng-if="logged()">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#!Planning_Personnel" id="PlanningPersonnel" class="divider-droite">
+                    <span class="glyphicon glyphicon-user"></span> Planning du Personnel</a>
+                </li>
 
-<nav class="navbar navbar-inverse" >
-    <div class="container-fluid">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="#!Planning_Personnel" id="PlanningPersonnel" class="divider-droite">
-                <span class="glyphicon glyphicon-user"></span> Planning du Personnel</a>
-            </li>
-
-            <li>
-                <a href="#!Planning_Lieux" id="PlanningLieux" class="divider-droite">
-                    <span class="glyphicon glyphicon-list-alt"></span> Planning des Lieux
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-toggle" data-toggle="dropdown" href="" id ="Gestion">
-                    <span class="glyphicon glyphicon-cog"></span> Gestion
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu Dropdown">
-                  <li class="Dropdown"><a href="#!Gestion_Personnel" class="Dropdown">Personnel</a></li><br>
-                  <li class="Dropdown"><a href="#!Gestion_Lieux" class="Dropdown">Lieux</a></li>
-                  <li class="Dropdown"><a href="#!Recap_mois" class="Dropdown">Heures à payer</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</nav>
-
+                <li>
+                    <a href="#!Planning_Lieux" id="PlanningLieux" class="divider-droite">
+                        <span class="glyphicon glyphicon-list-alt"></span> Planning des Lieux
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="" id ="Gestion">
+                        <span class="glyphicon glyphicon-cog"></span> Gestion
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu Dropdown">
+                      <li class="Dropdown"><a href="#!Gestion_Personnel" class="Dropdown">Personnel</a></li><br>
+                      <li class="Dropdown"><a href="#!Gestion_Lieux" class="Dropdown">Lieux</a></li>
+                      <li class="Dropdown"><a href="#!Recap_mois" class="Dropdown">Heures à payer</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
 <div ng-view></div>
 
 
 <script src="./js/index.js"></script>
+<script src="./js/entete_controller.js"></script>
+<script src="./js/identification_controller.js"></script>
 <script src="./js/planning1_controller.js"></script>
 <script src="./js/modal_controller.js"></script>
 <script src="./js/modal_modif_controller.js"></script>

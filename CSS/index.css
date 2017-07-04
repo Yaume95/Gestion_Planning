@@ -4,6 +4,11 @@
 	justify-content: center;
 	font-weight: bold;	
 }
+.milieu
+{
+	display:flex;
+	justify-content: center;
+}
 body
 {
 	background-color: #F8F8F8;

@@ -25,6 +25,8 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
           }
       });
 
+
+
       $http.get("./BDD/horaires.php")
       .then(function (response) 
       {
@@ -419,9 +421,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
     $scope.cellule  = function(Date,Lieu,Nom,Ferie)
     {
-
-        var x=$scope.compress($('#'+Date+Lieu+Nom+'1').text().valueOf())  ;
-        var y=$('#'+Date+Lieu+Nom+'2').text().valueOf() ;
+        x = 0.0;
        
         if($('.'+Date).is('.Sam, .Dim'))
         {
@@ -435,14 +435,22 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
               $('[data-idl='+Lieu+'][data-date='+Date+']').css('border-right','2px solid darkgrey');
               return 'DIM';
            } 
-        }
+        0}
         else if(Ferie==1)
         {
           return 'Férié';
         }
-        else if ( x=='Travail' || x =='Maladie' || x=='Repos' ||x=='DemiRepos')
+        else 
         {
-            return y;
+            angular.forEach($scope.Horaires, function(value,key)
+            {
+                if(value.Date_jour==Date && value.IDL==Lieu && value.IDP==Nom)
+                {
+                  x = value.NbHeures;
+                }
+            
+            });
+            if(x>0) return x;
         }
 
         
@@ -459,8 +467,16 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     $scope.testclasses  = function(Date,Lieu,Nom)
     {
 
-        var x=$scope.compress($('#'+Date+Lieu+Nom+'1').text().valueOf());
-        var y=$scope.compress($('#'+Date+Lieu+Nom+'3').text().valueOf());
+        x='';
+
+        angular.forEach($scope.Horaires,function(value,key)
+        {
+            if(value.Date_jour==Date && value.IDL==Lieu && value.IDP==Nom)
+            {
+              x=$scope.compress(value.Etat);
+              y=value.Checked;
+            }
+        });
 
         if(x!='')
         {

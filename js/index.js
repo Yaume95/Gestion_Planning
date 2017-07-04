@@ -1,10 +1,12 @@
-var app = angular.module('Planning', ['ngRoute']);
+var app = angular.module('Planning', ['ngRoute', 'ngCookies']);
+
 
 
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
         templateUrl : "Templates/identification.html",
+        controller : "identification_controller"
     })
     .when("/Planning_Personnel", {
         templateUrl : "Templates/Planning1.html",
@@ -28,14 +30,19 @@ app.config(function($routeProvider) {
     });
 });
 
-app.controller("navCtrl", ['$scope',function($scope)
-{
-}]);
 
-function raccourci(string)
+app.run(function($rootScope,$location,$cookies)
 {
-    string= string.replace(/[\n]/gi, "" );
-    string = string.replace(/ /g,"");
-    return string;
-
-}
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) 
+    {
+        if ( $cookies.get('AdminLogged') == null ||  $cookies.get('AdminLogged') == undefined) 
+        {
+        // no logged user, we should be going to #login
+            if ( next.templateUrl != "/" ) 
+            {
+                // not going to #login, we should redirect now
+                $location.path( "/" );
+            }
+        }         
+    });
+});

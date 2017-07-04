@@ -11,13 +11,13 @@
                     <tr>
                         <th class ="Entete"> Nom du site </th>
                         <th class ="Entete"> Catégorie</th>
-                        <th class ="Entete MoisSelec" colspan="5">Actions</th>
+                        <th class ="Entete MoisSelec Exclus" colspan="5">Actions</th>
 
                     </tr>
                     <tr ng-repeat="x in Lieux |orderBy:'Categorie'">
                         <td class="col-xs-2" id="IDL{{x.IDL}}" >{{x.Lieu}}</td>
                         <td class="col-xs-1" ng-bind="CorrespondanceNom(x.Categorie)"></td>
-                        <th class="col-xs-3">
+                        <th class="col-xs-3 Exclus">
                             <div class="actions">
                                 <div class="col-xs-3">
                                     <button type="button" class="btn btn-danger " ng-click="validSuppression(x.IDL)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
@@ -79,7 +79,7 @@
 
                 </div>
                 <div ng-if="AjoutDemande==false && AjoutDemandeCat==false && SupprDemandeCat==false">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 Exclus">
                         <div class="col-xs-3"></div>
                         <div class="actions2">
                             <div class="col-xs-2">

@@ -4,7 +4,7 @@
 
         <!-- ==================================== Barre de recherche ==================================== -->
 
-        <div class="col-xs-12">
+        <div class="col-xs-12 Exclus">
             <div class="col-xs-2"></div>
             <div class="col-xs-6">
                 <div class="form-group">
@@ -30,7 +30,7 @@
                         <th class ="Entete"> CA (av Janv) </th>
                         <th class ="Entete"> Nb Maladies </th>
                         <th class ="Entete"> RTT </th>
-                        <th class ="Entete MoisSelec" colspan="5">Actions</th>
+                        <th class ="Entete MoisSelec Exclus" colspan="5">Actions</th>
 
                     </tr>
                     <tr ng-repeat="x in Employes | filter:Recherche" id={{x.IDP}}>
@@ -41,8 +41,8 @@
                         <td class="col-xs-1">{{x.CAav}}</td>
                         <td class="col-xs-1">{{x.Maladie}}</td>
                         <td class="col-xs-1">{{x.RTT}}</td>
-                        <th class="col-xs-3">
-                            <div class="actions">
+                        <th class="col-xs-3 Exclus">
+                            <div class="actions Exclus">
                                 <button type="button" class="btn btn-danger" ng-click="validSuppression(x.IDP)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
                                 <button type="button" class="btn btn-primary" ng-click="modification(x)"><span class="glyphicon glyphicon-th-list"></span> Modifier </button>
                                 <button type="button" class="btn btn-warning" ng-click="redirectPlanning(x)"><span class="glyphicon glyphicon-calendar"></span> Planning </button>

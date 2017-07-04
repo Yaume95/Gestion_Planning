@@ -1,7 +1,7 @@
 var idl,nom;
 app.controller('modifLieuCtrl', ['$scope', '$http', function($scope,$http)
 {
-  
+
     $scope.envoyer_modifs_lieu=function()
     {
     	if ($('#NomSubmitLieu').val() != "")
