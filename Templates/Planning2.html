@@ -20,7 +20,7 @@
                     <th>
                         <select class="form-control" ng-model="SelectionMois" ng-options="x.mois for x in Mois" ng-init="SelectionMois=moisact()"></select>
                     </th>
-                    <th ng-repeat="x in Calendrier" ng-if="x.Mois==SelectionMois.mois" class="date">
+                    <th ng-repeat="x in Calendrier" ng-if="x.Mois==SelectionMois.mois" class="date {{x.Jour}} {{x.Date_jour}}">
                         {{x.Jour}}
                         <br>
                         {{x.Date_jour[8] + x.Date_jour[9]}}
@@ -28,7 +28,7 @@
                 </tr>
                 <tr ng-repeat="a in Lieux">
                     <th class="lieu"> {{a.Lieu}} </th>
-                    <td ng-repeat="b in Calendrier" ng-if="b.Mois==SelectionMois.mois" ng-bind="celluleLieu(b.Date_jour,a.IDL)"  
+                    <td ng-repeat="b in Calendrier" ng-if="b.Mois==SelectionMois.mois" ng-bind="celluleLieu(b.Date_jour,a.IDL,b.Ferie)"  
                         data-date="{{b.Date_jour}}" 
                         data-idl="{{a.IDL}}" 
                         ng-click="focusin()" 

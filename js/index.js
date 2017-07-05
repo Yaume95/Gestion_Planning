@@ -5,7 +5,7 @@ var app = angular.module('Planning', ['ngRoute', 'ngCookies']);
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
-        templateUrl : "Templates/identification.html",
+        templateUrl : "Templates/Identification.html",
         controller : "identification_controller"
     })
     .when("/Planning_Personnel", {
@@ -27,6 +27,10 @@ app.config(function($routeProvider) {
     .when("/Recap_mois", {
         templateUrl : "Templates/Gestion3.html",
         controller : "gestion_controller3"
+    })
+    .when("/Admin_password", {
+        templateUrl : "Templates/Gestion4.html",
+        controller : "gestion_controller4"
     });
 });
 
@@ -43,6 +47,12 @@ app.run(function($rootScope,$location,$cookies)
                 // not going to #login, we should redirect now
                 $location.path( "/" );
             }
-        }         
+        }
+        else if(next.originalPath=="/")
+        {
+            $location.path( "/Planning_Personnel" );
+        }
+
+                
     });
 });

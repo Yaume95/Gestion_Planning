@@ -1,3 +1,14 @@
+.erreur
+{
+  color:red;
+}
+
+
+.decal-gauche
+{
+    margin-left: 15px;
+}
+
 .Erreur
 {
     display:flex;
@@ -11,6 +22,19 @@
     align-items: center;
     justify-content: flex-start!important;
 	color:#1FA600;
+}
+
+
+div {
+  transition: all linear 0.5s;
+}
+
+.ng-hide {
+  height: 0;
+  width: 0;
+  background-color: transparent;
+  top:-200px;
+  left: 200px;
 }
 
 .glyphicon-ok

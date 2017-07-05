@@ -1,0 +1,34 @@
+<div class="milieu">
+    <div class="col-xs-4 row">
+    <form action="" name="ModifPwd">
+        <div class="form-group" ng-hide="Next">
+            <label class="">Mot de passe :</label>
+            <div class="has-feedback ">
+                <input type="password"  ng-model="Pwd1" name="Pwd1" class="form-control" placeholder="Entrez le mot de passe" required>
+                <div ng-hide="Sent">
+                    <span class="glyphicon glyphicon-remove form-control-feedback erreur" ></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-hide="Next">
+            <label class="">Confirmation :</label>
+            <div class="has-feedback ">
+                <input type="password" ng-model="Pwd2" name="Pwd2" class="form-control" placeholder="Confirmez le mot de passe" required>
+                <div ng-hide="Pwd1==Pwd2 || Pwd1!=Pwd2 && ModifPwd.Pwd2.$pristine">
+                    <span class="glyphicon glyphicon-remove form-control-feedback erreur"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row has-feedback" ng-hide="Next">
+            <button class="btn btn-primary decal-gauche" ng-mousedown="testPsswd(Pwd1)" ng-disabled="Pwd1!=Pwd2 || Pwd1==undefined">Suivant</button>
+        </div>
+        <div class="form-group row" ng-hide="!Next">
+            <label for="">Nouveau mot de passe :</label>
+            <input type="password" class="form-control" ng-model="Pwd3" placeholder="Entrez votre mot de passe">
+        </div>
+        <div class="form-group row" ng-hide="!Next">
+            <button class="btn btn-primary" ng-mousedown="sendPsswd(Pwd3)">Confirmer</button>
+        </div>
+    </form>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 app.controller('planning1_controller', ['$scope','$http', '$route','$window','$location','$rootScope' ,function($scope, $http,$route,$window,$location,$rootScope) {
 
     $scope.place=0;
+    compteur=0;
     heure_checked=false;
 
     compteur=0;
@@ -114,11 +115,12 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
     $scope.focusin=function($event)
     {
-        if($event.which==1)
+        if($event.which==1 && compteur==0)
         {
             enter_pressed=false;  
             $event.preventDefault();
             contentCell=$event.target.innerText;
+            compteur+=1;
         }
 
     }
@@ -130,9 +132,9 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
         if(contentCell!=$event.target.innerText && !enter_pressed)
         {
-
            event.target.innerText=initialCellContent;
         }
+        compteur=0;
     }
 
     $scope.valide_entrer = function($event)
@@ -348,7 +350,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     {
         
         var z =0.0;
-        valeurs=document.querySelectorAll('.checked');
+        valeurs=document.querySelectorAll('[data-idp="'+idp+'"]');
 
 
 
@@ -427,15 +429,13 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         {
            if($('.'+Date).is('.Sam'))
            {
-              $('[data-idl='+Lieu+'][data-date='+Date+']').css('border-left','2px solid darkgrey');
               return 'SAM';
            } 
-           else
+           else if($('.'+Date).is('.Dim'))
            {
-              $('[data-idl='+Lieu+'][data-date='+Date+']').css('border-right','2px solid darkgrey');
               return 'DIM';
            } 
-        0}
+        }
         else if(Ferie==1)
         {
           return 'Férié';

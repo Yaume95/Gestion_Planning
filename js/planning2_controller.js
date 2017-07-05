@@ -44,10 +44,31 @@ app.controller('planning2_controller', ['$scope','$http','$window','$location' ,
        return $scope.Mois[d.getMonth()];
     }
 
-	$scope.celluleLieu=function(date,idl)
+	$scope.celluleLieu=function(date,idl,Ferie)
 	{
-		var x= $('#'+date+idl).children('.nombre').text();
-		return x;
+
+		if($('.'+date).is('.Sam, .Dim'))
+        {
+           if($('.'+date).is('.Sam'))
+           {
+              $('[data-idl='+idl+'][data-date='+date+']').css('border-left','2px solid darkgrey');
+              return 'SAM';
+           } 
+           else
+           {
+              $('[data-idl='+idl+'][data-date='+date+']').css('border-right','2px solid darkgrey');
+              return 'DIM';
+           } 
+        }
+        else if(Ferie==1)
+        {
+          return 'Férié';
+        }
+        else
+        {
+            var x= $('#'+date+idl).children('.nombre').text();
+    		return x;
+        }
 	}
 
 	$scope.clickdroit=function($event,date,idl)
