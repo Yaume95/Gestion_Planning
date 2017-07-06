@@ -22,6 +22,7 @@ body
 {
 	background-color: #E30C2A;
 }
+
 .Repos
 {
 	background-color: #9C5A0C;
@@ -249,3 +250,7 @@ td,.date,.Entete
 	color:red;
 }
 
+.Maladie.unchecked, .Repos.unchecked, .DemiRepos.unchecked
+{
+	color:lightgreen!important;
+}

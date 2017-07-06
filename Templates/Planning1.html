@@ -32,12 +32,12 @@
         <div class="col-md-12">
             <table class="table table-bordered" ng-keydown="unableTab($event)">
                     <tr>
-                        <th class="MoisSelec" colspan="33"><span class="glyphicon glyphicon-calendar calendar"></span> {{SelectionMois.mois}} - {{Horaires[0].Date_jour[0]+Horaires[0].Date_jour[1]+Horaires[0].Date_jour[2]+Horaires[0].Date_jour[3]}}</th>
+                        <th class="MoisSelec" colspan="33"><span class="glyphicon glyphicon-calendar calendar"></span> {{SelectionMois.mois}} - {{Calendrier[0].Date_jour[0]+Calendrier[0].Date_jour[1]+Calendrier[0].Date_jour[2]+Calendrier[0].Date_jour[3]}}</th>
                     </tr>
                     <tr>
                         <th>
                             
-                            <select class="form-control input-md Exclus" id="SelectedPerson" ng-model="SelectionPersonne" ng-change="reset()">
+                            <select class="form-control input-md Exclus" id="SelectedPerson" ng-model="SelectionPersonne" ng-change="reset(SelectionPersonne,SelectionMois.num)">
                                 <option ng-repeat="(count,x) in Employes" id="{{count}}" value="{{x.IDP}}">{{Employes[count].Personne}}</option>
                             </select>
                             <select class="form-control Exclus" ng-model="SelectionMois" ng-options="x.mois for x in Mois" ng-init="SelectionMois=moisact()"></select>

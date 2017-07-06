@@ -1,11 +1,24 @@
 app.controller('planning1_controller', ['$scope','$http', '$route','$window','$location','$rootScope' ,function($scope, $http,$route,$window,$location,$rootScope) {
 
     $scope.place=0;
-    compteur=0;
     heure_checked=false;
-
     compteur=0;
     pattern = /^((SAM)*(DIM)*(Férié)*)*$/;
+
+    $scope.Mois = [
+        {mois : "Janvier", num : 1},
+        {mois : "Février", num : 2},
+        {mois : "Mars", num : 3},
+        {mois : "Avril", num : 4},
+        {mois : "Mai", num : 5},
+        {mois : "Juin", num : 6},
+        {mois : "Juillet", num : 7},
+        {mois : "Aout", num : 8},
+        {mois : "Septembre", num : 9},
+        {mois : "Octobre", num :10},
+        {mois : "Novembre", num : 11},
+        {mois : "Décembre", num : 12}
+      ];
 
     $scope.initFirst=function()
     {
@@ -18,21 +31,21 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
           {
             $rootScope.redirect==false;
             $scope.SelectionPersonne = $rootScope.planningRedirect;
-            
           }
           else
           {
             $scope.SelectionPersonne = $scope.Employes[0].IDP;
           }
-      });
 
+      });
 
 
       $http.get("./BDD/horaires.php")
       .then(function (response) 
       {
-          $scope.Horaires = response.data.horaires
+          $scope.Horaires = response.data['horaires'];
       });
+
       
         
       $http.get("./BDD/calendrier.php")
@@ -115,12 +128,13 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
     $scope.focusin=function($event)
     {
-        if($event.which==1 && compteur==0)
+        if($event.which==1 && compteur==0 && !($event.target.innerText=="SAM" || $event.target.innerText=="DIM" || $event.target.innerText=="Férié"))
         {
             enter_pressed=false;  
             $event.preventDefault();
             contentCell=$event.target.innerText;
             compteur+=1;
+            
         }
 
     }
@@ -130,11 +144,12 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     {   
         initialCellContent = contentCell;
 
-        if(contentCell!=$event.target.innerText && !enter_pressed)
+        if(contentCell!=$event.target.innerText && !enter_pressed && compteur)
         {
            event.target.innerText=initialCellContent;
         }
         compteur=0;
+        
     }
 
     $scope.valide_entrer = function($event)
@@ -284,20 +299,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     }
 
 
-    $scope.Mois = [
-        {mois : "Janvier", num : 1},
-        {mois : "Février", num : 2},
-        {mois : "Mars", num : 3},
-        {mois : "Avril", num : 4},
-        {mois : "Mai", num : 5},
-        {mois : "Juin", num : 6},
-        {mois : "Juillet", num : 7},
-        {mois : "Aout", num : 8},
-        {mois : "Septembre", num : 9},
-        {mois : "Octobre", num :10},
-        {mois : "Novembre", num : 11},
-        {mois : "Décembre", num : 12}
-      ];
+    
 
 
 
