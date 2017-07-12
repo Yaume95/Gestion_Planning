@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 05 Juillet 2017 à 08:54
+-- Généré le :  Mer 12 Juillet 2017 à 06:37
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -29,10 +29,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `AjoutDatesCalendrier` (IN `NumPremi
  DECLARE enddate  date;
  DECLARE Jour int;
  
+
+ 
  SET startdate = makedate(year(CURRENT_DATE),1);
  SET enddate = last_day(DATE_ADD(CURRENT_DATE, INTERVAL 12-MONTH(CURRENT_DATE) MONTH));
  SET Jour = NumPremierJour;
  DELETE FROM calendrier WHERE 1;
+ DELETE from horaires where 1;
  WHILE startdate  <= enddate DO
      INSERT INTO calendrier(Date_jour,Num_Jour)
      VALUES (startdate,Jour);
@@ -298,7 +301,7 @@ INSERT INTO `calendrier` (`Date_jour`, `Num_jour`, `Ferie`) VALUES
 ('2017-04-14', 5, 0),
 ('2017-04-15', 6, 0),
 ('2017-04-16', 7, 0),
-('2017-04-17', 1, 0),
+('2017-04-17', 1, 1),
 ('2017-04-18', 2, 0),
 ('2017-04-19', 3, 0),
 ('2017-04-20', 4, 0),
@@ -312,14 +315,14 @@ INSERT INTO `calendrier` (`Date_jour`, `Num_jour`, `Ferie`) VALUES
 ('2017-04-28', 5, 0),
 ('2017-04-29', 6, 0),
 ('2017-04-30', 7, 0),
-('2017-05-01', 1, 0),
+('2017-05-01', 1, 1),
 ('2017-05-02', 2, 0),
 ('2017-05-03', 3, 0),
 ('2017-05-04', 4, 0),
 ('2017-05-05', 5, 0),
 ('2017-05-06', 6, 0),
 ('2017-05-07', 7, 0),
-('2017-05-08', 1, 0),
+('2017-05-08', 1, 1),
 ('2017-05-09', 2, 0),
 ('2017-05-10', 3, 0),
 ('2017-05-11', 4, 0),
@@ -336,7 +339,7 @@ INSERT INTO `calendrier` (`Date_jour`, `Num_jour`, `Ferie`) VALUES
 ('2017-05-22', 1, 0),
 ('2017-05-23', 2, 0),
 ('2017-05-24', 3, 0),
-('2017-05-25', 4, 0),
+('2017-05-25', 4, 1),
 ('2017-05-26', 5, 0),
 ('2017-05-27', 6, 0),
 ('2017-05-28', 7, 0),
@@ -347,7 +350,7 @@ INSERT INTO `calendrier` (`Date_jour`, `Num_jour`, `Ferie`) VALUES
 ('2017-06-02', 5, 0),
 ('2017-06-03', 6, 0),
 ('2017-06-04', 7, 0),
-('2017-06-05', 1, 0),
+('2017-06-05', 1, 1),
 ('2017-06-06', 2, 0),
 ('2017-06-07', 3, 0),
 ('2017-06-08', 4, 0),
@@ -418,7 +421,7 @@ INSERT INTO `calendrier` (`Date_jour`, `Num_jour`, `Ferie`) VALUES
 ('2017-08-12', 6, 0),
 ('2017-08-13', 7, 0),
 ('2017-08-14', 1, 0),
-('2017-08-15', 2, 0),
+('2017-08-15', 2, 1),
 ('2017-08-16', 3, 0),
 ('2017-08-17', 4, 0),
 ('2017-08-18', 5, 0),
@@ -597,57 +600,190 @@ CREATE TABLE `horaires` (
 --
 
 INSERT INTO `horaires` (`IDP`, `IDL`, `Date_jour`, `NbHeures`, `Etat`, `Checked`) VALUES
-(142, 93, '2017-01-02', 0, 'Maladie', 0),
-(142, 95, '2017-01-31', 5, 'Travail', 0),
-(142, 95, '2017-01-27', 5, 'Travail', 0),
-(142, 95, '2017-01-30', 5, 'Travail', 0),
-(142, 95, '2017-01-26', 5, 'Travail', 0),
-(142, 95, '2017-01-25', 5, 'Travail', 0),
-(142, 95, '2017-01-24', 5, 'Travail', 0),
-(142, 95, '2017-01-23', 5, 'Travail', 0),
-(142, 95, '2017-01-20', 5, 'Travail', 0),
-(142, 95, '2017-01-19', 5, 'Travail', 0),
-(142, 95, '2017-01-18', 5, 'Travail', 0),
-(142, 95, '2017-01-17', 5, 'Travail', 0),
-(142, 95, '2017-01-16', 5, 'Travail', 0),
-(142, 95, '2017-01-13', 5, 'Travail', 0),
-(142, 95, '2017-01-12', 5, 'Travail', 0),
-(142, 95, '2017-01-11', 5, 'Travail', 0),
-(142, 95, '2017-01-10', 5, 'Travail', 0),
-(142, 95, '2017-01-09', 5, 'Travail', 0),
-(142, 95, '2017-01-06', 5, 'Travail', 0),
-(142, 95, '2017-01-05', 5, 'Travail', 0),
-(142, 95, '2017-01-04', 5, 'Travail', 0),
-(142, 95, '2017-01-03', 5, 'Travail', 0),
-(142, 95, '2017-01-02', 5, 'Travail', 0),
-(142, 95, '2017-07-31', 5, 'Travail', 0),
-(142, 95, '2017-07-28', 5, 'Travail', 0),
-(142, 95, '2017-07-27', 5, 'Travail', 0),
-(142, 95, '2017-07-26', 5, 'Travail', 0),
-(142, 95, '2017-07-25', 5, 'Travail', 0),
-(142, 95, '2017-07-24', 5, 'Travail', 0),
-(142, 95, '2017-07-17', 5, 'Travail', 0),
-(142, 95, '2017-07-21', 5, 'Travail', 0),
-(142, 95, '2017-07-20', 5, 'Travail', 0),
-(142, 95, '2017-07-19', 5, 'Travail', 0),
-(142, 95, '2017-07-18', 5, 'Travail', 0),
-(142, 95, '2017-07-14', 5, 'Travail', 0),
-(142, 95, '2017-07-13', 5, 'Travail', 0),
-(142, 95, '2017-07-12', 5, 'Travail', 0),
-(142, 95, '2017-07-11', 5, 'Travail', 0),
-(142, 95, '2017-07-10', 5, 'Travail', 0),
-(142, 95, '2017-07-07', 5, 'Travail', 0),
-(142, 95, '2017-07-06', 5, 'Travail', 0),
-(142, 95, '2017-07-05', 7, 'Travail', 0),
-(142, 95, '2017-07-03', 5, 'Travail', 0),
-(142, 95, '2017-07-04', 6, 'Travail', 0);
+(139, 95, '2017-07-05', 5, 'Travail', 0),
+(139, 95, '2017-07-06', 5, 'Travail', 0),
+(139, 95, '2017-07-04', 5, 'Travail', 0),
+(139, 95, '2017-07-03', 5, 'Travail', 0),
+(142, 95, '2017-08-17', 0, 'CA', 0),
+(142, 95, '2017-08-31', 0, 'CA', 0),
+(142, 95, '2017-08-30', 0, 'CA', 0),
+(142, 95, '2017-08-29', 0, 'CA', 0),
+(142, 95, '2017-08-28', 0, 'CA', 0),
+(142, 95, '2017-08-25', 0, 'CA', 0),
+(142, 95, '2017-08-24', 0, 'CA', 0),
+(142, 95, '2017-08-23', 0, 'CA', 0),
+(142, 95, '2017-08-22', 0, 'CA', 0),
+(142, 95, '2017-08-21', 0, 'CA', 0),
+(142, 95, '2017-08-18', 0, 'CA', 0),
+(142, 95, '2017-08-16', 0, 'CA', 0),
+(142, 95, '2017-08-14', 0, 'CA', 0),
+(142, 95, '2017-08-11', 0, 'CA', 0),
+(142, 95, '2017-08-10', 0, 'CA', 0),
+(142, 95, '2017-08-09', 0, 'CA', 0),
+(142, 95, '2017-08-08', 0, 'CA', 0),
+(142, 95, '2017-08-07', 0, 'CA', 0),
+(142, 95, '2017-08-04', 0, 'CA', 0),
+(142, 95, '2017-08-03', 0, 'CA', 0),
+(142, 95, '2017-08-02', 0, 'CA', 0),
+(142, 95, '2017-08-01', 0, 'CA', 0),
+(142, 95, '2017-07-31', 0, 'CA', 0),
+(142, 95, '2017-07-28', 0, 'CA', 0),
+(142, 95, '2017-07-27', 0, 'CA', 0),
+(142, 95, '2017-07-26', 0, 'Repos', 0),
+(142, 95, '2017-07-25', 0, 'Repos', 0),
+(142, 95, '2017-07-24', 0, 'Repos', 0),
+(142, 95, '2017-07-21', 9, 'Travail', 0),
+(142, 95, '2017-07-20', 9, 'Travail', 0),
+(142, 95, '2017-07-19', 9, 'Travail', 0),
+(142, 95, '2017-07-18', 9, 'Travail', 0),
+(142, 95, '2017-07-17', 9, 'Travail', 0),
+(142, 95, '2017-07-14', 9, 'Travail', 0),
+(142, 95, '2017-07-13', 9, 'Travail', 0),
+(142, 95, '2017-07-12', 9, 'Travail', 0),
+(142, 95, '2017-07-11', 9, 'Travail', 0),
+(142, 95, '2017-07-10', 9, 'Travail', 0),
+(142, 95, '2017-07-07', 9, 'Travail', 0),
+(142, 95, '2017-07-06', 8.75, 'Travail', 0),
+(142, 95, '2017-07-05', 5, 'Travail', 0),
+(142, 95, '2017-07-04', 8.75, 'Travail', 0),
+(142, 95, '2017-07-03', 8.75, 'Travail', 0),
+(142, 95, '2017-06-30', 9, 'Travail', 0),
+(142, 95, '2017-06-29', 8.75, 'Travail', 0),
+(142, 95, '2017-06-28', 5, 'Travail', 0),
+(142, 95, '2017-06-27', 8.75, 'Travail', 0),
+(142, 95, '2017-06-26', 8.75, 'Travail', 0),
+(142, 95, '2017-06-23', 9, 'Travail', 0),
+(142, 95, '2017-06-22', 8.75, 'Travail', 0),
+(142, 95, '2017-06-21', 5, 'Travail', 0),
+(142, 95, '2017-06-20', 9.25, 'Travail', 1),
+(142, 95, '2017-06-19', 8.75, 'Travail', 0),
+(142, 95, '2017-06-16', 9, 'Travail', 0),
+(142, 95, '2017-06-15', 8.25, 'Travail', 0),
+(142, 95, '2017-06-14', 5, 'Travail', 0),
+(142, 95, '2017-06-13', 8.25, 'Travail', 0),
+(142, 95, '2017-06-12', 8.75, 'Travail', 0),
+(142, 95, '2017-06-09', 9, 'Travail', 0),
+(142, 95, '2017-06-08', 8.25, 'Travail', 0),
+(142, 95, '2017-06-07', 5, 'Travail', 0),
+(142, 95, '2017-06-06', 8.25, 'Travail', 0),
+(142, 95, '2017-06-02', 9, 'Travail', 0),
+(142, 95, '2017-06-01', 8.25, 'Travail', 0),
+(142, 95, '2017-05-31', 6.5, 'Travail', 0),
+(142, 95, '2017-05-30', 8.25, 'Travail', 0),
+(142, 95, '2017-05-29', 7.75, 'Travail', 1),
+(142, 95, '2017-05-24', 6.5, 'Travail', 1),
+(142, 95, '2017-05-23', 8.25, 'Travail', 0),
+(142, 95, '2017-05-22', 8.75, 'Travail', 0),
+(142, 95, '2017-05-19', 9, 'Travail', 0),
+(142, 95, '2017-05-18', 8.25, 'Travail', 0),
+(142, 95, '2017-05-17', 5, 'Travail', 0),
+(142, 95, '2017-05-16', 8.25, 'Travail', 0),
+(142, 95, '2017-05-15', 8.75, 'Travail', 0),
+(142, 95, '2017-05-12', 9, 'Travail', 0),
+(142, 95, '2017-05-11', 8.25, 'Travail', 0),
+(142, 95, '2017-05-10', 4.5, 'Travail', 1),
+(142, 95, '2017-05-09', 8.25, 'Travail', 0),
+(142, 95, '2017-05-05', 9, 'Travail', 0),
+(142, 95, '2017-05-04', 8.25, 'Travail', 0),
+(142, 95, '2017-05-03', 5, 'Travail', 0),
+(142, 95, '2017-05-02', 8.25, 'Travail', 0),
+(142, 95, '2017-04-28', 9, 'Travail', 0),
+(142, 95, '2017-04-27', 8.25, 'Travail', 0),
+(142, 95, '2017-04-26', 5, 'Travail', 0),
+(142, 95, '2017-04-25', 8.25, 'Travail', 0),
+(142, 95, '2017-04-24', 8.75, 'Travail', 0),
+(142, 95, '2017-04-21', 9, 'Travail', 0),
+(142, 95, '2017-04-20', 8.25, 'Travail', 0),
+(142, 95, '2017-04-19', 6.5, 'Travail', 0),
+(142, 95, '2017-04-18', 8.25, 'Travail', 0),
+(142, 95, '2017-04-13', 0, 'Repos', 0),
+(142, 95, '2017-04-14', 0, 'Repos', 0),
+(142, 95, '2017-04-12', 0, 'Repos', 0),
+(142, 95, '2017-04-11', 0, 'Repos', 0),
+(142, 95, '2017-04-10', 0, 'Repos', 0),
+(142, 95, '2017-04-07', 7, 'Travail', 0),
+(142, 95, '2017-04-06', 7, 'Travail', 0),
+(142, 95, '2017-04-05', 7, 'Travail', 0),
+(142, 95, '2017-04-04', 7, 'Travail', 0),
+(142, 95, '2017-04-03', 7, 'Travail', 0),
+(142, 95, '2017-03-31', 9, 'Travail', 1),
+(142, 95, '2017-03-30', 8.25, 'Travail', 1),
+(142, 95, '2017-03-29', 5, 'Travail', 1),
+(142, 95, '2017-03-28', 7.25, 'Travail', 1),
+(142, 95, '2017-03-27', 8.75, 'Travail', 1),
+(142, 95, '2017-03-24', 9, 'Travail', 1),
+(142, 95, '2017-03-23', 8.25, 'Travail', 1),
+(142, 95, '2017-03-22', 5, 'Demi Repos', 1),
+(142, 95, '2017-03-21', 8.25, 'Travail', 1),
+(142, 95, '2017-03-20', 8.75, 'Travail', 1),
+(142, 95, '2017-03-17', 9, 'Travail', 1),
+(142, 95, '2017-03-16', 8.25, 'Travail', 1),
+(142, 95, '2017-03-15', 6.5, 'Demi Repos', 1),
+(142, 95, '2017-03-14', 8.25, 'Travail', 1),
+(142, 95, '2017-03-13', 8.75, 'Travail', 1),
+(142, 95, '2017-03-10', 9, 'Travail', 1),
+(142, 95, '2017-03-09', 8.25, 'Travail', 1),
+(142, 95, '2017-03-08', 5, 'Demi Repos', 1),
+(142, 95, '2017-03-07', 8.25, 'Travail', 1),
+(142, 95, '2017-03-06', 8.75, 'Travail', 1),
+(142, 95, '2017-03-03', 8.25, 'Travail', 1),
+(142, 95, '2017-03-02', 8.25, 'Travail', 1),
+(142, 95, '2017-03-01', 5, 'Demi Repos', 1),
+(142, 95, '2017-02-28', 8.25, 'Travail', 1),
+(142, 95, '2017-02-27', 8.75, 'Travail', 1),
+(142, 95, '2017-02-24', 9, 'Travail', 1),
+(142, 95, '2017-02-23', 8.25, 'Travail', 1),
+(142, 95, '2017-02-22', 6.5, 'Demi Repos', 1),
+(142, 95, '2017-02-21', 8.75, 'Travail', 1),
+(142, 95, '2017-02-20', 7.75, 'Travail', 1),
+(142, 95, '2017-02-17', 0, 'Repos', 0),
+(142, 95, '2017-02-16', 0, 'Repos', 0),
+(142, 95, '2017-02-15', 0, 'Repos', 0),
+(142, 95, '2017-02-14', 7, 'Travail', 1),
+(142, 95, '2017-02-13', 7, 'Travail', 1),
+(142, 95, '2017-02-10', 7, 'Travail', 1),
+(142, 95, '2017-02-09', 7, 'Travail', 1),
+(142, 95, '2017-02-08', 7, 'Travail', 1),
+(142, 95, '2017-02-07', 7, 'Travail', 1),
+(142, 95, '2017-02-06', 7, 'Travail', 1),
+(142, 95, '2017-02-03', 8.25, 'Travail', 1),
+(142, 95, '2017-02-02', 8.25, 'Travail', 1),
+(142, 95, '2017-02-01', 5, 'Demi Repos', 1),
+(142, 95, '2017-01-31', 8.25, 'Travail', 1),
+(142, 95, '2017-01-30', 8.75, 'Travail', 1),
+(142, 95, '2017-01-27', 8.25, 'Travail', 1),
+(142, 95, '2017-01-26', 8.25, 'Travail', 1),
+(142, 95, '2017-01-25', 5, 'Demi Repos', 1),
+(142, 95, '2017-01-24', 8.25, 'Travail', 1),
+(142, 95, '2017-01-23', 8.75, 'Travail', 1),
+(142, 95, '2017-01-20', 8.25, 'Travail', 1),
+(142, 95, '2017-01-19', 8.25, 'Travail', 1),
+(142, 95, '2017-01-18', 6.5, 'Demi Repos', 1),
+(142, 95, '2017-01-17', 8.25, 'Travail', 1),
+(142, 95, '2017-01-16', 8.75, 'Travail', 1),
+(142, 95, '2017-01-13', 8.25, 'Travail', 1),
+(142, 95, '2017-01-12', 8.25, 'Travail', 1),
+(142, 95, '2017-01-11', 5, 'Demi Repos', 1),
+(142, 95, '2017-01-10', 8.75, 'Travail', 1),
+(142, 95, '2017-01-09', 8.75, 'Travail', 1),
+(142, 95, '2017-01-06', 8.25, 'Travail', 1),
+(142, 95, '2017-01-05', 8.25, 'Travail', 1),
+(142, 95, '2017-01-04', 5, 'Demi Repos', 1),
+(142, 95, '2017-01-03', 7.25, 'Travail', 1),
+(142, 95, '2017-01-02', 0, 'Repos', 0);
 
 --
 -- Déclencheurs `horaires`
 --
 DELIMITER $$
 CREATE TRIGGER `Ajout_CA` AFTER INSERT ON `horaires` FOR EACH ROW BEGIN
-  IF New.Etat='CA' THEN BEGIN
+  DECLARE maxCA INT;
+  DECLARE actCA INT;
+  SET maxCA = (SELECT personne.CAapMax from personne where personne.IDP = New.IDP);
+  SET actCA = (SELECT personne.CAapPris from personne where personne.IDP = New.IDP);
+  IF New.Etat='CA' AND actCA+1<=maxCA THEN BEGIN
+    	
+
   	UPDATE personne SET personne.CAapPris = personne.CAapPris + 1 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
@@ -655,7 +791,11 @@ $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_CA2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
-  IF New.Etat='CA' THEN BEGIN
+  DECLARE maxCA INT;
+  DECLARE actCA INT;
+  SET maxCA = (SELECT personne.CAavMax from personne where personne.IDP = New.IDP);
+  SET actCA = (SELECT personne.CAavPris from personne where personne.IDP = New.IDP);
+  IF New.Etat='CA' AND actCA+1<=maxCA THEN BEGIN
   	UPDATE personne SET personne.CAapPris = personne.CAapPris + 1 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
@@ -727,7 +867,7 @@ $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Heure2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
-  IF (New.Etat = 'Travail' OR New.Etat='Maladie' OR New.Etat='Repos' OR New.Etat='Demi Repos') AND New.NbHeures>0 AND New.Checked=1 THEN BEGIN
+  IF (New.Etat = 'Travail' OR New.Etat='Maladie' OR New.Etat='Repos' OR New.Etat='Demi Repos') AND New.NbHeures>0 THEN BEGIN
     UPDATE personne SET personne.NbHFaites = personne.NbHFaites+New.NbHeures WHERE personne.IDP = New.IDP;
   END; END IF;
 END
@@ -735,7 +875,7 @@ $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Heures` AFTER INSERT ON `horaires` FOR EACH ROW BEGIN
-  IF New.Etat = 'Travail' AND New.NbHeures>0 And New.Checked=1 THEN BEGIN
+  IF New.Etat = 'Travail' AND New.NbHeures>0 THEN BEGIN
     UPDATE personne SET personne.NbHFaites = personne.NbHFaites+New.NbHeures WHERE personne.IDP = New.IDP;
   END; END IF;
 END
@@ -855,7 +995,7 @@ $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Heures` AFTER DELETE ON `horaires` FOR EACH ROW BEGIN
-  IF (Old.Etat = 'Travail' OR old.Etat='Maladie' OR old.Etat='Repos' OR old.Etat='Demi Repos') AND Old.Checked=1 THEN BEGIN
+  IF (Old.Etat = 'Travail' OR old.Etat='Maladie' OR old.Etat='Repos' OR old.Etat='Demi Repos') THEN BEGIN
     UPDATE personne SET personne.NbHFaites = personne.NbHFaites-Old.NbHeures WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
@@ -863,7 +1003,7 @@ $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Heures2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
-  IF (Old.Etat = 'Travail' OR old.Etat='Maladie' OR old.Etat='Repos' OR old.Etat='Demi Repos') AND Old.Checked = 1 THEN BEGIN
+  IF (Old.Etat = 'Travail' OR old.Etat='Maladie' OR old.Etat='Repos' OR old.Etat='Demi Repos') THEN BEGIN
     UPDATE personne SET personne.NbHFaites = personne.NbHFaites-Old.NbHeures WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
@@ -943,10 +1083,10 @@ INSERT INTO `personne` (`IDP`, `Prenom`, `Nom`, `NbHaFaire`, `NbHFaites`, `CAavP
 (136, ' ', 'Marylyne', 1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, '151565161'),
 (137, '', 'Odile', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '165156165'),
 (138, '', 'Salima', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1561656'),
-(139, 'Marie', 'Attal', 1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, '165166156'),
+(139, 'Marie', 'Attal', 1500, 20, 0, 0, 0, 0, 0, 0, 0, 0, '165166156'),
 (140, 'Camille', 'Lubin', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '155161616161'),
 (141, 'Carine', 'Mule', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '15165161616'),
-(142, 'Julie', 'Armant', 1000, 0, 0, 0, 0, 0, 1, 0, 0, 0, '1651565'),
+(142, 'Armant', 'Armant', 1022.25, 1012, 0, 0, 25, 25, 0, 17, 0, 0, '1651565'),
 (143, 'Sonia', 'Bonatto', 1200, 0, 0, 0, 0, 0, 0, 0, 0, 0, '15161616516154');
 
 --
