@@ -19,7 +19,7 @@ app.controller('identification_controller', ['$scope','$http','$window','$locati
                 d.setTime(d.getTime+ 8*60*60*1000);
                 $cookies.put('AdminLogged',true,{expires:d});
                 $rootScope.AdminLogged=true;
-                $location.path('/Planning_Personnel');
+                $location.path('/Gestion_Personnel');
             }
         });
 

@@ -3,10 +3,16 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
 
     $scope.PersonneModif=[];
 
+    $scope.Types= ['ASEM','Agent','Animation'];
+    $scope.Contrats= ['Titulaire','Vaccataire','Remplaçant'];
+
+    $scope.SelectionTypeAjout=$scope.Types[0];
+    $scope.SelectionContratAjout=$scope.Contrats[0];
+
 	$scope.initGestion=function()
 	{
 
-        $http.get("./BDD/employes.php")
+        $http.get("./BDD/employes2.php")
         .then(function (response)
         {
         	$scope.Employes = response.data.employes;
@@ -23,7 +29,7 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
 
     $scope.refresh=function()
     {
-       $http.get("./BDD/employes.php")
+       $http.get("./BDD/employes2.php")
       .then(function (response) 
       {
           $scope.Employes = response.data.employes;
@@ -95,26 +101,30 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
         $scope.PersonneModif['IDP']=object.IDP;
         $scope.PersonneModif['Personne']=object.Personne;
         $scope.PersonneModif['Prenom']=object.Prenom;
+        $scope.PersonneModif['Type']=object.Type;
         $scope.PersonneModif['Total']=substr(object.Total,"/");
         $scope.PersonneModif['CA']=substr(object.CA,"/");
         $scope.PersonneModif['CAav']=substr(object.CAav,"/");
-        $scope.PersonneModif['Vaccataire']=object.Vaccataire;
+        $scope.PersonneModif['Contrat']=object.Contrat;
         $scope.PersonneModif['Matricule']=object.Matricule  ;
 
-        console.log($scope.PersonneModif.Vaccataire);
+        $scope.SelectionTypeModif=object.Type;
+        $scope.SelectionContratModif=object.Contrat;
 
         $scope.refresh();
 
     }
+
 
     $scope.ajouter=function()
     {
         $('#Ajout').modal('show');
     }
 
-    $scope.redirectPlanning=function(object)
+    $scope.redirectPlanning=function(object,place)
     {
         $rootScope.redirect=true;
+        $rootScope.place= place;
         $rootScope.planningRedirect=object.IDP;
         location.hash="#!/Planning_Personnel";
     }

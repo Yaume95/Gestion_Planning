@@ -17,12 +17,12 @@
                     <tr ng-repeat="x in Lieux |orderBy:'Categorie'">
                         <td class="col-xs-2" id="IDL{{x.IDL}}" >{{x.Lieu}}</td>
                         <td class="col-xs-1" ng-bind="CorrespondanceNom(x.Categorie)"></td>
-                        <th class="col-xs-3 Exclus">
+                        <th class="col-xs-1 Exclus">
                             <div class="actions">
-                                <div class="col-xs-3">
+                                <div class="col-xs-4">
                                     <button type="button" class="btn btn-danger " ng-click="validSuppression(x.IDL)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
                                 </div>
-                                <div class="col-xs-3">
+                                <div class="col-xs-5">
                                     <button type="button" class="btn btn-primary" ng-click="modificationLieu(x)"><span class="glyphicon glyphicon-th-list"></span> Modifier </button>
                                 </div>
                             </div>

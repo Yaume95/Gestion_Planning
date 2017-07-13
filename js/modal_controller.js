@@ -13,7 +13,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
           nbheures=Number(nbheures);
         }
         console.log(nbheures);
-        $scope.refresh();
+        $scope.refresh(type);
         if(int==0)
         {
             
@@ -31,7 +31,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
             })
             .then(function successCallback(response) 
             {
-                $scope.refresh();
+                $scope.refresh(type);
                 $('#AjoutEtat').modal('hide');
             });
         }
@@ -51,7 +51,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
             })
             .then(function successCallback(response) 
             {
-                $scope.refresh();
+                $scope.refresh(type);
                 $('#AjoutEtat').modal('hide');
             });
         }
@@ -71,7 +71,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
             })
             .then(function successCallback(response) 
             {
-                $scope.refresh();
+                $scope.refresh(type);
                 $('#AjoutEtat').modal('hide');
             });
         }
@@ -91,7 +91,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
             })
             .then(function successCallback(response) 
             {
-                $scope.refresh();
+                $scope.refresh(type);
                 $('#AjoutEtat').modal('hide');
             });
         }
@@ -112,7 +112,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
             .then(function successCallback(response) 
             {
                 $('#AjoutEtat').modal('hide');
-                $scope.refresh();
+                $scope.refresh(type);
             });
         }
         else if (int==5)
@@ -137,7 +137,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
               })
               .then(function successCallback(response) 
               {
-                  $scope.refresh();
+                  $scope.refresh(type);
                   $('#AjoutEtat').modal('hide');
               });
             }
@@ -164,7 +164,7 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
               })
               .then(function successCallback(response) 
               {
-                  $scope.refresh();
+                  $scope.refresh(type);
                   $('#AjoutEtat').modal('hide');
               });
             }
@@ -207,8 +207,8 @@ app.controller('modalCtrl', ['$scope', '$http','$location','$route', function($s
             }
         }
 
-        $scope.refresh();
-        $scope.refresh();
+        $scope.refresh(type);
+        $scope.refresh(type);
         
     }
   

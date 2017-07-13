@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 12 Juillet 2017 à 06:37
+-- Généré le :  Jeu 13 Juillet 2017 à 14:30
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -176,7 +176,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`Mdp`) VALUES
-('03de6c570bfe24bfc328ccd7ca46b76eadaf4334');
+('3c018426ba45a42286951e125408ea7374c864f5');
 
 -- --------------------------------------------------------
 
@@ -389,7 +389,7 @@ INSERT INTO `calendrier` (`Date_jour`, `Num_jour`, `Ferie`) VALUES
 ('2017-07-11', 2, 0),
 ('2017-07-12', 3, 0),
 ('2017-07-13', 4, 0),
-('2017-07-14', 5, 0),
+('2017-07-14', 5, 1),
 ('2017-07-15', 6, 0),
 ('2017-07-16', 7, 0),
 ('2017-07-17', 1, 0),
@@ -578,7 +578,10 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`NumCat`, `NomCat`) VALUES
 (1, 'Études'),
-(2, 'Périscolaire');
+(2, 'Périscolaire'),
+(12, 'Ménage'),
+(14, 'Scolaire'),
+(15, 'Cantine');
 
 -- --------------------------------------------------------
 
@@ -630,11 +633,11 @@ INSERT INTO `horaires` (`IDP`, `IDL`, `Date_jour`, `NbHeures`, `Etat`, `Checked`
 (142, 95, '2017-07-28', 0, 'CA', 0),
 (142, 95, '2017-07-27', 0, 'CA', 0),
 (142, 95, '2017-07-26', 0, 'Repos', 0),
-(142, 95, '2017-07-25', 0, 'Repos', 0),
+(142, 95, '2017-07-25', 5, 'Repos', 0),
 (142, 95, '2017-07-24', 0, 'Repos', 0),
 (142, 95, '2017-07-21', 9, 'Travail', 0),
 (142, 95, '2017-07-20', 9, 'Travail', 0),
-(142, 95, '2017-07-19', 9, 'Travail', 0),
+(142, 95, '2017-07-19', 9, 'Travail', 1),
 (142, 95, '2017-07-18', 9, 'Travail', 0),
 (142, 95, '2017-07-17', 9, 'Travail', 0),
 (142, 95, '2017-07-14', 9, 'Travail', 0),
@@ -770,7 +773,79 @@ INSERT INTO `horaires` (`IDP`, `IDL`, `Date_jour`, `NbHeures`, `Etat`, `Checked`
 (142, 95, '2017-01-05', 8.25, 'Travail', 1),
 (142, 95, '2017-01-04', 5, 'Demi Repos', 1),
 (142, 95, '2017-01-03', 7.25, 'Travail', 1),
-(142, 95, '2017-01-02', 0, 'Repos', 0);
+(142, 95, '2017-01-02', 0, 'Repos', 0),
+(138, 110, '2017-01-02', 0, 'Repos', 0),
+(138, 121, '2017-01-03', 1.5, 'Travail', 1),
+(138, 110, '2017-01-04', 5, 'Travail', 1),
+(138, 110, '2017-01-05', 8.25, 'Travail', 1),
+(138, 110, '2017-01-06', 8.25, 'Travail', 1),
+(138, 110, '2017-01-09', 8.25, 'Travail', 1),
+(138, 110, '2017-01-10', 8.75, 'Travail', 1),
+(138, 110, '2017-01-11', 5, 'Travail', 1),
+(138, 110, '2017-01-12', 8.25, 'Travail', 1),
+(138, 110, '2017-01-13', 8.25, 'Travail', 1),
+(138, 110, '2017-01-16', 8.75, 'Travail', 1),
+(138, 110, '2017-01-17', 8.75, 'Travail', 1),
+(138, 110, '2017-01-18', 5, 'Travail', 1),
+(138, 110, '2017-01-19', 8.25, 'Travail', 1),
+(138, 110, '2017-01-20', 8.25, 'Travail', 1),
+(138, 110, '2017-01-23', 8.25, 'Travail', 1),
+(138, 110, '2017-01-24', 8.75, 'Travail', 1),
+(138, 110, '2017-01-25', 6.5, 'Travail', 1),
+(138, 110, '2017-01-26', 8.25, 'Travail', 1),
+(138, 110, '2017-01-27', 8.25, 'Travail', 1),
+(138, 110, '2017-01-30', 8.75, 'Travail', 1),
+(138, 110, '2017-01-31', 8.75, 'Travail', 1),
+(138, 110, '2017-07-17', 0, 'CA', 0),
+(138, 110, '2017-07-18', 0, 'CA', 0),
+(138, 110, '2017-07-19', 0, 'CA', 0),
+(138, 110, '2017-07-20', 0, 'CA', 0),
+(138, 110, '2017-07-21', 0, 'CA', 0),
+(138, 110, '2017-07-24', 0, 'CA', 0),
+(138, 110, '2017-07-25', 0, 'CA', 0),
+(138, 110, '2017-07-26', 0, 'CA', 0),
+(138, 110, '2017-07-27', 0, 'CA', 0),
+(138, 110, '2017-07-28', 0, 'CA', 0),
+(138, 110, '2017-07-31', 0, 'CA', 0),
+(138, 110, '2017-07-03', 8.75, 'Travail', 0),
+(138, 110, '2017-07-04', 8.25, 'Travail', 0),
+(138, 110, '2017-07-05', 5, 'Travail', 0),
+(138, 110, '2017-07-06', 8.25, 'Travail', 0),
+(138, 110, '2017-07-07', 8.25, 'Travail', 0),
+(138, 110, '2017-07-10', 7, 'Travail', 0),
+(138, 110, '2017-07-11', 7, 'Travail', 0),
+(138, 110, '2017-07-12', 7, 'Travail', 0),
+(138, 110, '2017-07-13', 7, 'Travail', 0),
+(138, 110, '2017-08-01', 0, 'CA', 0),
+(138, 110, '2017-08-02', 0, 'CA', 0),
+(138, 110, '2017-08-03', 0, 'CA', 0),
+(138, 110, '2017-08-04', 0, 'CA', 0),
+(138, 110, '2017-08-07', 0, 'CA', 0),
+(138, 110, '2017-08-08', 0, 'CA', 0),
+(138, 110, '2017-08-10', 0, 'CA', 0),
+(138, 110, '2017-08-09', 0, 'CA', 0),
+(138, 110, '2017-08-11', 0, 'CA', 0),
+(138, 110, '2017-08-14', 0, 'CA', 0),
+(138, 110, '2017-08-16', 0, 'CA', 0),
+(138, 110, '2017-08-17', 0, 'CA', 0),
+(138, 110, '2017-08-18', 0, 'CA', 0),
+(138, 110, '2017-08-21', 0, 'CA', 0),
+(138, 110, '2017-08-22', 0, 'CA', 0),
+(138, 110, '2017-08-23', 0, 'CA', 0),
+(138, 110, '2017-08-24', 0, 'CA', 0),
+(138, 110, '2017-08-25', 0, 'Repos', 0),
+(138, 110, '2017-08-28', 7, 'Travail', 0),
+(138, 110, '2017-08-29', 7, 'Travail', 0),
+(138, 110, '2017-08-30', 7, 'Travail', 0),
+(138, 110, '2017-08-31', 7, 'Travail', 0),
+(123, 107, '2017-06-01', 2.25, 'Travail', 0),
+(123, 99, '2017-06-01', 2, 'Travail', 0),
+(123, 98, '2017-06-01', 1, 'Travail', 0),
+(138, 119, '2017-01-13', 1, 'Travail', 1),
+(138, 120, '2017-01-03', 5.75, 'Travail', 1),
+(138, 110, '2017-01-03', 0.5, 'Travail', 1),
+(123, 124, '2017-07-11', 0, 'CA', 0),
+(142, 128, '2017-07-03', 0, 'Maladie', 0);
 
 --
 -- Déclencheurs `horaires`
@@ -782,9 +857,9 @@ CREATE TRIGGER `Ajout_CA` AFTER INSERT ON `horaires` FOR EACH ROW BEGIN
   SET maxCA = (SELECT personne.CAapMax from personne where personne.IDP = New.IDP);
   SET actCA = (SELECT personne.CAapPris from personne where personne.IDP = New.IDP);
   IF New.Etat='CA' AND actCA+1<=maxCA THEN BEGIN
-    	
+      
 
-  	UPDATE personne SET personne.CAapPris = personne.CAapPris + 1 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.CAapPris = personne.CAapPris + 1 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -793,10 +868,10 @@ DELIMITER $$
 CREATE TRIGGER `Ajout_CA2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   DECLARE maxCA INT;
   DECLARE actCA INT;
-  SET maxCA = (SELECT personne.CAavMax from personne where personne.IDP = New.IDP);
-  SET actCA = (SELECT personne.CAavPris from personne where personne.IDP = New.IDP);
+  SET maxCA = (SELECT personne.CAapMax from personne where personne.IDP = New.IDP);
+  SET actCA = (SELECT personne.CAapPris from personne where personne.IDP = New.IDP);
   IF New.Etat='CA' AND actCA+1<=maxCA THEN BEGIN
-  	UPDATE personne SET personne.CAapPris = personne.CAapPris + 1 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.CAapPris = personne.CAapPris + 1 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -804,7 +879,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_CA_Avant_Janvier2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='CA avant Janvier' THEN BEGIN
-  	UPDATE personne SET personne.CAavPris = personne.CAavPris + 1 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.CAavPris = personne.CAavPris + 1 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -812,7 +887,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_CA_Avant_janvier` AFTER INSERT ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='CA avant Janvier' THEN BEGIN
-  	UPDATE personne SET personne.CAavPris = personne.CAavPris + 1 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.CAavPris = personne.CAavPris + 1 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -820,7 +895,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Demi_CA` AFTER INSERT ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='Demi CA' THEN BEGIN
-  	UPDATE personne SET personne.CAapPris = personne.CAapPris + 0.5 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.CAapPris = personne.CAapPris + 0.5 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -828,7 +903,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Demi_CA2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='Demi CA' THEN BEGIN
-  	UPDATE personne SET personne.CAapPris = personne.CAapPris + 0.5 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.CAapPris = personne.CAapPris + 0.5 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -836,7 +911,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Demi_CA_Avant_Janvier` AFTER INSERT ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='Demi CA avant Janvier' THEN BEGIN
-  	UPDATE personne SET personne.CAavPris = personne.CAavPris + 0.5 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.CAavPris = personne.CAavPris + 0.5 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -844,7 +919,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Demi_CA_Avant_Janvier2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='Demi CA avant Janvier' THEN BEGIN
-  	UPDATE personne SET personne.CAavPris = personne.CAavPris + 0.5 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.CAavPris = personne.CAavPris + 0.5 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -852,7 +927,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Demi_Repos` AFTER INSERT ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='Demi Repos' THEN BEGIN
-  	UPDATE personne SET personne.RTTpris = personne.RTTpris + 0.5 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.RTTpris = personne.RTTpris + 0.5 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -860,7 +935,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Demi_Repos2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='Demi Repos' THEN BEGIN
-  	UPDATE personne SET personne.RTTpris = personne.RTTpris + 0.5 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.RTTpris = personne.RTTpris + 0.5 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -884,7 +959,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Maladie` AFTER INSERT ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='Maladie' THEN BEGIN
-  	UPDATE personne SET personne.NbJMal = personne.NbJMal + 1 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.NbJMal = personne.NbJMal + 1 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -892,7 +967,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Maladie2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='Maladie' THEN BEGIN
-  	UPDATE personne SET personne.NbJMal = personne.NbJMal + 1 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.NbJMal = personne.NbJMal + 1 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -900,7 +975,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Repos` AFTER INSERT ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='Repos' THEN BEGIN
-  	UPDATE personne SET personne.RTTpris = personne.RTTpris + 1 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.RTTpris = personne.RTTpris + 1 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -908,7 +983,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Ajout_Repos2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF New.Etat='Repos' THEN BEGIN
-  	UPDATE personne SET personne.RTTpris = personne.RTTpris + 1 WHERE personne.IDP = New.IDP;
+    UPDATE personne SET personne.RTTpris = personne.RTTpris + 1 WHERE personne.IDP = New.IDP;
   END; END IF;
 END
 $$
@@ -916,7 +991,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_CA` AFTER DELETE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='CA' THEN BEGIN
-  	UPDATE personne SET personne.CAapPris = personne.CAapPris - 1 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.CAapPris = personne.CAapPris - 1 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -924,7 +999,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_CA2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='CA' THEN BEGIN
-  	UPDATE personne SET personne.CAapPris = personne.CAapPris - 1 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.CAapPris = personne.CAapPris - 1 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -932,7 +1007,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_CA_Avant_Janvier` AFTER DELETE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='CA avant Janvier' THEN BEGIN
-  	UPDATE personne SET personne.CAavPris = personne.CAavPris - 1 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.CAavPris = personne.CAavPris - 1 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -940,7 +1015,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_CA_Avant_Janvier2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='CA avant Janvier' THEN BEGIN
-  	UPDATE personne SET personne.CAavPris = personne.CAavPris - 1 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.CAavPris = personne.CAavPris - 1 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -948,7 +1023,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Demi_CA` AFTER DELETE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='Demi CA' THEN BEGIN
-  	UPDATE personne SET personne.CAapPris = personne.CAapPris - 0.5 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.CAapPris = personne.CAapPris - 0.5 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -956,7 +1031,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Demi_CA2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='Demi CA' THEN BEGIN
-  	UPDATE personne SET personne.CAapPris = personne.CAapPris - 0.5 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.CAapPris = personne.CAapPris - 0.5 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -964,7 +1039,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Demi_CA_Avant_Janvier` AFTER DELETE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='Demi CA avant Janvier' THEN BEGIN
-  	UPDATE personne SET personne.CAavPris = personne.CAavPris - 0.5 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.CAavPris = personne.CAavPris - 0.5 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -972,7 +1047,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Demi_CA_Avant_Janvier2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='Demi CA avant Janvier' THEN BEGIN
-  	UPDATE personne SET personne.CAavPris = personne.CAavPris - 0.5 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.CAavPris = personne.CAavPris - 0.5 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -980,7 +1055,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Demi_Repos` AFTER DELETE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='Demi Repos' THEN BEGIN
-  	UPDATE personne SET personne.RTTpris = personne.RTTpris - 0.5 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.RTTpris = personne.RTTpris - 0.5 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -988,7 +1063,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Demi_Repos2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='Demi Repos' THEN BEGIN
-  	UPDATE personne SET personne.RTTpris = personne.RTTpris - 0.5 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.RTTpris = personne.RTTpris - 0.5 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -1012,7 +1087,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Maladie` AFTER DELETE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='Maladie' THEN BEGIN
-  	UPDATE personne SET personne.NbJMal = personne.NbJMal - 1 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.NbJMal = personne.NbJMal - 1 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -1020,7 +1095,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Maladie2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='Maladie' THEN BEGIN
-  	UPDATE personne SET personne.NbJMal = personne.NbJMal - 1 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.NbJMal = personne.NbJMal - 1 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -1028,7 +1103,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Repos` AFTER DELETE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='Repos' THEN BEGIN
-  	UPDATE personne SET personne.RTTpris = personne.RTTpris - 1 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.RTTpris = personne.RTTpris - 1 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -1036,7 +1111,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `Suppression_Repos2` AFTER UPDATE ON `horaires` FOR EACH ROW BEGIN
   IF Old.Etat='Repos' THEN BEGIN
-  	UPDATE personne SET personne.RTTpris = personne.RTTpris - 1 WHERE personne.IDP = Old.IDP;
+    UPDATE personne SET personne.RTTpris = personne.RTTpris - 1 WHERE personne.IDP = Old.IDP;
   END; END IF;
 END
 $$
@@ -1061,33 +1136,34 @@ CREATE TABLE `personne` (
   `NbJMal` int(11) NOT NULL DEFAULT '0',
   `RTTpris` double NOT NULL DEFAULT '0',
   `HSupp` int(11) NOT NULL DEFAULT '0',
-  `Vaccataire` tinyint(1) NOT NULL,
-  `Matricule` varchar(20) COLLATE utf8_bin NOT NULL
+  `Contrat` varchar(20) COLLATE utf8_bin NOT NULL,
+  `Matricule` varchar(20) COLLATE utf8_bin NOT NULL,
+  `Type` varchar(20) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Contenu de la table `personne`
 --
 
-INSERT INTO `personne` (`IDP`, `Prenom`, `Nom`, `NbHaFaire`, `NbHFaites`, `CAavPris`, `CAavMax`, `CAapPris`, `CAapMax`, `NbJMal`, `RTTpris`, `HSupp`, `Vaccataire`, `Matricule`) VALUES
-(123, 'Arcadia', 'NomArcadia', 1010.5, 0, 0, 0, 0, 25, 0, 0, 0, 0, 'DBSBFLQS?SDT5'),
-(126, '', 'Meriem', 1018, 0, 0, 0, 0, 25, 0, 0, 0, 0, 'DFNSD541DAZED'),
-(125, '', 'Florence', 1486.75, 0, 0, 0, 0, 25, 0, 0, 0, 1, 'DFNSDLFNLS5DZ'),
-(131, '', 'Soraya', 747, 0, 0, 0, 0, 25, 0, 0, 0, 0, 'BFIDKFLSCNPDS'),
-(124, '', 'Badia', 1509, 0, 0, 0, 0, 25, 0, 0, 0, 1, 'DFDSFDSFDZD'),
-(127, '', 'Mireille', 1600, 0, 0, 0, 0, 25, 0, 0, 0, 0, '#?LFMQDS3D54'),
-(128, '', 'Nathalie D', 1041.5, 0, 0, 0, 0, 25, 0, 0, 0, 0, 'BFIDKFLSCNPDS'),
-(129, '', 'Nathalie V', 1234.5, 0, 0, 0, 0, 25, 0, 0, 0, 0, 'BFIDKFLSCNPDS'),
-(130, '', 'Sandrine', 1425.25, 0, 0, 0, 0, 5, 0, 0, 0, 0, 'BFIDKFLSCNPDS'),
-(135, 'A', 'Françoise', 1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, '12151515151'),
-(136, ' ', 'Marylyne', 1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, '151565161'),
-(137, '', 'Odile', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '165156165'),
-(138, '', 'Salima', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1561656'),
-(139, 'Marie', 'Attal', 1500, 20, 0, 0, 0, 0, 0, 0, 0, 0, '165166156'),
-(140, 'Camille', 'Lubin', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '155161616161'),
-(141, 'Carine', 'Mule', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, '15165161616'),
-(142, 'Armant', 'Armant', 1022.25, 1012, 0, 0, 25, 25, 0, 17, 0, 0, '1651565'),
-(143, 'Sonia', 'Bonatto', 1200, 0, 0, 0, 0, 0, 0, 0, 0, 0, '15161616516154');
+INSERT INTO `personne` (`IDP`, `Prenom`, `Nom`, `NbHaFaire`, `NbHFaites`, `CAavPris`, `CAavMax`, `CAapPris`, `CAapMax`, `NbJMal`, `RTTpris`, `HSupp`, `Contrat`, `Matricule`, `Type`) VALUES
+(123, '', 'Arcadia', 1010.5, 5.25, 0, 0, 0, 25, 0, 0, 0, 'Titulaire', 'DBSBFLQS?SDT5', 'Agent'),
+(126, '', 'Meriem', 1018, 0, 0, 0, 0, 25, 0, 0, 0, 'Titulaire', 'DFNSD541DAZED', 'Agent'),
+(125, '', 'Florence', 1486.75, 0, 0, 0, 0, 25, 0, 0, 0, 'Vaccataire', 'DFNSDLFNLS5DZ', 'Agent'),
+(131, '', 'Soraya', 747, 0, 0, 0, 0, 25, 0, 0, 0, 'Titulaire', 'BFIDKFLSCNPDS', 'ASEM'),
+(124, '', 'Badia', 1509, 0, 0, 0, 0, 25, 0, 0, 0, 'Vaccataire', 'DFDSFDSFDZD', 'Agent'),
+(127, '', 'Mireille', 1600, 0, 0, 0, 0, 25, 0, 0, 0, 'Titulaire', '#?LFMQDS3D54', 'Agent'),
+(128, '', 'Nathalie D', 1041.5, 0, 0, 0, 0, 25, 0, 0, 0, 'Titulaire', 'BFIDKFLSCNPDS', 'Agent'),
+(129, '', 'Nathalie V', 1234.5, 0, 0, 0, 0, 25, 0, 0, 0, 'Titulaire', 'BFIDKFLSCNPDS', 'Agent'),
+(130, '', 'Sandrine', 1425.25, 0, 0, 0, 0, 5, 0, 0, 0, 'Titulaire', 'BFIDKFLSCNPDS', 'Agent'),
+(135, '', 'Françoise', 1500, 0, 0, 0, 0, 0, 0, 0, 0, 'Titulaire', '12151515151', 'ASEM'),
+(136, '', 'Marylyne', 1500, 0, 0, 0, 0, 0, 0, 0, 0, 'Titulaire', '151565161', 'ASEM'),
+(137, '', 'Odile', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 'Titulaire', '165156165', 'ASEM'),
+(138, '', 'Salima', 1600, 259.75, 0, 0, 28, 28, 0, 2, 0, 'Titulaire', '1561656', 'ASEM'),
+(139, '', 'Attal', 1500, 20, 0, 0, 0, 0, 0, 0, 0, 'Titulaire', '165166156', 'ASEM'),
+(140, '', 'Lubin', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 'Titulaire', '155161616161', 'ASEM'),
+(141, '', 'Mule', 1000, 0, 0, 0, 0, 0, 0, 0, 0, 'Titulaire', '15165161616', 'ASEM'),
+(142, '', 'Armant', 1000, 1017, 0, 0, 25, 25, 1, 17, 0, 'Vaccataire', '1651565', 'ASEM'),
+(143, '', 'Bonatto', 1200, 0, 0, 0, 0, 0, 0, 0, 0, 'Titulaire', '15161616516154', 'ASEM');
 
 --
 -- Déclencheurs `personne`
@@ -1106,26 +1182,37 @@ DELIMITER ;
 CREATE TABLE `site` (
   `IDL` int(11) NOT NULL,
   `NomLieu` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `Categorie` double NOT NULL DEFAULT '1'
+  `Categorie` double NOT NULL DEFAULT '1',
+  `Type` varchar(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `site`
 --
 
-INSERT INTO `site` (`IDL`, `NomLieu`, `Categorie`) VALUES
-(96, 'Mairie', 2),
-(95, 'Ancienne Mairie', 1),
-(91, 'Fontaine', 2),
-(93, 'Arts Plastiques', 2),
-(94, 'Salle A.Hugo', 1),
-(92, 'École Musique', 1),
-(97, 'Salle des Fêtes', 1),
-(98, 'CLP', 2),
-(99, 'Crèche', 1),
-(102, 'Victor Hugo', 2),
-(107, 'Jules Ferry', 1),
-(110, 'Gambetta', 2);
+INSERT INTO `site` (`IDL`, `NomLieu`, `Categorie`, `Type`) VALUES
+(96, 'Mairie', 2, 'Agent'),
+(95, 'Ancienne Mairie', 12, 'Agent'),
+(91, 'Fontaine', 2, 'Agent'),
+(93, 'Arts Plastiques', 2, 'Agent'),
+(94, 'Salle A.Hugo', 1, 'Agent'),
+(92, 'École Musique', 1, 'Agent'),
+(97, 'Salle des Fêtes', 1, 'Agent'),
+(98, 'CLP', 2, 'Agent'),
+(99, 'Crèche', 1, 'ASEM'),
+(102, 'VH - Classe', 14, 'ASEM'),
+(107, 'JF - Classe', 14, 'ASEM'),
+(110, 'G - Ménage', 12, 'ASEM'),
+(119, 'G - PP', 2, 'ASEM'),
+(126, 'JF - PP', 2, 'ASEM'),
+(120, 'G - Classe', 14, 'ASEM'),
+(121, 'G - Cantine', 14, 'ASEM'),
+(122, 'JF - Cantine', 14, 'ASEM'),
+(123, 'JF - Ménage', 12, 'ASEM'),
+(124, 'VH - Cantine', 14, 'ASEM'),
+(125, 'VH - Ménage', 12, 'ASEM'),
+(127, 'VH - PP', 2, 'ASEM'),
+(128, 'CLM', 2, 'Agent');
 
 --
 -- Déclencheurs `site`
@@ -1180,17 +1267,17 @@ ALTER TABLE `site`
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `NumCat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `NumCat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT pour la table `personne`
 --
 ALTER TABLE `personne`
-  MODIFY `IDP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `IDP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 --
 -- AUTO_INCREMENT pour la table `site`
 --
 ALTER TABLE `site`
-  MODIFY `IDL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `IDL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

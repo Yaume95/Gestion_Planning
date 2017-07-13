@@ -9,21 +9,8 @@
 
 
 
-<div id="body" ng-init="initFirst()">
+<div id="body" ng-init="initFirst('Animation')">
     <div class="container-fluid">
-        <!-- <div>
-            <ul>
-                <li ng-hide="true" ng-repeat="chargement in Horaires" ng-if="SelectionPersonne==chargement.IDP && SelectionMois.mois==chargement.Mois" id="{{chargement.Date_jour+chargement.IDL+chargement.IDP}}1">
-                    {{chargement.Etat}}
-                </li>
-                <li ng-hide="true" ng-repeat="chargement in Horaires" ng-if="SelectionPersonne==chargement.IDP && SelectionMois.mois==chargement.Mois && chargement.NbHeures>0" id="{{chargement.Date_jour+chargement.IDL+chargement.IDP}}2">
-                    {{chargement.NbHeures}}
-                </li>
-                <li ng-hide="true" ng-repeat="chargement in Horaires" ng-if="SelectionPersonne==chargement.IDP && SelectionMois.mois==chargement.Mois && chargement.NbHeures>0" id="{{chargement.Date_jour+chargement.IDL+chargement.IDP}}3">
-                    {{chargement.Checked}}
-                </li>
-            </ul>
-        </div> -->
         <ul>
             <li ng-hide="true" ng-repeat="(count,x) in Calendrier" ng-if="SelectionMois.mois==x.Mois">
                 {{x.Date_jour}} <label ng-repeat="y in Horaires" ng-if="y.Date_jour==x.Date_jour && SelectionMois.mois==y.Mois && SelectionPersonne==y.IDP"> :  {{y.NbHeures}} </label>
@@ -40,7 +27,7 @@
                             <select class="form-control input-md Exclus" id="SelectedPerson" ng-model="SelectionPersonne" ng-change="reset()">
                                 <option ng-repeat="(count,x) in Employes" id="{{count}}" value="{{x.IDP}}">{{Employes[count].Personne}}</option>
                             </select>
-                            <select class="form-control Exclus" ng-model="SelectionMois" ng-options="x.mois for x in Mois" ng-init="SelectionMois=moisact()"></select>
+                            <select class="form-control Exclus" ng-model="SelectionMois" ng-options="x.mois for x in Mois" ng-init="SelectionMois=moisact()" ng-change=refreshCalendrier()></select>
                         </th>
                         <th ng-repeat="x in Calendrier" ng-if="x.Mois==SelectionMois.mois" class='date {{x.Jour}} {{x.Date_jour}}'>
                             {{x.Jour}}
@@ -58,6 +45,7 @@
                         data-idp="{{SelectionPersonne}}" 
                         data-date="{{b.Date_jour}}" 
                         data-idl="{{a.IDL}}"
+                        data-type="Animation"
                         ng-keypress="valide_entrer($event)"
                         ng-click="focusin($event)" 
                         ng-blur="focusout($event)" 

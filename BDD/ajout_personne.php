@@ -5,15 +5,17 @@
 
 	$dbh->beginTransaction();
 
-	$requete = $dbh->prepare("INSERT INTO personne(Nom,Prenom,NbHaFaire,CAapMax,CAavMax,Vaccataire,Matricule) VALUES(:Nom,:Prenom,:NbHaFaire,:CAapMax,:CAavMax,:Vaccataire,:Matricule) ");
+	$requete = $dbh->prepare("INSERT INTO personne(Nom,Prenom,NbHaFaire,CAapMax,CAavMax,Contrat,Type,Matricule) VALUES(:Nom,:Prenom,:NbHaFaire,:CAapMax,:CAavMax,:Contrat,:Type,:Matricule) ");
 
 	$requete->bindParam(':Nom', $Nom);
 	$requete->bindParam(':Prenom', $Prenom);
 	$requete->bindParam(':NbHaFaire', $NbHaFaire);
 	$requete->bindParam(':CAapMax', $CAapMax);
 	$requete->bindParam(':CAavMax', $CAavMax);
-	$requete->bindParam(':Vaccataire', $Vaccataire);
+	$requete->bindParam(':Contrat', $Contrat);
 	$requete->bindParam(':Matricule', $Matricule);
+	$requete->bindParam(':Type', $Type);
+
 	
 
 	$Nom=utf8_decode($params['Nom']);
@@ -21,8 +23,9 @@
 	$NbHaFaire=$params['NbHaFaire'];
 	$CAapMax=$params['CAapMax'];
 	$CAavMax=$params['CAavMax'];
-	$Vaccataire=$params['Vaccataire'];
+	$Contrat=$params['Contrat'];
 	$Matricule=$params['Matricule'];
+	$Type=$params['Type'];
 
 	$requete->execute();
 	$dbh->commit();

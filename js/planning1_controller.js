@@ -1,6 +1,5 @@
 app.controller('planning1_controller', ['$scope','$http', '$route','$window','$location','$rootScope' ,function($scope, $http,$route,$window,$location,$rootScope) {
 
-    $scope.place=0;
     heure_checked=false;
     compteur=0;
     pattern = /^((SAM)*(DIM)*(Férié)*)*$/;
@@ -20,27 +19,46 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         {mois : "Décembre", num : 12}
       ];
 
-    $scope.initFirst=function()
+    $scope.SelectionMois = $scope.Mois[new Date().getMonth()];
+    $scope.initFirst=function(type)
     {
       $scope.Ferie=false;
-      $http.get("./BDD/employes.php")
+      $http({ 
+              method : 'POST',
+              url : './BDD/employes.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                          Type: type
+                          
+                      } 
+      })
       .then(function (response) 
       {
           $scope.Employes = response.data.employes;
           if($rootScope.redirect==true)
           {
-            $rootScope.redirect==false;
+            $rootScope.redirect=false;
             $scope.SelectionPersonne = $rootScope.planningRedirect;
+            console.log($rootScope.place)
+
           }
           else
           {
+            $rootScope.place=0;
             $scope.SelectionPersonne = $scope.Employes[0].IDP;
           }
 
       });
 
-
-      $http.get("./BDD/horaires.php")
+      $http({ 
+              method : 'POST',
+              url : './BDD/horaires.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                          Type: type
+                          
+                      } 
+      })
       .then(function (response) 
       {
           $scope.Horaires = response.data['horaires'];
@@ -48,16 +66,32 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
       
         
-      $http.get("./BDD/calendrier.php")
+      $http({ 
+              method : 'POST',
+              url : './BDD/calendrier.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                          Mois:  $scope.SelectionMois.num
+                      } 
+      })
       .then(function (response) 
       {
           $scope.Calendrier = response.data['calendrier'];
       });
 
-        $http.get("./BDD/lieux.php")
+
+      $http({ 
+              method : 'POST',
+              url : './BDD/lieux.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                          Type: type
+                          
+                      } 
+      })
       .then(function (response)
       {
-        $scope.Lieux =response.data.lieux
+        $scope.Lieux =  response.data.lieux
       });
     }
 
@@ -72,28 +106,50 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         });
     }
 
-    $scope.refresh=function()
+    $scope.refresh=function(type)
     {
-       $http.get("./BDD/employes.php")
+       $http({ 
+              method : 'POST',
+              url : './BDD/employes.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                          Type: type
+                          
+                      } 
+      })
       .then(function (response) 
       {
           $scope.Employes = response.data.employes;
       });
-
-      $http.get("./BDD/horaires.php")
+      $http({ 
+              method : 'POST',
+              url : './BDD/horaires.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                          Type: type
+                          
+                      } 
+      })
       .then(function (response) 
       {
-          $scope.Horaires = response.data.horaires
-      }); 
+          $scope.Horaires = response.data['horaires'];
+      });
     }
 
-    $scope.refreshCal=function()
+    $scope.refreshCalendrier=function()
     {
-       $http.get("./BDD/calendrier.php")
-      .then(function (response) 
-      {
+        $http({ 
+                method : 'POST',
+                url : './BDD/calendrier.php',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                data :  {
+                            Mois: $scope.SelectionMois.num
+                        } 
+        })
+        .then(function (response)
+        {
           $scope.Calendrier = response.data.calendrier;
-      });
+        });
     }
 
     $scope.moisact=function()
@@ -103,10 +159,12 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
     }
 
 
+
+
     $scope.reset=function()
     {
       $('.heure').removeClass().addClass(' heure ');
-      $scope.place= $('[value='+$scope.SelectionPersonne+']').attr('id');
+      $rootScope.place= $('[value='+$scope.SelectionPersonne+']').attr('id');
     }
 
     $scope.clickdroit=function($event)
@@ -158,6 +216,8 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         idp = $event.target.attributes['data-idp'].value;
         idl = $event.target.attributes['data-idl'].value;
         date= $event.target.attributes['data-date'].value;
+        type= $event.target.attributes['data-type'].value;
+
         nbheures= Number(content);
 
         if ($event.keyCode == 13)
@@ -184,10 +244,10 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                                 } 
                   }).then(function successCallback(response) {
                       console.log("supression");
-                      $scope.refresh();
+                      $scope.refresh(type);
                       $event.target.blur();
                   });
-                  $scope.refresh();
+                  $scope.refresh(type);
               }
               else if (contentCell=="" && content!="" && Number(content)>0 && !$('[data-idl='+idl+'][data-date='+date+']').is('.CA,.CAavantJanvier,.DemiCAavantJanvier,.DemiCA'))
               {
@@ -208,7 +268,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                                 } 
                   }).then(function successCallback(response) {
                       $event.target.blur();
-                      $scope.refresh()
+                      $scope.refresh(type)
                     });
                   
 
@@ -249,7 +309,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                   })
                   .then(function successCallback(response) {
                       $event.target.blur();
-                      $scope.refresh()
+                      $scope.refresh(type)
                   });
               }
               else if( content!="" && Number(content)<=0)
@@ -270,11 +330,13 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                   })
                 .then(function successCallback(response) {
                       $event.target.blur();
-                      $scope.refresh()
+                      $scope.refresh(type)
                   });
               }
               else
               {
+                  $scope.refresh();
+                  console.log('autres');
                   $event.target.blur();
               }
             }
@@ -297,34 +359,6 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
         
     }
-
-
-    
-
-
-
-
-    $scope.Place = function(int)
-    {
-
-          $http.get("./BDD/employes.php")
-          .then(function (response) 
-          {
-            
-            angular.forEach(response.data.employes, function(object, key)
-            {
-                if(int==Number(object.IDP) )
-                {
-                    $scope.place=key;
-                }
-            });
-          });
-
-          return $scope.place
-
-
-    }
-
 
     
 
@@ -431,10 +465,12 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         {
            if($('.'+Date).is('.Sam'))
            {
+              $('[data-idl='+Lieu+'][data-date='+Date+']').css('border-left','2px solid darkgrey');
               return 'SAM';
            } 
            else if($('.'+Date).is('.Dim'))
            {
+              $('[data-idl='+Lieu+'][data-date='+Date+']').css('border-right','2px solid darkgrey');
               return 'DIM';
            } 
         }
@@ -507,6 +543,7 @@ app.directive('noRightClick', function() {
               idp = e.target.attributes['data-idp'].value;
               idl = e.target.attributes['data-idl'].value;
               date= e.target.attributes['data-date'].value;
+              type= e.target.attributes['data-type'].value;
               if(e.target.innerText!="SAM" && e.target.innerText!="DIM" && e.target.innerText!="Férié") $('#AjoutEtat').modal();
               else if(e.target.innerText=="Férié") $('#SuppressionFerie').modal();
           });

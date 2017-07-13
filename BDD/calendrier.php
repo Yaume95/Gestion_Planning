@@ -3,7 +3,14 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 	include('./connection_bdd.php');
-	$requete = $dbh->prepare("SELECT * FROM calendrier");
+	$params = json_decode(file_get_contents('php://input'),true);
+
+	$requete = $dbh->prepare("SELECT * FROM calendrier where month(Date_jour)=:Mois");
+
+	$requete->bindParam(':Mois', $Mois);
+	$Mois=$params['Mois'];
+
+
 	$requete->execute();
 
 

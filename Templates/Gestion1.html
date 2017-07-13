@@ -25,6 +25,7 @@
                     <tr>
                         <th class ="Entete"> Employé </th>
                         <th class ="Entete"> Contrat </th>
+                        <th class ="Entete"> Type    </th>
                         <th class ="Entete"> Heures </th>
                         <th class ="Entete"> CA </th>
                         <th class ="Entete"> CA (av Janv) </th>
@@ -33,19 +34,20 @@
                         <th class ="Entete MoisSelec Exclus" colspan="5">Actions</th>
 
                     </tr>
-                    <tr ng-repeat="x in Employes | filter:Recherche" id={{x.IDP}}>
-                        <td class="col-xs-1">{{x.Prenom[0]}}.{{x.Personne}}</td>
-                        <td class="col-xs-1">{{titre(x)}}</td>
+                    <tr ng-repeat="(count,x) in Employes | filter:Recherche" id={{count}}>
+                        <td class="col-xs-1"><span ng-if="x.Prenom!=''">{{x.Prenom[0]}}.</span>{{x.Personne}}</td>
+                        <td class="col-xs-1">{{x.Contrat}}</td>
+                        <td class="col-xs-1">{{x.Type}}</td>
                         <td class="col-xs-1">{{x.Total}}</td>
                         <td class="col-xs-1">{{x.CA}}</td>
                         <td class="col-xs-1">{{x.CAav}}</td>
                         <td class="col-xs-1">{{x.Maladie}}</td>
                         <td class="col-xs-1">{{x.RTT}}</td>
-                        <th class="col-xs-3 Exclus">
+                        <th class="col-xs-2 Exclus">
                             <div class="actions Exclus">
                                 <button type="button" class="btn btn-danger" ng-click="validSuppression(x.IDP)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
                                 <button type="button" class="btn btn-primary" ng-click="modification(x)"><span class="glyphicon glyphicon-th-list"></span> Modifier </button>
-                                <button type="button" class="btn btn-warning" ng-click="redirectPlanning(x)"><span class="glyphicon glyphicon-calendar"></span> Planning </button>
+                                <button type="button" class="btn btn-warning" ng-click="redirectPlanning(x,count)"><span class="glyphicon glyphicon-calendar"></span> Planning </button>
                             </div>
                         </th>
                     </tr>
@@ -82,6 +84,20 @@
 
             <div class="modal-body">
                 <form charset="UTF-8"  name="myform1">
+
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <label class="col-xs-3 control-label" > Type :</label>
+                    <div class="col-xs-5">
+                        <select class="form-control input-md Exclus" id="ModifType" ng-model="SelectionTypeModif">
+                                <option ng-repeat="(count,x) in Types"  value="{{x}}">{{x}}</option>
+                        </select> 
+                    </div>
+                    <div class="col-xs-3"></div>
+                </div>
+                <br>
+
+
                 <div class="row">
                     <div class="col-xs-1"></div>
                     <label class="col-xs-3 control-label" > Nom :</label>
@@ -171,8 +187,12 @@
                 <br>
                 <div class="row">
                     <div class="col-xs-1"></div>
-                        <label class="col-xs-3 control-label"> Vaccataire :</label>
-                        <div class="col-xs-5"><input type="checkbox" ng-checked="vaccataire(PersonneModif)" id="VacSubmit1"></div>
+                        <label class="col-xs-3 control-label"> Contrat :</label>
+                        <div class="col-xs-5">
+                            <select class="form-control input-md Exclus" id="ModifContrat" ng-model="SelectionContratModif">
+                                    <option ng-repeat="x in Contrats"  value="{{x}}">{{x}}</option>
+                            </select>
+                        </div>
                         <div class="col-xs-3">
                     </div>
                 </div>
@@ -209,6 +229,19 @@
             <div class="modal-body">
             <br>
                 <form charset="UTF-8"  name="myform">
+
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <label class="col-xs-3 control-label" > Type :</label>
+                    <div class="col-xs-4">
+                        <select class="form-control input-md Exclus" id="AjoutType" ng-model="SelectionTypeAjout">
+                                <option ng-repeat="(count,x) in Types"  value="{{x}}">{{x}}</option>
+                        </select> 
+                    </div>
+                    <div class="col-xs-3"></div>
+                </div>
+                <br>
+
                 <div class="row form-group">
                     <div class="col-xs-1"></div>
                     <label class="col-xs-3 " > Nom :</label>
@@ -318,8 +351,12 @@
                 <br>
                 <div class="row">
                     <div class="col-xs-1"></div>
-                        <label class="col-xs-3 control-label"> Vaccataire :</label>
-                        <div class="col-xs-5"><input type="checkbox" ng-checked="vaccataire(PersonneModif)" id="VacSubmit2"></div>
+                        <label class="col-xs-3 control-label"> Contrat :</label>
+                        <div class="col-xs-4">
+                            <select class="form-control input-md Exclus" id="AjoutContrat" ng-model="SelectionContratAjout">
+                                    <option ng-repeat="(count,x) in Contrats"  value="{{x}}">{{x}}</option>
+                            </select>
+                        </div>
                         <div class="col-xs-3">
                     </div>
                 </div>

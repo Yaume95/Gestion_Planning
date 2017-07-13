@@ -3,7 +3,15 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 	include('./connection_bdd.php');
-	$requete = $dbh->prepare("SELECT * FROM site order by nomlieu");
+	$params = json_decode(file_get_contents('php://input'),true);
+
+	
+
+	$requete = $dbh->prepare("SELECT * FROM site where Type=:Type order by nomlieu");
+	
+	$requete->bindParam(':Type', $Type);
+	$Type=$params['Type'];
+
 	$requete->execute();
 
 

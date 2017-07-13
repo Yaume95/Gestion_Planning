@@ -8,8 +8,16 @@ app.config(function($routeProvider) {
         templateUrl : "Templates/Identification.html",
         controller : "identification_controller"
     })
-    .when("/Planning_Personnel", {
-        templateUrl : "Templates/Planning1.html",
+    .when("/Planning_ASEM", {
+        templateUrl : "Templates/Planning1.1.html",
+        controller : "planning1_controller"
+    })
+    .when("/Planning_Agents", {
+        templateUrl : "Templates/Planning1.2.html",
+        controller : "planning1_controller"
+    })
+    .when("/Planning_Animation", {
+        templateUrl : "Templates/Planning1.3.html",
         controller : "planning1_controller"
     })
     .when("/Planning_Lieux", {
@@ -50,7 +58,7 @@ app.run(function($rootScope,$location,$cookies)
         }
         else if(next.originalPath=="/")
         {
-            $location.path( "/Planning_Personnel" );
+            $location.path( "/Gestion_Personnel" );
         }
 
                 

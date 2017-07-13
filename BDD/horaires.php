@@ -3,7 +3,15 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 	include('./connection_bdd.php');
-	$requete = $dbh->prepare("SELECT personne.IDP, horaires.IDL, Date_jour,NbHeures,Etat, checked from horaires join personne on personne.IDP=horaires.IDP join site on site.IDL = horaires.IDL ORDER BY horaires.IDP ASC, horaires.Date_jour ASC");
+	$params = json_decode(file_get_contents('php://input'),true);
+
+	$requete = $dbh->prepare("SELECT personne.IDP, horaires.IDL, Date_jour,NbHeures,Etat, checked from horaires join personne on personne.IDP=horaires.IDP join site on site.IDL = horaires.IDL where personne.Type=:Type ORDER BY horaires.IDP ASC, horaires.Date_jour ASC");
+
+
+
+	$requete->bindParam(':Type', $Type);
+	$Type=$params['Type'];
+
 	$requete->execute();
 
 

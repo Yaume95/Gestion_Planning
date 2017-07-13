@@ -22,8 +22,9 @@ app.controller('modifCtrl', ['$scope', '$http', function($scope,$http)
         }
         else
         {
-            prenom=$scope.PersonneModif['Personne'];
+            prenom="";
         }
+        
 
 
     	if ($('#HSubmit1').val() != "")
@@ -65,9 +66,8 @@ app.controller('modifCtrl', ['$scope', '$http', function($scope,$http)
         }
 
 
-        vac= $('#VacSubmit1').is(':checked');
-
-        console.log(vac);
+        type=$('#ModifType option:selected').val();
+        contrat=$('#ModifContrat option:selected').val();
 
 
 
@@ -86,7 +86,8 @@ app.controller('modifCtrl', ['$scope', '$http', function($scope,$http)
                         CAapMax: maxCA,
                         CAavMax: maxCAav,
                         Matricule: Mat,
-                        Vaccataire: vac
+                        Contrat: contrat,
+                        Type: type
                         
                     } 
         })

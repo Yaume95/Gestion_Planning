@@ -11,7 +11,9 @@ app.controller('ajoutCtrl', ['$scope', '$http', function($scope,$http)
         maxCA=$('#CASubmit2').val();    
         maxCAav=$('#CAavSubmit2').val();    
         matricule=$('#MatSubmit2').val();
-        vac= $('#VacSubmit2').is(':checked');
+        contrat= $('#AjoutContrat option:selected').val();
+        type=$('#AjoutType option:selected').val();
+
 
         $http({ 
         method : 'POST',
@@ -24,8 +26,9 @@ app.controller('ajoutCtrl', ['$scope', '$http', function($scope,$http)
                     NbHaFaire: totalH,
                     CAapMax: maxCA,
                     CAavMax: maxCAav,
-                    Vaccataire: vac,
-                    Matricule: matricule
+                    Contrat: contrat,
+                    Matricule: matricule,
+                    Type : type
                     
                 } 
         })

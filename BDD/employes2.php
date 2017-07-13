@@ -3,15 +3,9 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 	include('./connection_bdd.php');
-	$params = json_decode(file_get_contents('php://input'),true);
+
 	
-	$requete = $dbh->prepare("SELECT * FROM personne where Type=:Type order by nom");
-	$requete->bindParam(':Type', $Type);
-
-	$Type=$params['Type'];
-
-
-
+	$requete = $dbh->prepare("SELECT * FROM personne order by nom");
 	$requete->execute();
 
 
@@ -45,7 +39,7 @@
 	    	$y = $rs["CAapPris"].'/'.$rs['CAapMax'];
 	    }
 
-    	$outp .= '{"Personne" : "'  . utf8_encode($rs["Nom"]).'", "Prenom" :"'.$rs['Prenom'].'", "IDP" : "'.$rs['IDP'].'", "Total" : "'.$rs["NbHFaites"].'/'.$rs['NbHaFaire'].'", "RTT" : "'.$rs['RTTpris'].'", "Maladie" : "'.$rs['NbJMal'].'","CAav" :"'.$x.'", "CA" : "'.$y.'", "Contrat" : "'.$rs['Contrat'].'", "Matricule" : "'.$rs['Matricule'].'"}';
+    	$outp .= '{"Personne" : "'  . utf8_encode($rs["Nom"]).'", "Prenom" :"'.$rs['Prenom'].'", "Type" :"'.$rs['Type'].'", "IDP" : "'.$rs['IDP'].'", "Total" : "'.$rs["NbHFaites"].'/'.$rs['NbHaFaire'].'", "RTT" : "'.$rs['RTTpris'].'", "Maladie" : "'.$rs['NbJMal'].'","CAav" :"'.$x.'", "CA" : "'.$y.'", "Contrat" : "'.$rs['Contrat'].'", "Matricule" : "'.$rs['Matricule'].'"}';
 
 
 	}
