@@ -20,8 +20,16 @@ app.config(function($routeProvider) {
         templateUrl : "Templates/Planning1.3.html",
         controller : "planning1_controller"
     })
-    .when("/Planning_Lieux", {
-        templateUrl : "Templates/Planning2.html",
+    .when("/Planning_Lieux_ASEM", {
+        templateUrl : "Templates/Planning2.1.html",
+        controller : "planning2_controller"
+    })
+    .when("/Planning_Lieux_Agents", {
+        templateUrl : "Templates/Planning2.2.html",
+        controller : "planning2_controller"
+    })
+    .when("/Planning_Lieux_Animation", {
+        templateUrl : "Templates/Planning.2.3.html",
         controller : "planning2_controller"
     })
     .when("/Gestion_Personnel", {

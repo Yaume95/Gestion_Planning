@@ -18,12 +18,6 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
         	$scope.Employes = response.data.employes;
         });
 
-        $http.get("./BDD/lieux.php")
-        .then(function (response)
-        {
-            $scope.Lieux =response.data.lieux
-        });
-
         $scope.Recherche="";
 	}
 
@@ -96,7 +90,6 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
     $scope.modification=function(object)
     {
 
-        $('#Modification').modal('show');
 
         $scope.PersonneModif['IDP']=object.IDP;
         $scope.PersonneModif['Personne']=object.Personne;
@@ -106,10 +99,10 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
         $scope.PersonneModif['CA']=substr(object.CA,"/");
         $scope.PersonneModif['CAav']=substr(object.CAav,"/");
         $scope.PersonneModif['Contrat']=object.Contrat;
-        $scope.PersonneModif['Matricule']=object.Matricule  ;
+        $scope.PersonneModif['Matricule']=object.Matricule;
 
-        $scope.SelectionTypeModif=object.Type;
-        $scope.SelectionContratModif=object.Contrat;
+        $('#Modification').modal('show');
+ 
 
         $scope.refresh();
 
@@ -121,12 +114,30 @@ app.controller('gestion_controller', ['$scope','$http','$window','$location','$r
         $('#Ajout').modal('show');
     }
 
-    $scope.redirectPlanning=function(object,place)
+    $scope.redirectPlanning=function(object)
     {
+        place=0;
+        x = 0;
+        angular.forEach($scope.Employes,function(value,key)
+        {
+            if(value.Type==object.Type)
+            {
+                
+                if(value.IDP==object.IDP)
+                {
+                    place=x;
+                }
+                x+=1;
+            }
+        });
+
         $rootScope.redirect=true;
         $rootScope.place= place;
         $rootScope.planningRedirect=object.IDP;
-        location.hash="#!/Planning_Personnel";
+        
+        if(object.Type=='ASEM') location.hash="#!/Planning_ASEM";
+        else if(object.Type=='Agent') location.hash="#!/Planning_Agents";
+        else if(object.Type=='Animation') location.hash="#!/Planning_Animation";
     }
 	
 }]);

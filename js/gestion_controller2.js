@@ -1,7 +1,8 @@
 app.controller('gestion_controller2', ['$scope','$http','$window','$location','$rootScope', function($scope, $http,$location,$window,$rootScope)
 {
 
-    
+    $scope.Types= ['ASEM','Agent','Animation'];
+    $scope.SelectionTypeModif=$scope.Types[0];    
 
 	$scope.initGestion2=function()
 	{
@@ -9,14 +10,27 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
         $http.get("./BDD/lieux.php")
         .then(function (response)
         {
-            $scope.Lieux =response.data.lieux
+            $scope.Lieux = response.data.lieux;
         });
 
         $http.get("./BDD/categories.php")
         .then(function (response)
         {
             $scope.Categories =response.data.categories;
-            $scope.SuppressonCat=$scope.Categories[0].Nom_Cat;
+            $scope.SuppressionCat=$scope.Categories[0].Nom_Cat;
+        });
+
+        $http({ 
+              method : 'POST',
+              url : './BDD/lieux.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                          Type: 'ASEM'                         
+                      } 
+        })
+        .then(function (response)
+        {
+            $scope.Lieux =  response.data.lieux
         });
 
         $scope.AjoutDemande=false;
@@ -54,7 +68,7 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
         $scope.SupprDemandeCat=false;
     }
 
-    $scope.confirmerDemande= function(nom,cat)
+    $scope.confirmerDemande= function(nom,cat,type)
     {
         nom= nom.charAt(0).toUpperCase() +nom.substring(1);
         console.log(nom,cat);
@@ -64,16 +78,17 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             data :  {
                         Nom: nom,
-                        Categorie: cat                           
+                        Categorie: cat,
+                        Type: type                           
                     } 
         })
         .then(function successCallback(response) {
 
-            $scope.refresh();
+            $scope.resetLieux($scope.SelectionTypeModif);
         });
         $scope.AjoutDemande=false;
     
-        $scope.refresh();
+        $scope.resetLieux($scope.SelectionTypeModif);
     }
 
     $scope.confirmerDemandeCat= function(nom)
@@ -120,17 +135,28 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
 
     $scope.refresh=function()
     {
-        $http.get("./BDD/lieux.php")
-        .then(function (response) 
-        {
-            $scope.Lieux= response.data.lieux;
-        });
 
         $http.get("./BDD/categories.php")
         .then(function (response)
         {
             $scope.Categories =response.data.categories;
         });
+   }
+
+   $scope.resetLieux=function(type)
+   {
+        $http({ 
+              method : 'POST',
+              url : './BDD/lieux.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                          Type: type                         
+                      } 
+        })
+        .then(function (response)
+        {
+            $scope.Lieux =  response.data.lieux
+        }); 
    }
 
     $scope.validSuppression=function(idl)
@@ -147,11 +173,11 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
             })
             .then(function successCallback(response) 
             {
-                $scope.refresh();
+                $scope.resetLieux($scope.SelectionTypeModif);
             });
-            $scope.refresh();
+            $scope.resetLieux($scope.SelectionTypeModif);
         }
-        $scope.refresh();
+        $scope.resetLieux($scope.SelectionTypeModif);
     }
 
 
@@ -166,11 +192,10 @@ app.controller('gestion_controller2', ['$scope','$http','$window','$location','$
         $scope.LieuModif['Lieu']=object.Lieu;
         $scope.LieuModif['IDL']=object.IDL;
         $scope.LieuModif['Categorie']=object.Categorie;
+        $scope.SelectionModifCat=$scope.LieuModif['Categorie']
+        $scope.LieuModif['Type']=$scope.SelectionTypeModif;
 
-        $scope.SelectionModifCat=$scope.LieuModif['Categorie'];
-
-        console.log($scope.LieuModif.Categorie,$scope.SelectionModifCat)
-        $scope.refresh()
+        $scope.resetLieux($scope.SelectionTypeModif);
     }
 
     $scope.CorrespondanceNom=function(num_cat)

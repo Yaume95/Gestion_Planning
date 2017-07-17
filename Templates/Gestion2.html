@@ -1,18 +1,22 @@
+<br>
 <div ng-init="initGestion2()" class="container-fluid" >
     <div class="container-fluid">
-    
 <!-- ==================================== Affichage des Lieux ==================================== --> 
         <div class="col-xs-12">
-
             <div class="col-xs-12">
-                <div class="col-xs-3"></div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-1">
+                    <select class="form-control input-md Exclus" id="ModifType" ng-model="SelectionTypeModif" ng-change="resetLieux(SelectionTypeModif)">
+                        <option ng-repeat="(count,x) in Types" value="{{x}}">{{x}}</option>
+                    </select> 
+                </div>
+                <div class="col-xs-1"></div>
                 <div class="col-xs-6">
                 <table class="table table-bordered" >
                     <tr>
                         <th class ="Entete"> Nom du site </th>
                         <th class ="Entete"> Catégorie</th>
                         <th class ="Entete MoisSelec Exclus" colspan="5">Actions</th>
-
                     </tr>
                     <tr ng-repeat="x in Lieux |orderBy:'Categorie'">
                         <td class="col-xs-2" id="IDL{{x.IDL}}" >{{x.Lieu}}</td>
@@ -20,7 +24,7 @@
                         <th class="col-xs-1 Exclus">
                             <div class="actions">
                                 <div class="col-xs-4">
-                                    <button type="button" class="btn btn-danger " ng-click="validSuppression(x.IDL)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
+                                    <button type="button" class="btn btn-danger" ng-click="validSuppression(x.IDL)"><span class="glyphicon glyphicon-remove"></span> Supprimer </button>
                                 </div>
                                 <div class="col-xs-5">
                                     <button type="button" class="btn btn-primary" ng-click="modificationLieu(x)"><span class="glyphicon glyphicon-th-list"></span> Modifier </button>
@@ -39,7 +43,7 @@
                         <div class="col-xs-2"><label class="Ajout">Nom du lieu: </label></div>
                         <div class="col-xs-6"><input type="text" placeholder="Entrez le nom du nouveau site" ng-model="AjoutNomLieu" class ="form-control"></div>
                         <div class="col-xs-2"><input type="submit" ng-click="annulerDemande()" value="Annuler" class ="btn btn-danger"></div>
-                        <div class="col-xs-2"><input type="submit" ng-click="confirmerDemande(AjoutNomLieu,SelectionCat.Categorie)" value="Confirmer" class ="btn btn-success"></div>
+                        <div class="col-xs-2"><input type="submit" ng-click="confirmerDemande(AjoutNomLieu,SelectionCat.Categorie,SelectionTypeModif)" value="Confirmer" class ="btn btn-success"></div>
                     </div>
                     <div class="col-xs-3"></div>
                     <br>
@@ -135,7 +139,7 @@
                     <div class="col-xs-1"></div>
                     <label class="col-xs-3 control-label" > Catégorie:</label>
                     <div class="col-xs-5">  
-                        <select class="form-control input-md Exclus" id="CatSubmitLieu" ng-model="SelectionModifCat">
+                        <select class="form-control input-md Exclus" id="CatSubmitLieu" ng-model="LieuModif.Categorie">
                                 <option ng-repeat="(count,x) in Categories" value="{{x.Categorie}}">{{Categories[count].Nom_Cat}}</option>
                         </select>     
                     </div>

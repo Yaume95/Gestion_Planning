@@ -33,7 +33,7 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <li>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="" id="PlanningPersonnel" class="divider-droite">
+                    <a class="dropdown-toggle divider-droite" data-toggle="dropdown" href="" id="PlanningPersonnel">
                         <span class="glyphicon glyphicon-user"></span> Planning du Personnel
                         <span class="caret"></span>        
                     </a>
@@ -45,9 +45,15 @@
                 </li>
 
                 <li>
-                    <a href="#!Planning_Lieux" id="PlanningLieux" class="divider-droite">
+                    <a class="dropdown-toggle divider-droite" data-toggle="dropdown" href="" id="PlanningLieux">
                         <span class="glyphicon glyphicon-list-alt"></span> Planning des Lieux
+                        <span class="caret"></span>        
                     </a>
+                    <ul class="dropdown-menu Dropdown">
+                      <li class="Dropdown"><a href="#!Planning_Lieux_ASEM" class="Dropdown">ASEM</a></li><br>
+                      <li class="Dropdown"><a href="#!Planning_Lieux_Agents" class="Dropdown">Agents d'entretien</a></li><br>
+                      <li class="Dropdown"><a href="#!Planning_Lieux_Animation" class="Dropdown">Animation</a></li><br>
+                    </ul>
                 </li>
                 <li>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="" id ="Gestion">

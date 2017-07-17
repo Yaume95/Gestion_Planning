@@ -16,45 +16,61 @@ app.controller('planning2_controller', ['$scope','$http','$window','$location' ,
       ];
 
 
-	$scope.initLieux=function()
+	$scope.initLieux=function(type)
 	{
-		$http.get("./BDD/presence_lieux.php")
-       	.then(function (response) 
+    		$http({ 
+              method : 'POST',
+              url : './BDD/presence_lieux.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                          Type: type                         
+                      } 
+        })
+        .then(function (response)
         {
-        	$scope.Presences = response.data.presences;
-
+            $scope.Presences =  response.data.presences
         });
 
-        $http.get("./BDD/calendrier.php")
+        $http.get("./BDD/calendrier2.php")
         .then(function (response) 
         {
         	$scope.Calendrier = response.data['calendrier'];
         });
 
-        $http.get("./BDD/lieux.php")
+        $http({ 
+              method : 'POST',
+              url : './BDD/lieux.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                          Type: type                         
+                      } 
+        })
         .then(function (response)
         {
-        	$scope.Lieux =response.data.lieux
+            $scope.Lieux =  response.data.lieux
         });
 	}
 
-    $scope.moisact=function()
-    {
-       d= new Date();
-       return $scope.Mois[d.getMonth()];
-    }
+  $scope.moisact=function()
+  {
+     d= new Date();
+     return $scope.Mois[d.getMonth()];
+  }
 
 	$scope.celluleLieu=function(date,idl,Ferie)
 	{
 
-		if($('.'+date).is('.Sam, .Dim'))
+		if($('.'+date).is('.Sam, .Dim, .Ven'))
         {
-           if($('.'+date).is('.Sam'))
+           if($('.'+date).is('.Ven'))
            {
-              $('[data-idl='+idl+'][data-date='+date+']').css('border-left','2px solid darkgrey');
+              $('[data-idl='+idl+'][data-date='+date+']').css('border-right','2px solid darkgrey');
+           } 
+           else if($('.'+date).is('.Sam'))
+           {
               return 'SAM';
            } 
-           else
+           else if ($('.'+date).is('.Dim'))
            {
               $('[data-idl='+idl+'][data-date='+date+']').css('border-right','2px solid darkgrey');
               return 'DIM';

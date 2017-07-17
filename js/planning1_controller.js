@@ -39,7 +39,7 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
           {
             $rootScope.redirect=false;
             $scope.SelectionPersonne = $rootScope.planningRedirect;
-            console.log($rootScope.place)
+            console.log($rootScope.place);
 
           }
           else

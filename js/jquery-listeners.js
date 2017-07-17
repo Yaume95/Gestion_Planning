@@ -8,6 +8,8 @@ $(document).ready(function() {
       handle: ".modal-header"
   	});
 
-  	document.body.style.zoom = 0.9
+  	document.body.style.zoom = 0.9;
+
+  	
     
 });

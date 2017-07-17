@@ -18,6 +18,7 @@ app.controller('modifLieuCtrl', ['$scope', '$http', function($scope,$http)
     
         cat=$('#CatSubmitLieu option:selected').val();
     	idl= $scope.LieuModif['IDL'];
+        type=$scope.LieuModif['Type'];
 
         $http({ 
             method : 'POST',
@@ -27,16 +28,16 @@ app.controller('modifLieuCtrl', ['$scope', '$http', function($scope,$http)
 
                         IDL: idl,
                         Nom: nom,                        
-                        Categorie: cat                        
+                        Categorie: cat,
+                        Type : type                        
                     } 
         })
         .then(function successCallback(response)
         {
             $('#ModificationLieu').modal('hide');
             $('#NomSubmitLieu').val("");
-        	$('#CatSubmitLieu').val("");
             $scope.formLieu.$setPristine();
-        	$scope.refresh();
+        	$scope.resetLieux($scope.SelectionTypeModif);
         });
 
     }

@@ -3,7 +3,16 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 	include('./connection_bdd.php');
-	$requete = $dbh->prepare("SELECT IDL, count(DISTINCT IDP) as Presences, Month(Date_jour) as Mois, Date_jour FROM `horaires` WHERE Etat='Travail' group by idl,Mois,date_jour");
+
+	
+
+	$params = json_decode(file_get_contents('php://input'),true);
+
+	$requete = $dbh->prepare("SELECT horaires.IDL, count(DISTINCT IDP) as Presences, Month(Date_jour) as Mois, Date_jour FROM `horaires` join site on site.IDL=horaires.IDL WHERE Etat='Travail' and Type=:Type group by horaires.idl,Mois,date_jour");
+
+
+	$requete->bindParam(':Type', $Type);
+	$Type=$params['Type'];	
 	$requete->execute();
 
 	$requete2=$dbh->prepare("SELECT Nom FROM `horaires`join personne on horaires.IDP=personne.IDP WHERE Etat='Travail' And Date_jour=:Date_jour and IDL=:IDL group by Nom");
@@ -19,7 +28,7 @@
 
 		$requete2->bindParam(':IDL', $IDL);
 		$requete2->bindParam(':Date_jour', $Date_jour);
-
+		
 		$IDL=$rs['IDL'];
 		$Date_jour=$rs['Date_jour'];
 
@@ -30,7 +39,7 @@
 		while($rs2 = $requete2->fetch(PDO::FETCH_ASSOC))
 		{
 			if($noms!="") $noms.='\n';
-			$noms.=$rs2['Nom'];
+			 $noms.=$rs2['Nom'];
 		}
 
 

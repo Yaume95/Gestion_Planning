@@ -7,6 +7,7 @@
 	$dbh= new PDO('mysql:host=127.0.0.1;dbname=' . $bdd, $user, $pw);	
 
 	$num_day = idate('w');
+	if($num_day==0) $num_day=7;
 
 	$dbh->beginTransaction();
 
@@ -18,5 +19,5 @@
 	$requete->execute();
 
 	$dbh->commit();
-
+	echo $num_day;
 ?>

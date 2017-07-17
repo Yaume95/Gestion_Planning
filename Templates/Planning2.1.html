@@ -1,0 +1,44 @@
+<div id="body" ng-init="initLieux('ASEM')">
+    <div class="container-fluid">
+        <div>
+            <ul>
+                <li ng-hide="true" ng-repeat="chargement in Presences" id="{{chargement.Date+chargement.IDL}}">
+                    <span class="nombre" >{{chargement.Nombre}}</span>
+                    <span class="personnes" >{{chargement.Noms}}</span>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-12 test">
+        <table class="table table-bordered">
+                <tr>
+                    <tr>
+                        <th class="MoisSelec" colspan="33"><span class="glyphicon glyphicon-calendar calendar"></span>{{SelectionMois.mois}}</th>
+                    </tr>
+                    <th>
+                        <select class="form-control" ng-model="SelectionMois" ng-options="x.mois for x in Mois" ng-init="SelectionMois=moisact()"></select>
+                    </th>
+                    <th ng-repeat="x in Calendrier" ng-if="x.Mois==SelectionMois.mois" class="date {{x.Jour}} {{x.Date_jour}}">
+                        {{x.Jour}}
+                        <br>
+                        {{x.Date_jour[8] + x.Date_jour[9]}}
+                    </th>
+                </tr>
+                <tr ng-repeat="a in Lieux">
+                    <th class="lieu"> {{a.Lieu}} </th>
+                    <td ng-repeat="b in Calendrier" ng-if="b.Mois==SelectionMois.mois" ng-bind="celluleLieu(b.Date_jour,a.IDL,b.Ferie)"  
+                        data-date="{{b.Date_jour}}" 
+                        data-idl="{{a.IDL}}" 
+                        ng-click="focusin()" 
+                        ng-mousedown="clickdroit($event,b.Date_jour,a.IDL)" no-right-click>                      
+                    </td>
+                </tr>
+        </table>
+    </div>   
+</div>
+
+
+
+

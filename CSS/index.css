@@ -173,6 +173,9 @@ ul.nav
     width:33%;
 }
 
+.borderless td, .borderless th {
+    border: none;
+}
 .nav a {
     text-align:center;
     display:block;
@@ -201,10 +204,11 @@ td,.date,.Entete
 	vertical-align: middle!important;
 	font-size:15px;
 }
-.test2
+.red
 {
-	
-	height:100%;
+	background-color: red;
+	width:40px;
+	height: 20px;
 }
 .choix
 {
@@ -254,3 +258,5 @@ td,.date,.Entete
 {
 	color:lightgreen!important;
 }
+
+

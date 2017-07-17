@@ -15,51 +15,54 @@
 
 
 	$outp = "";
+
+	switch ($Mois) {
+    	case "01":
+    		$j="Janvier";
+    		break;
+    	case "02":
+    		$j="Février";
+    		break;
+    	case "03":
+    		$j="Mars";
+    		break;
+    	case "04":
+    		$j="Avril";
+    		break;
+		case "05":
+    		$j="Mai";
+    		break;
+    	case "06":
+    		$j="Juin";
+    		break;
+    	case "07":
+    		$j="Juillet";
+    		break;
+    	case "08":
+    		$j="Aout";
+    		break;
+    	case "09":
+    		$j="Septembre";
+    		break;
+    	case "10":
+    		$j="Octobre";
+    		break;
+    	case "11":
+    		$j="Novembre";
+    		break;
+    	case "12":
+    		$j="Décembre";
+    		break;
+    }
+
 	while($rs = $requete->fetch(PDO::FETCH_ASSOC)) 
 	{
-		$moisact=$rs["Date_jour"][5].$rs["Date_jour"][6];
+		
     	if ($outp != "")
     	{
 	    		$outp .= ",";
 	    }
-	    switch ($moisact) {
-	    	case "01":
-	    		$j="Janvier";
-	    		break;
-	    	case "02":
-	    		$j="Février";
-	    		break;
-	    	case "03":
-	    		$j="Mars";
-	    		break;
-	    	case "04":
-	    		$j="Avril";
-	    		break;
-			case "05":
-	    		$j="Mai";
-	    		break;
-	    	case "06":
-	    		$j="Juin";
-	    		break;
-	    	case "07":
-	    		$j="Juillet";
-	    		break;
-	    	case "08":
-	    		$j="Aout";
-	    		break;
-	    	case "09":
-	    		$j="Septembre";
-	    		break;
-	    	case "10":
-	    		$j="Octobre";
-	    		break;
-	    	case "11":
-	    		$j="Novembre";
-	    		break;
-	    	case "12":
-	    		$j="Décembre";
-	    		break;
-	    }
+	    
 	    switch ($rs["Num_jour"]) {
 	    	case 1:
 	    		$i='Lun';
