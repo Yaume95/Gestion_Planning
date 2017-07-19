@@ -71,7 +71,8 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
               url : './BDD/calendrier.php',
               headers: {'Content-Type': 'application/x-www-form-urlencoded'},
               data :  {
-                          Mois:  $scope.SelectionMois.num
+                          Mois:  $scope.SelectionMois.num,
+                          Annee: new Date().getYear()+1900
                       } 
       })
       .then(function (response) 
@@ -92,6 +93,22 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
       .then(function (response)
       {
         $scope.Lieux =  response.data.lieux
+      });
+
+      $http.get("./BDD/annees.php")
+      .then(function (response)
+      {
+          $scope.Annees = response.data.annees;
+          angular.forEach($scope.Annees, function(value,key)
+          {
+
+              if(value.Annee==(new Date().getYear()+1900))
+              {
+                $scope.SelectionAnnee=value;
+                console.log(value.Annee)
+              } 
+
+          });
       });
     }
 
@@ -143,7 +160,8 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
                 url : './BDD/calendrier.php',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 data :  {
-                            Mois: $scope.SelectionMois.num
+                            Mois: $scope.SelectionMois.num,
+                            Annee: $scope.SelectionAnnee.Annee
                         } 
         })
         .then(function (response)
@@ -152,13 +170,20 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
         });
     }
 
+    $scope.refreshAnnees=function()
+    {
+        $http.get("./BDD/annees.php")
+        .then(function (response)
+        {
+            $scope.Annees = response.data.annees;
+        });
+    }
+
     $scope.moisact=function()
     {
        d= new Date();
        return $scope.Mois[d.getMonth()];
     }
-
-
 
 
     $scope.reset=function()
@@ -359,9 +384,6 @@ app.controller('planning1_controller', ['$scope','$http', '$route','$window','$l
 
         
     }
-
-    
-
     
     $scope.total = function(Lieu)
     {

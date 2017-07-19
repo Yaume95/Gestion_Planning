@@ -3,7 +3,17 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 	include('./connection_bdd.php');
-	$requete = $dbh->prepare("SELECT Nom,Prenom,sum(nbheures) as Heures,month(date_jour) as Mois,categorie FROM personne join horaires on personne.IDP=horaires.IDP join site on horaires.IDL=site.IDL join categories on site.Categorie=categories.NumCat where nbheures>0 group by nom,prenom,mois,categorie order by Nom,categorie");
+	$params = json_decode(file_get_contents('php://input'),true);
+
+
+	$requete = $dbh->prepare("SELECT Nom,Prenom,sum(nbheures) as Heures,month(date_jour) as Mois,categorie FROM personne join horaires on personne.IDP=horaires.IDP join site on horaires.IDL=site.IDL join categories on site.Categorie=categories.NumCat where nbheures>0 and year(horaires.Date_jour)=:Annee group by nom,prenom,mois,categorie order by Nom,categorie");
+
+
+	$requete->bindParam(':Annee', $Annee);
+	$Annee=$params['Annee'];
+
+
+
 	$requete->execute();
 
 

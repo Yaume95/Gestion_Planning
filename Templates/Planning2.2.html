@@ -15,6 +15,7 @@
         <table class="table table-bordered">
                 <tr>
                     <tr>
+                        <td><select class="form-control Exclus" ng-model="SelectionAnnee" ng-options="x.Annee for x in Annees" ng-change="refreshCalendrier()"></select></td>
                         <th class="MoisSelec" colspan="33"><span class="glyphicon glyphicon-calendar calendar"></span>{{SelectionMois.mois}}</th>
                     </tr>
                     <th>

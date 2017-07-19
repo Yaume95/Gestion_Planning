@@ -19,7 +19,8 @@
         <div class="col-md-12">
             <table class="table table-bordered" ng-keydown="unableTab($event)">
                     <tr>
-                        <th class="MoisSelec" colspan="33"><span class="glyphicon glyphicon-calendar calendar"></span> {{SelectionMois.mois}} - {{Calendrier[0].Date_jour[0]+Calendrier[0].Date_jour[1]+Calendrier[0].Date_jour[2]+Calendrier[0].Date_jour[3]}}</th>
+                        <td><select class="form-control Exclus" ng-model="SelectionAnnee" ng-options="x.Annee for x in Annees"></select></td>
+                        <th class="MoisSelec" colspan="33"><span class="glyphicon glyphicon-calendar calendar"></span> {{SelectionMois.mois}} - {{Annees[0].Annee}}</th>
                     </tr>
                     <tr>
                         <th>

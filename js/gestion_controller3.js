@@ -5,12 +5,37 @@ app.controller('gestion_controller3', ['$scope','$http','$window','$location','$
 
 	$scope.initGestion3=function()
 	{
-
-        $http.get("./BDD/totaux.php")
-        .then(function (response)
+        d=Number(new Date().getYear())+1900;
+        console.log(d);
+        $http({ 
+              method : 'POST',
+              url : './BDD/totaux.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                            Annee : new Date().getYear()+1900
+                      } 
+        })
+        .then(function (response) 
         {
-            $scope.Totaux =response.data.totaux
+            $scope.Totaux = response.data.totaux;
         });
+
+
+        $http.get("./BDD/annees.php")
+          .then(function (response)
+          {
+              $scope.Annees = response.data.annees;
+              angular.forEach($scope.Annees, function(value,key)
+              {
+
+                  if(value.Annee==(new Date().getYear()+1900))
+                  {
+                    $scope.SelectionAnnee=value;
+                  } 
+
+              });
+          });
+
 
         $http.get("./BDD/categories.php")
         .then(function (response)
@@ -27,6 +52,22 @@ app.controller('gestion_controller3', ['$scope','$http','$window','$location','$
         });
 
     };
+
+    $scope.refreshTotaux = function()
+    {
+      $http({ 
+              method : 'POST',
+              url : './BDD/totaux.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data :  {
+                            Annee : $scope.SelectionAnnee.Annee
+                      } 
+        })
+        .then(function (response) 
+        {
+            $scope.Totaux = response.data.totaux;
+        });
+    }
 
     $scope.moisact=function()
     {

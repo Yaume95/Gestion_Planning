@@ -18,24 +18,46 @@ app.controller('planning2_controller', ['$scope','$http','$window','$location' ,
 
 	$scope.initLieux=function(type)
 	{
-    		$http({ 
+  		$http({ 
+            method : 'POST',
+            url : './BDD/presence_lieux.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data :  {
+                        Type: type                         
+                    } 
+      })
+      .then(function (response)
+      {
+          $scope.Presences =  response.data.presences
+      });
+
+      $http.get("./BDD/annees.php")
+      .then(function (response)
+      {
+          $scope.Annees = response.data.annees;
+          angular.forEach($scope.Annees, function(value,key)
+          {
+              if(value.Annee==(new Date().getYear()+1900))
+              {
+                $scope.SelectionAnnee=value;
+              } 
+
+          });
+      });
+
+      $http({ 
               method : 'POST',
-              url : './BDD/presence_lieux.php',
+              url : './BDD/calendrier2.php',
               headers: {'Content-Type': 'application/x-www-form-urlencoded'},
               data :  {
-                          Type: type                         
+                          Annee: new Date().getYear()+1900
                       } 
-        })
-        .then(function (response)
-        {
-            $scope.Presences =  response.data.presences
-        });
-
-        $http.get("./BDD/calendrier2.php")
-        .then(function (response) 
-        {
-        	$scope.Calendrier = response.data['calendrier'];
-        });
+      })
+      .then(function (response) 
+      {
+          $scope.Calendrier = response.data['calendrier'];
+      });
+;
 
         $http({ 
               method : 'POST',
@@ -56,6 +78,22 @@ app.controller('planning2_controller', ['$scope','$http','$window','$location' ,
      d= new Date();
      return $scope.Mois[d.getMonth()];
   }
+
+  $scope.refreshCalendrier=function()
+    {
+        $http({ 
+                method : 'POST',
+                url : './BDD/calendrier2.php',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                data :  {
+                            Annee: $scope.SelectionAnnee.Annee
+                        } 
+        })
+        .then(function (response)
+        {
+          $scope.Calendrier = response.data.calendrier;
+        });
+    }
 
 	$scope.celluleLieu=function(date,idl,Ferie)
 	{

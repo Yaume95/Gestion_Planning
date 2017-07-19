@@ -5,9 +5,11 @@
 	include('./connection_bdd.php');
 	$params = json_decode(file_get_contents('php://input'),true);
 
-	$requete = $dbh->prepare("SELECT * FROM calendrier where month(Date_jour)=:Mois");
+	$requete = $dbh->prepare("SELECT * FROM calendrier where month(Date_jour)=:Mois and Annee=:Annee");
 
 	$requete->bindParam(':Mois', $Mois);
+	$requete->bindParam(':Annee', $Annee);
+	$Annee=$params['Annee'];
 	$Mois=$params['Mois'];
 
 
@@ -90,7 +92,7 @@
 	    	
 	    }
     	
-    	$outp .= '{"Date_jour" : "'  . $rs["Date_jour"].'", "Jour" : "'.$i.'", "Mois" : "'.$j.'", "Ferie" : "'.$rs['Ferie'].'" }';
+    	$outp .= '{"Date_jour" : "'  . $rs["Date_jour"].'", "Jour" : "'.$i.'", "Mois" : "'.$j.'", "Ferie" : "'.$rs['Ferie'].'", "Annee" : "'.$rs['Annee'].'" }';
 
 	}
 	$outp='{"calendrier":['.$outp.']}';

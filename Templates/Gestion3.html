@@ -11,7 +11,7 @@
             </div>
 
             <div class="Titre">
-                <h3>(Mois de : {{SelectionMois.mois}} {{Horaires[0].Date_jour[0]+Horaires[0].Date_jour[1]+Horaires[0].Date_jour[2]+Horaires[0].Date_jour[3]}})</h3>
+                <h3>({{SelectionMois.mois}} - {{SelectionAnnee.Annee}})</h3>
             </div>
 
             <br><br>
@@ -20,11 +20,15 @@
                     <div class="col-xs-5">
                         <label class="Exclus">Mois :</label>
                         <br><br><br>
+                        <label class="Exclus">Année :</label>
+                        <br><br><br>
                         <label class="Exclus">Catégorie :</label>
                     </div>
                     <div class="col-xs-65">
                         <select class="form-control Exclus" ng-model="SelectionMois" ng-options="x.mois for x in Mois" ng-init="SelectionMois=moisact()"></select>
-                        <br>    
+                        <br> 
+                        <select class="form-control Exclus" ng-model="SelectionAnnee" ng-options="x.Annee for x in Annees" ng-change="refreshTotaux()"></select>
+                        <br>   
                         <select class="form-control Exclus" ng-model="SelectedCat" ng-options="x.Nom_Cat for x in Categories">
                             
                         </select>

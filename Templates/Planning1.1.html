@@ -19,11 +19,11 @@
         <div class="col-md-12">
             <table class="table table-bordered" ng-keydown="unableTab($event)">
                     <tr>
-                        <th class="MoisSelec" colspan="33"><span class="glyphicon glyphicon-calendar calendar"></span> {{SelectionMois.mois}} - {{Calendrier[0].Date_jour[0]+Calendrier[0].Date_jour[1]+Calendrier[0].Date_jour[2]+Calendrier[0].Date_jour[3]}}</th>
+                        <td><select class="form-control Exclus" ng-model="SelectionAnnee" ng-options="x.Annee for x in Annees" ng-change="refreshCalendrier()"></select></td>
+                        <th class="MoisSelec" colspan="28"><span class="glyphicon glyphicon-calendar calendar"></span> {{SelectionMois.mois}} - {{Calendrier[0].Annee}}</th>
                     </tr>
                     <tr>
                         <th>
-                            
                             <select class="form-control input-md Exclus" id="SelectedPerson" ng-model="SelectionPersonne" ng-change="reset()">
                                 <option ng-repeat="(count,x) in Employes" id="{{count}}" value="{{x.IDP}}">{{Employes[count].Personne}}</option>
                             </select>

@@ -5,8 +5,11 @@
 	include('./connection_bdd.php');
 	$params = json_decode(file_get_contents('php://input'),true);
 
-	$requete = $dbh->prepare("SELECT * FROM calendrier");
+	$requete = $dbh->prepare("SELECT * FROM calendrier where Annee=:Annee");
 
+
+	$requete->bindParam(':Annee', $Annee);
+	$Annee=$params['Annee'];
 
 	$requete->execute();
 

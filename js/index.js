@@ -29,7 +29,7 @@ app.config(function($routeProvider) {
         controller : "planning2_controller"
     })
     .when("/Planning_Lieux_Animation", {
-        templateUrl : "Templates/Planning.2.3.html",
+        templateUrl : "Templates/Planning2.3.html",
         controller : "planning2_controller"
     })
     .when("/Gestion_Personnel", {
@@ -39,6 +39,10 @@ app.config(function($routeProvider) {
     .when("/Gestion_Lieux", {
         templateUrl : "Templates/Gestion2.html",
         controller : "gestion_controller2"
+    })
+    .when("/Gestion_Calendrier", {
+        templateUrl : "Templates/Gestion5.html",
+        controller : "gestion_controller5"
     })
     .when("/Recap_mois", {
         templateUrl : "Templates/Gestion3.html",

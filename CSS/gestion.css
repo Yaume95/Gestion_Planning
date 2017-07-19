@@ -1,3 +1,27 @@
+#LabelAnneeSup
+{
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  color : #009EE7;
+
+}
+
+#test
+{
+  display: flex;
+  justify-content: center;
+}
+
+#btngauche
+{
+  margin-right: 5%;
+}
+#btndroite
+{
+  margin-left: 5%;
+}
+
 .password
 {
     -webkit-text-security:disc;

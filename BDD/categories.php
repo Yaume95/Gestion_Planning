@@ -3,7 +3,7 @@
 	header("Content-Type: application/json; charset=UTF-8");
 
 	include('./connection_bdd.php');
-	$requete = $dbh->prepare("SELECT * FROM Categories");
+	$requete = $dbh->prepare("SELECT * FROM categories");
 	$requete->execute();
 
 
